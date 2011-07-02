@@ -1,0 +1,75 @@
+
+2011-02-03
+Initial Project in ajcodekatas
+IExpression, ICommand, IContext
+
+2011-03-05
+First commands and expressions
+Context with tests
+SetLocalVariable by number
+Add items from AjLanguage/AjSharp, to be reviewed
+
+2011-03-06
+Local variables in parser, with tests
+var x=1;
+for commands (WIP)
+implementing for (var k, for (k in
+
+2011-03-08
+Fix for (... parser tests
+NamedVariableExpression
+WriteFunction primitive with tests
+AjScript.Console (without var support)
+
+2011-03-12
+ObjectFunction WIP
+new Object() with tests
+EvaluationTests first version
+DynamicObjectTests first version
+NewExpression
+Function, IFunction
+ReturnValue
+ObjectFunction
+Object defined in AjScript.Console for x = new Object();
+
+2011-03-17
+WriteLine
+Print Initial Message in AjScript.Console
+Expression Evaluation Tests
+null, undefined as constant expressions
+
+2011-03-24
+VarCommand
+Remove LocalVariableExpression, SetLocalVariableCommand
+VariableExpression
+ConcatenateExpression tests
+Remove variable offset from Parser, IContext, Context
+FunctionExpression with tests
+Closure in Function.Invoke
+ObjectExpression
+Parser.ParserObjectExpression
+
+2011-03-25
+Prototype, first use and tests
+Function as DynamicObject
+IFunction as IObject
+Function with prototype
+PredicateTests
+FilesTests first version
+Operators === !== (no support for == != yet)
+x['y'] = value; with tests
+IsFalse(Undefined.Instance)
+
+2011-03-26
+FunctionBodyCommand
+Inner functions with tests
+
+2011-03-27
+Removed FunctionBodyCommand, SetValueCommand
+Reserved words for identifiers, WIP
+Catch errors: this = 1; var this; with tests
+Hoisted function and var
+Visitor and auxiliars, first tests and base implementations
+
+2011-07-02
+Moved to GitHub (from http://code.google.com/p/ajcodekatas/)

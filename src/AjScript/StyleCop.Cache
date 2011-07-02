@@ -1,0 +1,69 @@
+<stylecopresultscache>
+  <version>10</version>
+  <project key="-1466537768">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ICommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>02/03/2011 06:03:41</timestamp>
+    <milliseconds>363</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SetLocalVariableCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/05/2011 18:08:22</timestamp>
+    <milliseconds>28</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Context.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/05/2011 17:25:47</timestamp>
+    <milliseconds>291</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>02/03/2011 06:03:36</timestamp>
+    <milliseconds>436</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConstantExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/05/2011 17:49:36</timestamp>
+    <milliseconds>915</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>02/03/2011 05:54:05</timestamp>
+    <milliseconds>842</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IContext.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/05/2011 18:09:44</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/05/2011 17:22:38</timestamp>
+    <milliseconds>564</milliseconds>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>
