@@ -15,5 +15,6 @@ myObject.increment(2);
 myObject.increment(3);
 
 result = myObject.getValue(); // 5
+result2 = myObject.value; // undefined
 
 

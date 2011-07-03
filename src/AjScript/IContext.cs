@@ -8,6 +8,8 @@
 
     public interface IContext
     {
+        IContext RootContext { get; }
+
         ReturnValue ReturnValue { get; set;  }
 
         void SetValue(string name, object value);

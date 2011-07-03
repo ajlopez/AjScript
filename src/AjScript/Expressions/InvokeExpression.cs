@@ -30,8 +30,8 @@
             object obj = null;
             ICallable callable;
 
-            if (this.expression is ArrayExpression)
-                callable = (ICallable)((ArrayExpression)this.expression).Evaluate(context, ref obj);
+            if (this.expression is IndexedExpression)
+                callable = (ICallable)((IndexedExpression)this.expression).Evaluate(context, ref obj);
             else
                 callable = (ICallable)this.expression.Evaluate(context);
 
@@ -50,7 +50,7 @@
                 return dobj.Invoke(callable, parameters.ToArray());
             }
 
-            return callable.Invoke(context, null, parameters.ToArray());
+            return callable.Invoke(context, context.RootContext, parameters.ToArray());
         }
     }
 }

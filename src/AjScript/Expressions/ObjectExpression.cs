@@ -25,7 +25,7 @@
 
         public object Evaluate(IContext context)
         {
-            DynamicObject obj = new DynamicObject();
+            DynamicObject obj = new DynamicObject((IFunction) context.RootContext.GetValue("Object"));
 
             for (int k=0; k < this.names.Count; k++)
                 obj.SetValue(this.names[k], this.expressions[k].Evaluate(context));

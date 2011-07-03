@@ -706,6 +706,23 @@
         }
 
         [TestMethod]
+        public void ParseSimpleNamedFunctionAsCommand()
+        {
+            ICommand command = ParseCommand("function add1(x) { return x+1;}");
+            Assert.IsNotNull(command);
+            Assert.IsInstanceOfType(command, typeof(ExpressionCommand));
+
+            ExpressionCommand funcmd = (ExpressionCommand)command;
+            Assert.IsInstanceOfType(funcmd.Expression, typeof(FunctionExpression));
+
+            FunctionExpression funexpr = (FunctionExpression)funcmd.Expression;
+
+            Assert.IsInstanceOfType(funexpr.Body, typeof(CompositeCommand));
+            Assert.AreEqual(1, funexpr.ParameterNames.Length);
+            Assert.AreEqual("add1", funexpr.Name);
+        }
+
+        [TestMethod]
         public void ParseInnerFunctions()
         {
             IExpression expression = ParseExpression("function add1(x) { function bar() {} return x+1; function foo() {}}");
@@ -746,6 +763,32 @@
         }
 
         [TestMethod]
+        public void ParseEmptyArray()
+        {
+            IExpression expression = ParseExpression("[]");
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
+
+            ArrayExpression arrayExpression = (ArrayExpression)expression;
+
+            Assert.IsNotNull(arrayExpression.Expressions);
+            Assert.AreEqual(0, arrayExpression.Expressions.Count);
+        }
+
+        [TestMethod]
+        public void ParseArrayWithThreeElements()
+        {
+            IExpression expression = ParseExpression("[1, 2+3, 'foo']");
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
+
+            ArrayExpression arrayExpression = (ArrayExpression)expression;
+
+            Assert.IsNotNull(arrayExpression.Expressions);
+            Assert.AreEqual(3, arrayExpression.Expressions.Count);
+        }
+
+        [TestMethod]
         public void HoistingVarCommands()
         {
             ICommand command = ParseCommands("x = 1; y=2; var x; var y;");
@@ -767,7 +810,7 @@
             return expression;
         }
 
-        private ICommand ParseCommand(string text)
+        private static ICommand ParseCommand(string text)
         {
             Parser parser = CreateParser(text);
 
@@ -778,13 +821,13 @@
             return command;
         }
 
-        private ICommand ParseCommands(string text)
+        private static ICommand ParseCommands(string text)
         {
             Parser parser = CreateParser(text);
             return parser.ParseCommands();
         }
 
-        private Parser CreateParser(string text)
+        private static Parser CreateParser(string text)
         {
             return new Parser(text);
         }

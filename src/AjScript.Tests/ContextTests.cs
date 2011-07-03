@@ -28,6 +28,23 @@
         }
 
         [TestMethod]
+        public void GetTopContextWhenParentIsNull()
+        {
+            Context context = new Context();
+
+            Assert.AreEqual(context, context.RootContext);
+        }
+
+        [TestMethod]
+        public void GetTopContext()
+        {
+            TopContext top = new TopContext();
+            Context context = new Context(top);
+
+            Assert.AreEqual(top, context.RootContext);
+        }
+
+        [TestMethod]
         public void SetAndGetValues()
         {
             Context context = new Context();

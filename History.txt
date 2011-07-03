@@ -73,3 +73,15 @@ Visitor and auxiliars, first tests and base implementations
 
 2011-07-02
 Moved to GitHub (from http://code.google.com/p/ajcodekatas/)
+
+2011-07-03
+TopContext with tests
+IContext.RootContext with tests
+func.apply with tests
+func.call with tests
+array parsing [...]
+IndexedExpression
+ArrayExpression
+{} objects now with Object as function (taken from context.RootContext.GetValue("Object"))
+foo() { this... } this points to RootContext if no this object
+

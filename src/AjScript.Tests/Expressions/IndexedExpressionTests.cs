@@ -9,7 +9,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class ArrayExpressionTests
+    public class IndexedExpressionTests
     {
         [TestMethod]
         public void EvaluateArrayVariableExpression()
@@ -18,7 +18,7 @@
 
             context.SetValue("array", new string[] { "one", "two", "three" });
 
-            IExpression expression = new ArrayExpression(new VariableExpression("array"), new IExpression[] { new ConstantExpression(1) });
+            IExpression expression = new IndexedExpression(new VariableExpression("array"), new IExpression[] { new ConstantExpression(1) });
 
             object result = expression.Evaluate(context);
 
@@ -36,7 +36,7 @@
 
             context.SetValue("data", data);
 
-            IExpression expression = new ArrayExpression(new DotExpression(new VariableExpression("data"), "Numbers"), new IExpression[] { new ConstantExpression(1) });
+            IExpression expression = new IndexedExpression(new DotExpression(new VariableExpression("data"), "Numbers"), new IExpression[] { new ConstantExpression(1) });
 
             object result = expression.Evaluate(context);
 

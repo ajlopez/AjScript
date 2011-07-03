@@ -61,6 +61,8 @@
     <Compile Include="Compiler\IVisitor.cs" />
     <Compile Include="Compiler\IVisitorContext.cs" />
     <Compile Include="Compiler\IVisitorProcessor.cs" />
+    <Compile Include="Expressions\ArrayExpression.cs" />
+    <Compile Include="TopContext.cs" />
     <Compile Include="Expressions\ObjectExpression.cs" />
     <Compile Include="Expressions\FunctionExpression.cs" />
     <Compile Include="Expressions\NewExpression.cs" />
@@ -84,7 +86,7 @@
     <Compile Include="Expressions\AndExpression.cs" />
     <Compile Include="Expressions\ArithmeticBinaryExpression.cs" />
     <Compile Include="Expressions\ArithmeticUnaryExpression.cs" />
-    <Compile Include="Expressions\ArrayExpression.cs" />
+    <Compile Include="Expressions\IndexedExpression.cs" />
     <Compile Include="Expressions\BinaryExpression.cs" />
     <Compile Include="Expressions\CompareExpression.cs" />
     <Compile Include="Expressions\ConcatenateExpression.cs" />

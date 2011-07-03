@@ -9,6 +9,9 @@
 
     public class Function : DynamicObject, IFunction
     {
+        private static ICallable callFunction = new CallFunction();
+        private static ICallable applyFunction = new ApplyFunction();
+
         private string[] parameterNames;
         private ICommand body;
         private int arity;
@@ -24,7 +27,12 @@
             // TODO Review this cyclic reference
             this.Function = this;
 
-            this.SetValue("prototype", new DynamicObject());
+            DynamicObject prototype = new DynamicObject();
+
+            this.SetValue("prototype", prototype);
+            this.SetValue("call", callFunction);
+            this.SetValue("apply", applyFunction);
+
             this.parameterNames = parameterNames;
             this.body = body;
 
@@ -79,6 +87,47 @@
         {
             DynamicObject obj = new DynamicObject(this);
             return this.Invoke(this.context, obj, parameters);
+        }
+    }
+
+    internal class CallFunction : ICallable
+    {
+        public int Arity
+        {
+            get { return 2; }
+        }
+
+        public IContext Context
+        {
+            get { return null; }
+        }
+
+        public object Invoke(IContext context, object @this, object[] arguments)
+        {
+            object newthis = arguments[0];
+            object []args = (arguments.Length > 1) ? (object[])arguments[1] : null;
+            
+            return ((ICallable)@this).Invoke(context, newthis, args);
+        }
+    }
+
+    internal class ApplyFunction : ICallable
+    {
+        public int Arity
+        {
+            get { return -1; }
+        }
+
+        public IContext Context
+        {
+            get { return null; }
+        }
+
+        public object Invoke(IContext context, object @this, object[] arguments)
+        {
+            object newthis = arguments[0];
+
+            return ((ICallable)@this).Invoke(context, newthis, arguments.Skip(1).ToArray());
         }
     }
 }

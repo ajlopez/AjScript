@@ -24,6 +24,22 @@
 
         public ReturnValue ReturnValue { get; set; }
 
+        public IContext RootContext
+        {
+            get
+            {
+                if (this.parent == null)
+                    return this;
+
+                return this.parent.RootContext;
+            }
+        }
+
+        public ICollection<string> GetNames()
+        {
+            return this.values.Keys;
+        }
+
         public object GetValue(string name)
         {
             if (!this.values.ContainsKey(name))

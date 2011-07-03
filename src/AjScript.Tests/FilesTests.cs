@@ -64,6 +64,7 @@
         public void ObjectWithPrivateValues()
         {
             Assert.AreEqual(5, this.EvaluateFile("ObjectWithPrivateValues.js"));
+            Assert.AreEqual(Undefined.Instance, this.context.GetValue("result2"));
         }
 
         [TestMethod]

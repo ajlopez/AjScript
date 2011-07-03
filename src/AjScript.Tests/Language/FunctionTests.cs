@@ -30,6 +30,30 @@
         }
 
         [TestMethod]
+        public void FunctionHasCallMethod()
+        {
+            ICommand body = new ReturnCommand(new VariableExpression("x"));
+            Function function = new Function(new string[] { "x" }, body);
+
+            object result = function.GetValue("call");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ICallable));
+        }
+
+        [TestMethod]
+        public void FunctionHasApplyMethod()
+        {
+            ICommand body = new ReturnCommand(new VariableExpression("x"));
+            Function function = new Function(new string[] { "x" }, body);
+
+            object result = function.GetValue("apply");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ICallable));
+        }
+
+        [TestMethod]
         public void EvaluateFactorialFunction()
         {
             Context context = new Context();;

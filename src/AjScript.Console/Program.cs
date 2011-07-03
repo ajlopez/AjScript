@@ -12,8 +12,9 @@
     {
         static void Main(string[] args)
         {
-            IContext context = new Context();
+            IContext context = new TopContext();
             Parser parser = new Parser(System.Console.In);
+
             context.DefineVariable("write");
             context.SetValue("write", new WriteFunction());
             context.DefineVariable("writeln");

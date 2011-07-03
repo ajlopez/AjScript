@@ -123,9 +123,9 @@
 
                 ICommand command = null;
 
-                if (expression is ArrayExpression)
+                if (expression is IndexedExpression)
                 {
-                    ArrayExpression aexpr = (ArrayExpression)expression;
+                    IndexedExpression aexpr = (IndexedExpression)expression;
                     command = new SetArrayCommand(aexpr.Expression, aexpr.Arguments, this.ParseExpression());
                 }
                 else
@@ -372,7 +372,7 @@
                     continue;
                 }
 
-                expression = new ArrayExpression(expression, this.ParseArrayArgumentList());
+                expression = new IndexedExpression(expression, this.ParseArrayArgumentList());
             }
 
             return expression;
@@ -434,6 +434,23 @@
             this.Parse(TokenType.Separator, ")");
 
             return expressions;
+        }
+
+        private IExpression ParseArrayExpression()
+        {
+            List<IExpression> expressions = new List<IExpression>();
+
+            while (!this.TryParse(TokenType.Separator, "]"))
+            {
+                if (expressions.Count > 0)
+                    this.Parse(TokenType.Separator, ",");
+
+                expressions.Add(this.ParseExpression());
+            }
+
+            this.Parse(TokenType.Separator, "]");
+
+            return new ArrayExpression(expressions);
         }
 
         private IList<string> ParseArgumentNames()
@@ -499,6 +516,9 @@
 
                     if (token.Value == "{")
                         return this.ParseObjectExpression();
+
+                    if (token.Value == "[")
+                        return this.ParseArrayExpression();
 
                     break;
                 case TokenType.Boolean:
