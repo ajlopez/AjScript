@@ -11,11 +11,19 @@
     {
         private static ICallable callFunction = new CallFunction();
         private static ICallable applyFunction = new ApplyFunction();
+        private static IObject functionPrototype = null;
 
         private string[] parameterNames;
         private ICommand body;
         private int arity;
         private IContext context;
+
+        static Function()
+        {
+            functionPrototype = new DynamicObject();
+            functionPrototype.SetValue("call", callFunction);
+            functionPrototype.SetValue("apply", applyFunction);
+        }
 
         public Function(string[] parameterNames, ICommand body)
             : this(parameterNames, body, null)
@@ -29,11 +37,7 @@
 
             DynamicObject prototype = new DynamicObject();
 
-            this.SetValue("prototype", prototype);
-
-            // TODO set this values in the Function IDynamicObject prototype
-            this.SetValue("call", callFunction);
-            this.SetValue("apply", applyFunction);
+            this.SetValue("prototype", functionPrototype);
 
             this.parameterNames = parameterNames;
             this.body = body;
