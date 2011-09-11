@@ -30,6 +30,8 @@
             DynamicObject prototype = new DynamicObject();
 
             this.SetValue("prototype", prototype);
+
+            // TODO set this values in the Function IDynamicObject prototype
             this.SetValue("call", callFunction);
             this.SetValue("apply", applyFunction);
 
@@ -105,7 +107,16 @@
         public object Invoke(IContext context, object @this, object[] arguments)
         {
             object newthis = arguments[0];
-            object []args = (arguments.Length > 1) ? (object[])arguments[1] : null;
+            object[] args = null;
+
+            if (arguments.Length > 1)
+            {
+                object argvalues = arguments[1];
+                if (argvalues is ArrayObject)
+                    args = ((ArrayObject)argvalues).ToArray();
+                else
+                    args = (object[])argvalues;
+            }
             
             return ((ICallable)@this).Invoke(context, newthis, args);
         }

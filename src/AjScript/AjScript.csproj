@@ -62,6 +62,7 @@
     <Compile Include="Compiler\IVisitorContext.cs" />
     <Compile Include="Compiler\IVisitorProcessor.cs" />
     <Compile Include="Expressions\ArrayExpression.cs" />
+    <Compile Include="Language\ArrayObject.cs" />
     <Compile Include="TopContext.cs" />
     <Compile Include="Expressions\ObjectExpression.cs" />
     <Compile Include="Expressions\FunctionExpression.cs" />

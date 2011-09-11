@@ -43,6 +43,7 @@
             return ((IObject)prototype).GetValue(name);
         }
 
+        // TODO add prototype names to returned values
         public virtual ICollection<string> GetNames()
         {
             return this.values.Keys;

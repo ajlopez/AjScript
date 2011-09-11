@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using AjScript.Language;
 
     public class ArrayExpression : IExpression
     {
@@ -23,7 +24,7 @@
             foreach (IExpression expression in this.expressions)
                 values.Add(expression.Evaluate(context));
 
-            return values.ToArray();
+            return new ArrayObject(values);
         }
     }
 }

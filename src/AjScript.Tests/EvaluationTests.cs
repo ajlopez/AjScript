@@ -302,6 +302,14 @@
             Assert.AreEqual(800, EvaluateExpression("Person.prototype.age"));
         }
 
+        // TODO Array are IList, it should be a Javascript dyn obj
+        [TestMethod]
+        public void AddElementToArray()
+        {
+            EvaluateCommands("var arr = []; arr.push(1); arr.push(2);");
+            Assert.AreEqual(2, EvaluateExpression("arr.length"));
+        }
+
         private void EvaluateCommands(string text)
         {
             Parser parser = new Parser(text);
