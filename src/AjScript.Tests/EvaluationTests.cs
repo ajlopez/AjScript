@@ -197,7 +197,7 @@
         [TestMethod]
         public void NewDirectoryInfo()
         {
-            var expr = EvaluateExpression("new System.IO.DirectoryInfo('temp')");
+            var expr = EvaluateExpression("new System.IO.DirectoryInfo('.')");
             Assert.IsNotNull(expr);
             Assert.IsInstanceOfType(expr, typeof(System.IO.DirectoryInfo));
         }
@@ -265,6 +265,18 @@
         {
             EvaluateCommands("function foo() { this.name = 'Adam'; this.age = 800; }");
             object result = EvaluateExpression("new foo()");
+            Assert.IsInstanceOfType(result, typeof(IObject));
+            IObject obj = (IObject)result;
+
+            Assert.AreEqual("Adam", obj.GetValue("name"));
+            Assert.AreEqual(800, obj.GetValue("age"));
+        }
+
+        [TestMethod]
+        public void EvaluateNewWithObjectFunction()
+        {
+            EvaluateCommands("var obj = new Object(); obj.foo = function() { this.name = 'Adam'; this.age = 800; };");
+            object result = EvaluateExpression("new obj.foo()");
             Assert.IsInstanceOfType(result, typeof(IObject));
             IObject obj = (IObject)result;
 
