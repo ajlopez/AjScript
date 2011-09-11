@@ -148,10 +148,10 @@
                     dynobj.SetValue(expression.Name, obj);
                 }
 
-                return (IList) obj;
+                return (IList)obj;
             }
 
-            return (IList) ObjectUtilities.GetValue(obj, expression.Name);
+            return (IList)ObjectUtilities.GetValue(obj, expression.Name);
         }
 
         private static IDictionary ResolveToDictionary(VariableExpression expression, IContext context)

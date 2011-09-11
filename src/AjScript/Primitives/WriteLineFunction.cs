@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using AjScript.Language;
-    using System.IO;
 
     public class WriteLineFunction : ICallable
     {
@@ -33,7 +33,7 @@
 
         public object Invoke(IContext context, object @this, object[] arguments)
         {
-            if (arguments!=null)
+            if (arguments != null)
                 foreach (object argument in arguments)
                     this.writer.Write(argument);
 

@@ -56,7 +56,7 @@
 
         public Token NextToken()
         {
-            if (this.tokens != null && this.tokens.Count>0)
+            if (this.tokens != null && this.tokens.Count > 0)
                 return this.tokens.Pop();
 
             char ch;
@@ -381,7 +381,7 @@
 
             ch = this.NextChar();
 
-            while (char.IsWhiteSpace(ch) || ch=='/')
+            while (char.IsWhiteSpace(ch) || ch == '/')
             {
                 if (ch == '/')
                 {

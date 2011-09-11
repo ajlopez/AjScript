@@ -30,11 +30,13 @@
         public object Evaluate(IContext context)
         {
             object value = new Function(this.parameterNames, this.body, context);
+            
             if (this.name != null)
             {
                 context.DefineVariable(this.name);
                 context.SetValue(this.name, value);
             }
+
             return value;
         }
     }

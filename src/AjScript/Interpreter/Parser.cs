@@ -43,7 +43,7 @@
                 this.hoistedCommands = new List<ICommand>();
 
                 for (ICommand cmd = this.ParseCommand(); cmd != null; cmd = this.ParseCommand())
-                    AddCommand(commands, cmd);
+                    this.AddCommand(commands, cmd);
 
                 return new CompositeCommand(this.hoistedCommands, commands);
             }
@@ -104,6 +104,52 @@
                 this.lexer.Dispose();
         }
 
+        private static bool IsName(Token token, string value)
+        {
+            return IsToken(token, value, TokenType.Name);
+        }
+
+        private static bool IsToken(Token token, string value, TokenType type)
+        {
+            if (token == null)
+                return false;
+
+            if (token.TokenType != type)
+                return false;
+
+            return token.Value.Equals(value);
+        }
+
+        private static bool IsNoOperationCommand(ICommand command)
+        {
+            if (command == null)
+                return true;
+
+            if (command is CompositeCommand)
+            {
+                CompositeCommand composite = (CompositeCommand)command;
+                if (composite.CommandCount == 0)
+                    return true;
+            }
+
+            if (command == NoOperationCommand.Instance)
+                return true;
+
+            return false;
+        }
+
+        private static bool IsHoistedCommand(ICommand command)
+        {
+            if (command == null)
+                return false;
+            if (command is VarCommand)
+                return true;
+            if (command is ExpressionCommand && ((ExpressionCommand)command).Expression is FunctionExpression
+                && ((FunctionExpression)((ExpressionCommand)command).Expression).Name != null)
+                return true;
+            return false;
+        }
+
         private ICommand ParseSimpleCommand()
         {
             if (this.TryParse(TokenType.Name, "var"))
@@ -131,7 +177,7 @@
                 else
                 {
                     if (expression is VariableExpression)
-                        IsValidName(((VariableExpression)expression).Name);
+                        this.IsValidName(((VariableExpression)expression).Name);
 
                     command = new SetCommand(expression, this.ParseExpression());
                 }
@@ -144,22 +190,6 @@
                 this.lexer.PushToken(tokenSemiColon);
 
             return new ExpressionCommand(expression);
-        }
-
-        private static bool IsName(Token token, string value)
-        {
-            return IsToken(token, value, TokenType.Name);
-        }
-
-        private static bool IsToken(Token token, string value, TokenType type)
-        {
-            if (token == null)
-                return false;
-
-            if (token.TokenType != type)
-                return false;
-
-            return token.Value.Equals(value);
         }
 
         private ICollection<IExpression> ParseArrayValues()
@@ -346,7 +376,7 @@
         private IExpression ParseTermExpression()
         {
             if (this.TryParse(TokenType.Name, "new"))
-                return ParseNewExpression();
+                return this.ParseNewExpression();
 
             IExpression expression = this.ParseSimpleTermExpression();
 
@@ -502,7 +532,7 @@
                 return null;
 
             if (token.TokenType == TokenType.Name && token.Value == "function")
-                return ParseFunctionExpression();
+                return this.ParseFunctionExpression();
 
             switch (token.TokenType)
             {
@@ -584,7 +614,7 @@
             IList<ICommand> commands = new List<ICommand>();
 
             while (!this.TryParse(TokenType.Separator, "}"))
-                AddCommand(commands, this.ParseCommand());
+                this.AddCommand(commands, this.ParseCommand());
 
             this.lexer.NextToken();
 
@@ -691,7 +721,8 @@
             }
 
             ICommand initial = this.ParseSimpleCommand();
-            //this.Parse(TokenType.Separator, ";");
+
+            // this.Parse(TokenType.Separator, ";");
             IExpression condition = this.ParseExpression();
             this.Parse(TokenType.Separator, ";");
             ICommand endcmd = this.ParseSimpleCommand();
@@ -705,7 +736,7 @@
         {
             string name = this.ParseName();
 
-            IsValidName(name);
+            this.IsValidName(name);
 
             IExpression expression = null;
 
@@ -759,7 +790,8 @@
             memberNames.Add(name);
 
             throw new NotImplementedException();
-            //memberExpressions.Add(new FunctionExpression(parameterNames, body, isdefault, hasvariableparameters));
+
+            // memberExpressions.Add(new FunctionExpression(parameterNames, body, isdefault, hasvariableparameters));
         }
 
         private string[] ParseParameters(ref bool hasvariableparameters)
@@ -864,36 +896,6 @@
             }
 
             return expression;
-        }
-
-        private static bool IsNoOperationCommand(ICommand command)
-        {
-            if (command == null)
-                return true;
-
-            if (command is CompositeCommand)
-            {
-                CompositeCommand composite = (CompositeCommand)command;
-                if (composite.CommandCount == 0)
-                    return true;
-            }
-
-            if (command == NoOperationCommand.Instance)
-                return true;
-
-            return false;
-        }
-
-        private static bool IsHoistedCommand(ICommand command)
-        {
-            if (command == null)
-                return false;
-            if (command is VarCommand)
-                return true;
-            if (command is ExpressionCommand && ((ExpressionCommand)command).Expression is FunctionExpression
-                && ((FunctionExpression)((ExpressionCommand)command).Expression).Name != null)
-                return true;
-            return false;
         }
 
         private void IsValidName(string name)

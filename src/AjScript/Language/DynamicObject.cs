@@ -7,8 +7,9 @@
 
     public class DynamicObject : IObject
     {
-        private Dictionary<string, object> values = new Dictionary<string, object>();
         private static string[] nativeMethods = new string[] { "SetValue", "GetValue", "ToString", "GetNames", "Invoke", "GetHashCode", "Equals" };
+
+        private Dictionary<string, object> values = new Dictionary<string, object>();
         private IFunction function;
 
         public DynamicObject()
@@ -76,8 +77,8 @@
 
             return method.Invoke(null, this, parameters);
 
-            //TODO set up object environment if needed
-            //IContext objenv = new ObjectEnvironment(this, method.Environment);
+            // TODO set up object environment if needed
+            ////IContext objenv = new ObjectEnvironment(this, method.Environment);
 
             //return method.Invoke(objenv, parameters);
         }

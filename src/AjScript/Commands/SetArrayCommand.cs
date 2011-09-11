@@ -44,7 +44,7 @@
                 obj = ExpressionUtilities.ResolveToList(this.leftValue, context);
             else if (indexes.Length == 1)
             {
-                IObject iobj = (IObject) ExpressionUtilities.ResolveToObject(this.leftValue, context);
+                IObject iobj = (IObject)ExpressionUtilities.ResolveToObject(this.leftValue, context);
                 iobj.SetValue(indexes[0].ToString(), value);
                 return;
             }

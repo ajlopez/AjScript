@@ -1,10 +1,10 @@
 ﻿namespace AjScript.Expressions
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Collections;
     using AjScript.Language;
 
     public class DotExpression : IExpression
@@ -42,7 +42,7 @@
             if (this.type == null)
                 obj = this.expression.Evaluate(context);
 
-            return Evaluate(obj, context);
+            return this.Evaluate(obj, context);
         }
 
         public object TryEvaluate(IContext context)
@@ -55,40 +55,9 @@
                 obj = this.expression.Evaluate(context);
 
             if (obj != null && !(obj is Undefined))
-                return Evaluate(obj, context);
+                return this.Evaluate(obj, context);
 
             return null;
-        }
-
-        private object Evaluate(object obj, IContext context)
-        {
-            object[] parameters = null;
-
-            if (this.arguments != null)
-            {
-                List<object> values = new List<object>();
-
-                foreach (IExpression argument in this.arguments)
-                {
-                    object value = argument.Evaluate(context);
-
-                    values.Add(value);
-                }
-
-                parameters = values.ToArray();
-            }
-
-            if (this.type != null)
-                return TypeUtilities.InvokeTypeMember(this.type, this.name, parameters);
-
-            if (obj is Type)
-                return TypeUtilities.InvokeTypeMember((Type)obj, this.name, parameters);
-
-            // TODO if undefined, do nothing
-            if (obj == null)
-                return null;
-
-            return ObjectUtilities.GetValue(obj, this.name, parameters);
         }
 
         public Type AsType()
@@ -122,6 +91,37 @@
             }
 
             return null;
+        }
+
+        private object Evaluate(object obj, IContext context)
+        {
+            object[] parameters = null;
+
+            if (this.arguments != null)
+            {
+                List<object> values = new List<object>();
+
+                foreach (IExpression argument in this.arguments)
+                {
+                    object value = argument.Evaluate(context);
+
+                    values.Add(value);
+                }
+
+                parameters = values.ToArray();
+            }
+
+            if (this.type != null)
+                return TypeUtilities.InvokeTypeMember(this.type, this.name, parameters);
+
+            if (obj is Type)
+                return TypeUtilities.InvokeTypeMember((Type)obj, this.name, parameters);
+
+            // TODO if undefined, do nothing
+            if (obj == null)
+                return null;
+
+            return ObjectUtilities.GetValue(obj, this.name, parameters);
         }
     }
 }

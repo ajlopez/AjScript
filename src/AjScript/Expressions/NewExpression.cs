@@ -29,7 +29,7 @@
 
             if (this.expression is DotExpression)
             {
-                DotExpression dotexpr = (DotExpression) this.expression;
+                DotExpression dotexpr = (DotExpression)this.expression;
                 value = dotexpr.TryEvaluate(context);
             }
             else
@@ -41,7 +41,7 @@
             {
                 if (this.expression is VariableExpression)
                 {
-                    type = TypeUtilities.GetType(context, ((VariableExpression) this.expression).Name);
+                    type = TypeUtilities.GetType(context, ((VariableExpression)this.expression).Name);
                 }
                 else if (this.expression is DotExpression)
                 {

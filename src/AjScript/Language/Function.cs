@@ -67,8 +67,8 @@
 
             for (int k = 0; arguments != null && k < arguments.Length && k < this.Arity; k++)
             {
-                newctx.DefineVariable(parameterNames[k]);
-                newctx.SetValue(parameterNames[k], arguments[k]);
+                newctx.DefineVariable(this.parameterNames[k]);
+                newctx.SetValue(this.parameterNames[k], arguments[k]);
             }
 
             // TODO Review: it should be null?

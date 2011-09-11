@@ -61,7 +61,7 @@
 
         public void DefineVariable(string name)
         {
-            this.values[name] =  Undefined.Instance;
+            this.values[name] = Undefined.Instance;
         }
     }
 }

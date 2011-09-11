@@ -11,12 +11,12 @@
 
         public void RegisterVisitor(Type type, IVisitor<C> visitor)
         {
-            visitors[type] = visitor;
+            this.visitors[type] = visitor;
         }
 
         public void RegisterVisitor<T>(IVisitor<T, C> visitor)
         {
-            visitors[typeof(T)] = visitor;
+            this.visitors[typeof(T)] = visitor;
         }
 
         public void Process(C context, object element)
