@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Collections;
+    using AjScript.Language;
 
     public class DotExpression : IExpression
     {
@@ -41,6 +42,26 @@
             if (this.type == null)
                 obj = this.expression.Evaluate(context);
 
+            return Evaluate(obj, context);
+        }
+
+        public object TryEvaluate(IContext context)
+        {
+            object obj = null;
+
+            if (this.expression is DotExpression)
+                obj = ((DotExpression)this.expression).TryEvaluate(context);
+            else
+                obj = this.expression.Evaluate(context);
+
+            if (obj != null && !(obj is Undefined))
+                return Evaluate(obj, context);
+
+            return null;
+        }
+
+        private object Evaluate(object obj, IContext context)
+        {
             object[] parameters = null;
 
             if (this.arguments != null)
@@ -70,6 +91,11 @@
             return ObjectUtilities.GetValue(obj, this.name, parameters);
         }
 
+        public Type AsType()
+        {
+            return AsType(this);
+        }
+
         private static Type AsType(IExpression expression)
         {
             string name = AsName(expression);
@@ -82,11 +108,17 @@
 
         private static string AsName(IExpression expression)
         {
+            // TODO DotExpression responsability
             if (expression is DotExpression)
             {
                 DotExpression dot = (DotExpression)expression;
 
                 return AsName(dot.Expression) + "." + dot.Name;
+            }
+
+            if (expression is VariableExpression)
+            {
+                return ((VariableExpression)expression).Name;
             }
 
             return null;

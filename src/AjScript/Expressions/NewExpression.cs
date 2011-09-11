@@ -10,27 +10,44 @@
     [Serializable]
     public class NewExpression : IExpression
     {
-        private string name;
+        private IExpression expression;
         private ICollection<IExpression> arguments;
 
-        public NewExpression(string name, ICollection<IExpression> arguments)
+        public NewExpression(IExpression expression, ICollection<IExpression> arguments)
         {
-            this.name = name;
+            this.expression = expression;
             this.arguments = arguments;
         }
 
-        public string TypeName { get { return this.name; } }
+        public IExpression Expression { get { return this.expression; } }
 
         public ICollection<IExpression> Arguments { get { return this.arguments; } }
 
         public object Evaluate(IContext context)
         {
-            object value = context.GetValue(this.name);
+            object value = null;
+
+            if (this.expression is DotExpression)
+            {
+                DotExpression dotexpr = (DotExpression) this.expression;
+                value = dotexpr.TryEvaluate(context);
+            }
+            else
+                value = this.expression.Evaluate(context);
 
             Type type = null;
 
             if (!(value is IFunction))
-                type = TypeUtilities.GetType(context, this.name);
+            {
+                if (this.expression is VariableExpression)
+                {
+                    type = TypeUtilities.GetType(context, ((VariableExpression) this.expression).Name);
+                }
+                else if (this.expression is DotExpression)
+                {
+                    type = ((DotExpression)this.expression).AsType();
+                }
+            }
 
             object[] parameters = null;
 

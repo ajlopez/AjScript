@@ -382,7 +382,7 @@
         {
             this.Parse(TokenType.Name, "new");
 
-            string name = this.ParseName();
+            IExpression name = this.ParseQualifiedName();
             IList<IExpression> arguments = this.ParseArgumentList();
             return new NewExpression(name, arguments);
         }
@@ -852,17 +852,18 @@
             throw new UnexpectedTokenException(token);
         }
 
-        private string ParseQualifiedName()
+        private IExpression ParseQualifiedName()
         {
             string name = this.ParseName();
+            IExpression expression = new VariableExpression(name);
 
             while (this.TryParse(TokenType.Operator, "."))
             {
                 this.lexer.NextToken();
-                name += "." + this.ParseName();
+                expression = new DotExpression(expression, this.ParseName());
             }
 
-            return name;
+            return expression;
         }
 
         private static bool IsNoOperationCommand(ICommand command)

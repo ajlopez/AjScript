@@ -195,6 +195,14 @@
         }
 
         [TestMethod]
+        public void NewDirectoryInfo()
+        {
+            var expr = EvaluateExpression("new System.IO.DirectoryInfo('temp')");
+            Assert.IsNotNull(expr);
+            Assert.IsInstanceOfType(expr, typeof(System.IO.DirectoryInfo));
+        }
+
+        [TestMethod]
         public void EvaluateSimpleBooleans()
         {
             Assert.AreEqual(true, EvaluateExpression("true && true"));

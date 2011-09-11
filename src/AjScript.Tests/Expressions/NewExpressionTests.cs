@@ -15,7 +15,8 @@
         [TestMethod]
         public void EvaluateSimpleNewExpression()
         {
-            IExpression expression = new NewExpression("System.Data.DataSet", null);
+            IExpression dotexpr = new DotExpression(new DotExpression(new VariableExpression("System"), "Data"), "DataSet");
+            IExpression expression = new NewExpression(dotexpr, null);
 
             object result = expression.Evaluate(new Context());
 
@@ -26,7 +27,8 @@
         [TestMethod]
         public void EvaluateNewExpressionWithArguments()
         {
-            IExpression expression = new NewExpression("System.IO.DirectoryInfo", new IExpression[] { new ConstantExpression(".") });
+            IExpression dotexpr = new DotExpression(new DotExpression(new VariableExpression("System"), "IO"), "DirectoryInfo");
+            IExpression expression = new NewExpression(dotexpr, new IExpression[] { new ConstantExpression(".") });
 
             object result = expression.Evaluate(new Context());
 
@@ -43,7 +45,7 @@
         [TestMethod]
         public void EvaluateNewExpressionWithAliasedType()
         {
-            IExpression expression = new NewExpression("Lexer", new List<IExpression>() { new ConstantExpression(string.Empty) });
+            IExpression expression = new NewExpression(new VariableExpression("Lexer"), new List<IExpression>() { new ConstantExpression(string.Empty) });
             Context context = new Context();
             context.SetValue("Lexer", typeof(Lexer));
 

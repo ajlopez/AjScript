@@ -660,7 +660,10 @@
 
             NewExpression newexpr = (NewExpression)expression;
 
-            Assert.AreEqual("Object", newexpr.TypeName);
+            Assert.IsInstanceOfType(newexpr.Expression, typeof(VariableExpression));
+
+            VariableExpression varexpr = (VariableExpression)newexpr.Expression;
+            Assert.AreEqual("Object", varexpr.Name);
         }
 
         [TestMethod]
@@ -797,6 +800,17 @@
             Assert.AreEqual(2, composite.CommandCount);
             Assert.AreEqual(2, composite.HoistedCommandCount);
             Assert.IsInstanceOfType(composite.HoistedCommands.First(), typeof(VarCommand));
+        }
+
+        [TestMethod]
+        public void DotExpression()
+        {
+            IExpression expression = ParseExpression("a.b.c");
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(DotExpression));
+
+            var dotexp = (DotExpression) expression;
+            Assert.AreEqual("c", dotexp.Name);
         }
 
         private IExpression ParseExpression(string text)
