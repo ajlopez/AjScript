@@ -1,12 +1,10 @@
 ﻿namespace AjScript.Tests.Interpreter
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Text;
     using AjScript.Interpreter;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -118,7 +116,7 @@
         [TestMethod]
         public void PushToken()
         {
-            Lexer lexer = new Lexer("");
+            Lexer lexer = new Lexer(string.Empty);
             Token token = new Token() { TokenType = TokenType.Name, Value = "name" };
 
             lexer.PushToken(token);
@@ -129,7 +127,7 @@
         [TestMethod]
         public void PushTwoToken2()
         {
-            Lexer lexer = new Lexer("");
+            Lexer lexer = new Lexer(string.Empty);
             Token token = new Token() { TokenType = TokenType.Name, Value = "name" };
             Token token2 = new Token() { TokenType = TokenType.Name, Value = "name2" };
 
@@ -144,7 +142,6 @@
         {
             using (Lexer lexer = new Lexer(text))
             {
-
                 Token token = lexer.NextToken();
 
                 Assert.IsNotNull(token);

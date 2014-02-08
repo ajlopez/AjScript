@@ -1,14 +1,12 @@
 ﻿namespace AjScript.Tests.Language
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Text;
     using AjScript.Commands;
     using AjScript.Expressions;
     using AjScript.Language;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -56,7 +54,7 @@
         [TestMethod]
         public void EvaluateFactorialFunction()
         {
-            Context context = new Context();;
+            Context context = new Context();
             ICallable factorial = BuildFactorialFunction(context);
             context.SetValue("Factorial", factorial);
 
@@ -95,9 +93,11 @@
             IExpression condition = new CompareExpression(ComparisonOperator.LessEqual, new VariableExpression("n"), new ConstantExpression(1));
 
             ICommand return1 = new ReturnCommand(new ConstantExpression(1));
-            ICommand return2 = new ReturnCommand(new ArithmeticBinaryExpression(ArithmeticOperator.Multiply,
-                new VariableExpression("n"),
-                new InvokeExpression(new VariableExpression("Factorial"), new IExpression[] { new ArithmeticBinaryExpression(ArithmeticOperator.Subtract, new VariableExpression("n"), new ConstantExpression(1)) })));
+            ICommand return2 = new ReturnCommand(
+                new ArithmeticBinaryExpression(
+                    ArithmeticOperator.Multiply,
+                    new VariableExpression("n"),
+                    new InvokeExpression(new VariableExpression("Factorial"), new IExpression[] { new ArithmeticBinaryExpression(ArithmeticOperator.Subtract, new VariableExpression("n"), new ConstantExpression(1)) })));
 
             ICommand ifcmd = new IfCommand(condition, return1, return2);
             ICallable factorial = new Function(new string[] { "n" }, ifcmd, context);

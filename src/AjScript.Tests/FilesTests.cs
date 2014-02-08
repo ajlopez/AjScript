@@ -1,16 +1,16 @@
 ﻿namespace AjScript.Tests
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AjScript.Language;
-    using AjScript.Interpreter;
+    using System.Text;
     using AjScript.Commands;
     using AjScript.Expressions;
+    using AjScript.Interpreter;
+    using AjScript.Language;
     using AjScript.Primitives;
-    using System.IO;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class FilesTests

@@ -1,12 +1,12 @@
 ﻿namespace AjScript.Tests.Primitives
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AjScript.Primitives;
+    using System.Text;
     using AjScript.Language;
+    using AjScript.Primitives;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ObjectFunctionTests

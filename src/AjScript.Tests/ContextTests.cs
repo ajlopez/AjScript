@@ -1,11 +1,11 @@
 ﻿namespace AjScript.Tests
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Text;
     using AjScript.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ContextTests
@@ -51,7 +51,7 @@
             string[] names = { "one", "two", "three" };
             int[] values = { 1, 2, 3 };
 
-            for (int k=0; k < names.Length; k++)
+            for (int k = 0; k < names.Length; k++)
                 context.SetValue(names[k], values[k]);
 
             for (int k = 0; k < names.Length; k++)

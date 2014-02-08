@@ -94,55 +94,55 @@
             DynamicObject obj = new DynamicObject(this);
             return this.Invoke(this.context, obj, parameters);
         }
-    }
 
-    internal class CallFunction : ICallable
-    {
-        public int Arity
+        private class CallFunction : ICallable
         {
-            get { return 2; }
-        }
-
-        public IContext Context
-        {
-            get { return null; }
-        }
-
-        public object Invoke(IContext context, object @this, object[] arguments)
-        {
-            object newthis = arguments[0];
-            object[] args = null;
-
-            if (arguments.Length > 1)
+            public int Arity
             {
-                object argvalues = arguments[1];
-                if (argvalues is ArrayObject)
-                    args = ((ArrayObject)argvalues).ToArray();
-                else
-                    args = (object[])argvalues;
+                get { return 2; }
             }
-            
-            return ((ICallable)@this).Invoke(context, newthis, args);
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                object newthis = arguments[0];
+                object[] args = null;
+
+                if (arguments.Length > 1)
+                {
+                    object argvalues = arguments[1];
+                    if (argvalues is ArrayObject)
+                        args = ((ArrayObject)argvalues).ToArray();
+                    else
+                        args = (object[])argvalues;
+                }
+
+                return ((ICallable)@this).Invoke(context, newthis, args);
+            }
         }
-    }
 
-    internal class ApplyFunction : ICallable
-    {
-        public int Arity
+        private class ApplyFunction : ICallable
         {
-            get { return -1; }
-        }
+            public int Arity
+            {
+                get { return -1; }
+            }
 
-        public IContext Context
-        {
-            get { return null; }
-        }
+            public IContext Context
+            {
+                get { return null; }
+            }
 
-        public object Invoke(IContext context, object @this, object[] arguments)
-        {
-            object newthis = arguments[0];
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                object newthis = arguments[0];
 
-            return ((ICallable)@this).Invoke(context, newthis, arguments.Skip(1).ToArray());
+                return ((ICallable)@this).Invoke(context, newthis, arguments.Skip(1).ToArray());
+            }
         }
     }
 }

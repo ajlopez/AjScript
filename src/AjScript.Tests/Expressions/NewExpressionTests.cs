@@ -1,13 +1,13 @@
 ﻿namespace AjScript.Tests.Expressions
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
-    using System.Linq;
-    using AjScript.Expressions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.IO;
+    using System.Linq;
+    using System.Text;
+    using AjScript.Expressions;
     using AjScript.Interpreter;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class NewExpressionTests

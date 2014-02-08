@@ -1,11 +1,11 @@
 ﻿namespace AjScript.Tests.Expressions
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
+    using AjScript.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjScript.Expressions;
 
     [TestClass]
     public class ConstantExpressionTests

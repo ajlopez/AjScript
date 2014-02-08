@@ -435,6 +435,7 @@
                 IList<string> arguments = this.ParseArgumentNames();
                 this.Parse(TokenType.Separator, "{");
                 CompositeCommand command = this.ParseCompositeCommand();
+                
                 // TODO Review, should be 0
                 if (command.HoistedCommandCount > 0)
                     throw new ParserException("Invalid command");

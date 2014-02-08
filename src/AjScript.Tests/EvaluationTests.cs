@@ -1,15 +1,15 @@
 ﻿namespace AjScript.Tests
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AjScript.Language;
-    using AjScript.Interpreter;
+    using System.Text;
     using AjScript.Commands;
     using AjScript.Expressions;
+    using AjScript.Interpreter;
+    using AjScript.Language;
     using AjScript.Primitives;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class EvaluationTests
@@ -56,42 +56,42 @@
         [TestMethod]
         public void EvaluateVar()
         {
-            EvaluateCommands("var x;");
+            this.EvaluateCommands("var x;");
             Assert.AreEqual(Undefined.Instance, this.context.GetValue("x"));
         }
 
         [TestMethod]
         public void DefineVar()
         {
-            EvaluateCommands("var x=1;");
+            this.EvaluateCommands("var x=1;");
             Assert.AreEqual(1, this.context.GetValue("x"));
         }
 
         [TestMethod]
         public void DefineVarWithInitialValue()
         {
-            EvaluateCommands("var x=1+2;");
+            this.EvaluateCommands("var x=1+2;");
             Assert.AreEqual(3, this.context.GetValue("x"));
         }
 
         [TestMethod]
         public void DefineVarWithInitialExpressionValue()
         {
-            EvaluateCommands("var x=1+2;");
+            this.EvaluateCommands("var x=1+2;");
             Assert.AreEqual(3, this.context.GetValue("x"));
         }
 
         [TestMethod]
         public void SetUndefinedVar()
         {
-            EvaluateCommands("x = 1+2;");
+            this.EvaluateCommands("x = 1+2;");
             Assert.AreEqual(3, this.context.GetValue("x"));
         }
 
         [TestMethod]
         public void PreIncrementVar()
         {
-            EvaluateCommands("var x = 0; y = ++x;");
+            this.EvaluateCommands("var x = 0; y = ++x;");
             Assert.AreEqual(1, this.context.GetValue("x"));
             Assert.AreEqual(1, this.context.GetValue("y"));
         }
@@ -99,7 +99,7 @@
         [TestMethod]
         public void PostIncrementVar()
         {
-            EvaluateCommands("var x = 0; y = x++;");
+            this.EvaluateCommands("var x = 0; y = x++;");
             Assert.AreEqual(1, this.context.GetValue("x"));
             Assert.AreEqual(0, this.context.GetValue("y"));
         }
@@ -107,7 +107,7 @@
         [TestMethod]
         public void EmptyObject()
         {
-            object result = EvaluateExpression("{}");
+            object result = this.EvaluateExpression("{}");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
@@ -116,7 +116,7 @@
         [TestMethod]
         public void PreDecrementVar()
         {
-            EvaluateCommands("var x = 0; y = --x;");
+            this.EvaluateCommands("var x = 0; y = --x;");
             Assert.AreEqual(-1, this.context.GetValue("x"));
             Assert.AreEqual(-1, this.context.GetValue("y"));
         }
@@ -124,7 +124,7 @@
         [TestMethod]
         public void PostDecrementVar()
         {
-            EvaluateCommands("var x = 0; y = x--;");
+            this.EvaluateCommands("var x = 0; y = x--;");
             Assert.AreEqual(-1, this.context.GetValue("x"));
             Assert.AreEqual(0, this.context.GetValue("y"));
         }
@@ -132,7 +132,7 @@
         [TestMethod]
         public void SimpleFor()
         {
-            EvaluateCommands("var y = 1; for (var x=1; x<4; x++) y = y*x;");
+            this.EvaluateCommands("var y = 1; for (var x=1; x<4; x++) y = y*x;");
             Assert.AreEqual(4, this.context.GetValue("x"));
             Assert.AreEqual(6, this.context.GetValue("y"));
         }
@@ -140,7 +140,7 @@
         [TestMethod]
         public void SimpleForWithBlock()
         {
-            EvaluateCommands("var y = 1; for (var x=1; x<4; x++) { y = y*x; y = y*2; }");
+            this.EvaluateCommands("var y = 1; for (var x=1; x<4; x++) { y = y*x; y = y*2; }");
             Assert.AreEqual(4, this.context.GetValue("x"));
             Assert.AreEqual(48, this.context.GetValue("y"));
         }
@@ -148,27 +148,27 @@
         [TestMethod]
         public void AddFunction()
         {
-            Assert.AreEqual(3, EvaluateExpression("function (x) { return x+1;} (2)"));
+            Assert.AreEqual(3, this.EvaluateExpression("function (x) { return x+1;} (2)"));
         }
 
         [TestMethod]
         public void DefineAndEvaluateAddFunction()
         {
-            EvaluateCommands("var add1 = function (x) { return x+1;}; result = add1(2);");
+            this.EvaluateCommands("var add1 = function (x) { return x+1;}; result = add1(2);");
             Assert.AreEqual(3, this.context.GetValue("result"));
         }
 
         [TestMethod]
         public void DefineAndEvaluateFunctionWithClosure()
         {
-            EvaluateCommands("var addx = function (x) { return function(y) { return x+y;}; }; result = addx(2)(3);");
+            this.EvaluateCommands("var addx = function (x) { return function(y) { return x+y;}; }; result = addx(2)(3);");
             Assert.AreEqual(5, this.context.GetValue("result"));
         }
 
         [TestMethod]
         public void NewObject()
         {
-            object result = EvaluateExpression("new Object()");
+            object result = this.EvaluateExpression("new Object()");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
         }
@@ -176,28 +176,28 @@
         [TestMethod]
         public void NewObjectUsingPrototype()
         {
-            EvaluateCommands("var x = new Object(); Object.prototype.y = 10; result = x.y;");
+            this.EvaluateCommands("var x = new Object(); Object.prototype.y = 10; result = x.y;");
             Assert.AreEqual(10, this.context.GetValue("result"));
         }
 
         [TestMethod]
         public void NewEmptyObjectUsingPrototype()
         {
-            EvaluateCommands("var x = {}; Object.prototype.y = 10; result = x.y;");
+            this.EvaluateCommands("var x = {}; Object.prototype.y = 10; result = x.y;");
             Assert.AreEqual(10, this.context.GetValue("result"));
         }
 
         [TestMethod]
         public void SetValueUsingArrayNotation()
         {
-            EvaluateCommands("var x = new Object(); x['y'] = 10; result = x.y;");
+            this.EvaluateCommands("var x = new Object(); x['y'] = 10; result = x.y;");
             Assert.AreEqual(10, this.context.GetValue("result"));
         }
 
         [TestMethod]
         public void NewDirectoryInfo()
         {
-            var expr = EvaluateExpression("new System.IO.DirectoryInfo('.')");
+            var expr = this.EvaluateExpression("new System.IO.DirectoryInfo('.')");
             Assert.IsNotNull(expr);
             Assert.IsInstanceOfType(expr, typeof(System.IO.DirectoryInfo));
         }
@@ -205,17 +205,17 @@
         [TestMethod]
         public void EvaluateSimpleBooleans()
         {
-            Assert.AreEqual(true, EvaluateExpression("true && true"));
-            Assert.AreEqual(true, EvaluateExpression("false || true"));
-            Assert.AreEqual(false, EvaluateExpression("true && false"));
-            Assert.AreEqual(false, EvaluateExpression("false || false"));
+            Assert.AreEqual(true, this.EvaluateExpression("true && true"));
+            Assert.AreEqual(true, this.EvaluateExpression("false || true"));
+            Assert.AreEqual(false, this.EvaluateExpression("true && false"));
+            Assert.AreEqual(false, this.EvaluateExpression("false || false"));
         }
 
         [TestMethod]
         public void EvaluateFunctionWithGlobalThis()
         {
-            EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
-            EvaluateExpression("Person()");
+            this.EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
+            this.EvaluateExpression("Person()");
             Assert.AreEqual("Adam", this.context.GetValue("name"));
             Assert.AreEqual(800, this.context.GetValue("age"));
         }
@@ -223,48 +223,48 @@
         [TestMethod]
         public void EvaluateFunctionUsingCallWithOneParameterAsThis()
         {
-            EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
-            EvaluateCommands("var adam = {};");
-            EvaluateExpression("Person.call(adam)");
-            Assert.AreEqual("Adam", EvaluateExpression("adam.name"));
-            Assert.AreEqual(800, EvaluateExpression("adam.age"));
+            this.EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
+            this.EvaluateCommands("var adam = {};");
+            this.EvaluateExpression("Person.call(adam)");
+            Assert.AreEqual("Adam", this.EvaluateExpression("adam.name"));
+            Assert.AreEqual(800, this.EvaluateExpression("adam.age"));
         }
 
         [TestMethod]
         public void EvaluateFunctionUsingCallWithParameters()
         {
-            EvaluateCommands("function MakePerson(name, age) { this.name = name; this.age = age; }");
-            EvaluateCommands("var adam = {};");
-            EvaluateExpression("MakePerson.call(adam, ['Adam', 800])");
-            Assert.AreEqual("Adam", EvaluateExpression("adam.name"));
-            Assert.AreEqual(800, EvaluateExpression("adam.age"));
+            this.EvaluateCommands("function MakePerson(name, age) { this.name = name; this.age = age; }");
+            this.EvaluateCommands("var adam = {};");
+            this.EvaluateExpression("MakePerson.call(adam, ['Adam', 800])");
+            Assert.AreEqual("Adam", this.EvaluateExpression("adam.name"));
+            Assert.AreEqual(800, this.EvaluateExpression("adam.age"));
         }
 
         [TestMethod]
         public void EvaluateFunctionUsingApplyWithOneParameterAsThis()
         {
-            EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
-            EvaluateCommands("var adam = {};");
-            EvaluateExpression("Person.apply(adam)");
-            Assert.AreEqual("Adam", EvaluateExpression("adam.name"));
-            Assert.AreEqual(800, EvaluateExpression("adam.age"));
+            this.EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
+            this.EvaluateCommands("var adam = {};");
+            this.EvaluateExpression("Person.apply(adam)");
+            Assert.AreEqual("Adam", this.EvaluateExpression("adam.name"));
+            Assert.AreEqual(800, this.EvaluateExpression("adam.age"));
         }
 
         [TestMethod]
         public void EvaluateFunctionUsingApplyWithParameters()
         {
-            EvaluateCommands("function MakePerson(name, age) { this.name = name; this.age = age; }");
-            EvaluateCommands("var adam = {};");
-            EvaluateExpression("MakePerson.apply(adam, 'Adam', 800)");
-            Assert.AreEqual("Adam", EvaluateExpression("adam.name"));
-            Assert.AreEqual(800, EvaluateExpression("adam.age"));
+            this.EvaluateCommands("function MakePerson(name, age) { this.name = name; this.age = age; }");
+            this.EvaluateCommands("var adam = {};");
+            this.EvaluateExpression("MakePerson.apply(adam, 'Adam', 800)");
+            Assert.AreEqual("Adam", this.EvaluateExpression("adam.name"));
+            Assert.AreEqual(800, this.EvaluateExpression("adam.age"));
         }
 
         [TestMethod]
         public void EvaluateNewWithFunction()
         {
-            EvaluateCommands("function foo() { this.name = 'Adam'; this.age = 800; }");
-            object result = EvaluateExpression("new foo()");
+            this.EvaluateCommands("function foo() { this.name = 'Adam'; this.age = 800; }");
+            object result = this.EvaluateExpression("new foo()");
             Assert.IsInstanceOfType(result, typeof(IObject));
             IObject obj = (IObject)result;
 
@@ -275,8 +275,8 @@
         [TestMethod]
         public void EvaluateNewWithObjectFunction()
         {
-            EvaluateCommands("var obj = new Object(); obj.foo = function() { this.name = 'Adam'; this.age = 800; };");
-            object result = EvaluateExpression("new obj.foo()");
+            this.EvaluateCommands("var obj = new Object(); obj.foo = function() { this.name = 'Adam'; this.age = 800; };");
+            object result = this.EvaluateExpression("new obj.foo()");
             Assert.IsInstanceOfType(result, typeof(IObject));
             IObject obj = (IObject)result;
 
@@ -287,27 +287,27 @@
         [TestMethod]
         public void NewObjectWithPrototype()
         {
-            EvaluateCommands("function Person() { this.name = 'Adam'; }");
-            EvaluateCommands("Person.prototype.age = 800; var adam = new Person();");
-            Assert.AreEqual(800, EvaluateExpression("adam.age"));
+            this.EvaluateCommands("function Person() { this.name = 'Adam'; }");
+            this.EvaluateCommands("Person.prototype.age = 800; var adam = new Person();");
+            Assert.AreEqual(800, this.EvaluateExpression("adam.age"));
         }
 
         [TestMethod]
         public void NewObjectOverridingPrototypeValue()
         {
-            EvaluateCommands("function Person() { this.name = 'Adam'; }");
-            EvaluateCommands("Person.prototype.age = 800; var adam = new Person();");
-            EvaluateCommands("adam.age = 600;");
-            Assert.AreEqual(600, EvaluateExpression("adam.age"));
-            Assert.AreEqual(800, EvaluateExpression("Person.prototype.age"));
+            this.EvaluateCommands("function Person() { this.name = 'Adam'; }");
+            this.EvaluateCommands("Person.prototype.age = 800; var adam = new Person();");
+            this.EvaluateCommands("adam.age = 600;");
+            Assert.AreEqual(600, this.EvaluateExpression("adam.age"));
+            Assert.AreEqual(800, this.EvaluateExpression("Person.prototype.age"));
         }
 
         // TODO Array are IList, it should be a Javascript dyn obj
         [TestMethod]
         public void AddElementToArray()
         {
-            EvaluateCommands("var arr = []; arr.push(1); arr.push(2);");
-            Assert.AreEqual(2, EvaluateExpression("arr.length"));
+            this.EvaluateCommands("var arr = []; arr.push(1); arr.push(2);");
+            Assert.AreEqual(2, this.EvaluateExpression("arr.length"));
         }
 
         private void EvaluateCommands(string text)

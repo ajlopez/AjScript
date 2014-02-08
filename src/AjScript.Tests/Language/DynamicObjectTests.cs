@@ -1,15 +1,13 @@
 ﻿namespace AjScript.Tests.Language
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Text;
     using AjScript;
     using AjScript.Commands;
     using AjScript.Expressions;
     using AjScript.Language;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -28,24 +26,24 @@
         [TestMethod]
         public void GetUndefinedForUndefinedValue()
         {
-            Assert.AreSame(Undefined.Instance, dynobj.GetValue("Foo"));
+            Assert.AreSame(Undefined.Instance, this.dynobj.GetValue("Foo"));
         }
 
         [TestMethod]
         public void SetAndGetValue()
         {
-            dynobj.SetValue("Foo", "Bar");
+            this.dynobj.SetValue("Foo", "Bar");
 
-            Assert.AreEqual("Bar", dynobj.GetValue("Foo"));
+            Assert.AreEqual("Bar", this.dynobj.GetValue("Foo"));
         }
 
         [TestMethod]
         public void GetNames()
         {
-            dynobj.SetValue("FirstName", "Adam");
-            dynobj.SetValue("LastName", "Genesis");
+            this.dynobj.SetValue("FirstName", "Adam");
+            this.dynobj.SetValue("LastName", "Genesis");
 
-            ICollection<string> names = dynobj.GetNames();
+            ICollection<string> names = this.dynobj.GetNames();
 
             Assert.IsNotNull(names);
             Assert.AreEqual(2, names.Count);
@@ -62,9 +60,9 @@
 
             Assert.AreEqual(0, function.Arity);
 
-            dynobj.SetValue("GetName", function);
+            this.dynobj.SetValue("GetName", function);
 
-            object result = dynobj.GetValue("GetName");
+            object result = this.dynobj.GetValue("GetName");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ICallable));
@@ -79,10 +77,10 @@
 
             Assert.AreEqual(0, function.Arity);
 
-            dynobj.SetValue("Name", "Adam");
-            dynobj.SetValue("GetName", function);
+            this.dynobj.SetValue("Name", "Adam");
+            this.dynobj.SetValue("GetName", function);
 
-            object result = dynobj.Invoke("GetName", new object[] { });
+            object result = this.dynobj.Invoke("GetName", new object[] { });
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(string));
@@ -97,9 +95,9 @@
 
             Assert.AreEqual(0, function.Arity);
 
-            dynobj.SetValue("Name", "Adam");
+            this.dynobj.SetValue("Name", "Adam");
 
-            object result = dynobj.Invoke("GetValue", new object[] { "Name" });
+            object result = this.dynobj.Invoke("GetValue", new object[] { "Name" });
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(string));

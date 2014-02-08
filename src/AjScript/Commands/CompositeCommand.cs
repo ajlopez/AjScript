@@ -21,11 +21,27 @@
             this.commands = commands;
         }
 
-        public int CommandCount { get { if (this.commands == null) return 0; return this.commands.Count; } }
+        public int CommandCount 
+        { 
+            get 
+            { 
+                if (this.commands == null) 
+                    return 0; 
+                return this.commands.Count; 
+            } 
+        }
 
         public ICollection<ICommand> Commands { get { return this.commands; } }
 
-        public int HoistedCommandCount { get { if (this.hoistedCommands == null) return 0; return this.hoistedCommands.Count; } }
+        public int HoistedCommandCount 
+        { 
+            get 
+            { 
+                if (this.hoistedCommands == null)
+                    return 0; 
+                return this.hoistedCommands.Count; 
+            } 
+        }
 
         public ICollection<ICommand> HoistedCommands { get { return this.hoistedCommands; } }
 

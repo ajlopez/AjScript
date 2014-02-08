@@ -1,14 +1,14 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjScript.Compiler;
-using AjScript.Commands;
-using AjScript.Interpreter;
-
-namespace AjScript.Tests.Compiler
+﻿namespace AjScript.Tests.Compiler
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjScript.Commands;
+    using AjScript.Compiler;
+    using AjScript.Interpreter;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class BaseVisitorProcessorTests
     {
@@ -27,50 +27,50 @@ namespace AjScript.Tests.Compiler
             Parser parser = new Parser(text);
             return parser.ParseCommands();
         }
-    }
 
-    class MyVisitorContext : IVisitorContext
-    {
-        private int count;
-
-        public int Count { get { return this.count; } }
-
-        public void Increment()
+        private class MyVisitorContext : IVisitorContext
         {
-            this.count++;
+            private int count;
+
+            public int Count { get { return this.count; } }
+
+            public void Increment()
+            {
+                this.count++;
+            }
         }
-    }
 
-    class MyVisitorProcessor : BaseVisitorProcessor<MyVisitorContext>
-    {
-        internal MyVisitorProcessor()
+        private class MyVisitorProcessor : BaseVisitorProcessor<MyVisitorContext>
         {
-            this.RegisterVisitor(new MyCompositeCommandVisitor());
-            this.RegisterVisitor(new MyVarCommandVisitor());
+            internal MyVisitorProcessor()
+            {
+                this.RegisterVisitor(new MyCompositeCommandVisitor());
+                this.RegisterVisitor(new MyVarCommandVisitor());
+            }
         }
-    }
 
-    class MyCompositeCommandVisitor : BaseVisitor<CompositeCommand, MyVisitorContext>
-    {
-        public override void Process(IVisitorProcessor<MyVisitorContext> processor, MyVisitorContext context, CompositeCommand command)
+        private class MyCompositeCommandVisitor : BaseVisitor<CompositeCommand, MyVisitorContext>
         {
-            context.Increment();
+            public override void Process(IVisitorProcessor<MyVisitorContext> processor, MyVisitorContext context, CompositeCommand command)
+            {
+                context.Increment();
 
-            if (command.HoistedCommands != null)
-                foreach (ICommand cmd in command.HoistedCommands)
-                    processor.Process(context, cmd);
+                if (command.HoistedCommands != null)
+                    foreach (ICommand cmd in command.HoistedCommands)
+                        processor.Process(context, cmd);
 
-            if (command.Commands != null)
-                foreach (ICommand cmd in command.Commands)
-                    processor.Process(context, cmd);
+                if (command.Commands != null)
+                    foreach (ICommand cmd in command.Commands)
+                        processor.Process(context, cmd);
+            }
         }
-    }
 
-    class MyVarCommandVisitor : BaseVisitor<VarCommand, MyVisitorContext>
-    {
-        public override void Process(IVisitorProcessor<MyVisitorContext> processor, MyVisitorContext context, VarCommand command)
+        private class MyVarCommandVisitor : BaseVisitor<VarCommand, MyVisitorContext>
         {
-            context.Increment();
+            public override void Process(IVisitorProcessor<MyVisitorContext> processor, MyVisitorContext context, VarCommand command)
+            {
+                context.Increment();
+            }
         }
     }
 }

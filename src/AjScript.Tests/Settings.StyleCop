@@ -207,12 +207,12 @@
     </Analyzer>
     <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.LayoutRules">
       <Rules>
-        <Rule Name="CurlyBracketsMustNotBeOmitted">
+        <Rule Name="ElementMustNotBeOnSingleLine">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>
         </Rule>
-        <Rule Name="ElementMustNotBeOnSingleLine">
+        <Rule Name="CurlyBracketsMustNotBeOmitted">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>

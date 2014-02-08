@@ -1,12 +1,12 @@
 ﻿namespace AjScript.Tests.Expressions
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using AjScript.Expressions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using AjScript.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ArithmeticExpressionTests
@@ -79,6 +79,7 @@
             Assert.AreEqual(1, EvaluateArithmeticBinaryOperator(ArithmeticOperator.Modulo, 3, 2));
             Assert.AreEqual(0, EvaluateArithmeticBinaryOperator(ArithmeticOperator.Modulo, 6, 3));
         }
+
         private static object EvaluateArithmeticBinaryOperator(ArithmeticOperator operation, object left, object right)
         {
             IExpression expression = new ArithmeticBinaryExpression(operation, new ConstantExpression(left), new ConstantExpression(right));

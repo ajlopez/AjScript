@@ -39,26 +39,26 @@
         {
             return this.elements.GetEnumerator();
         }
-    }
 
-    internal class PushFunction : ICallable
-    {
-        public int Arity
+        private class PushFunction : ICallable
         {
-            get { return 1; }
-        }
+            public int Arity
+            {
+                get { return 1; }
+            }
 
-        public IContext Context
-        {
-            get { return null; }
-        }
+            public IContext Context
+            {
+                get { return null; }
+            }
 
-        public object Invoke(IContext context, object @this, object[] arguments)
-        {
-            object newelement = arguments[0];
-            ArrayObject array = (ArrayObject)@this;
-            array.Elements.Add(newelement);
-            return array.Elements.Count;
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                object newelement = arguments[0];
+                ArrayObject array = (ArrayObject)@this;
+                array.Elements.Add(newelement);
+                return array.Elements.Count;
+            }
         }
     }
 }

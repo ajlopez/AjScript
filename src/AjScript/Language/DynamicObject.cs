@@ -79,8 +79,7 @@
 
             // TODO set up object environment if needed
             ////IContext objenv = new ObjectEnvironment(this, method.Environment);
-
-            //return method.Invoke(objenv, parameters);
+            ////return method.Invoke(objenv, parameters);
         }
 
         public virtual object Invoke(ICallable method, object[] parameters)

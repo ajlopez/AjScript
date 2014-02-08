@@ -5,12 +5,10 @@
     using System.IO;
     using System.Linq;
     using System.Text;
-
     using AjScript.Commands;
-    using AjScript.Interpreter;
     using AjScript.Expressions;
+    using AjScript.Interpreter;
     using AjScript.Language;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -21,33 +19,33 @@
         {
             IExpression expression;
 
-            expression = ParseExpression("1");
+            expression = this.ParseExpression("1");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
             Assert.AreEqual(1, expression.Evaluate(null));
 
-            expression = ParseExpression("1.2");
+            expression = this.ParseExpression("1.2");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
             Assert.AreEqual(1.2, expression.Evaluate(null));
 
-            expression = ParseExpression("false");
+            expression = this.ParseExpression("false");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
             Assert.IsFalse((bool)expression.Evaluate(null));
 
-            expression = ParseExpression("\"foo\"");
+            expression = this.ParseExpression("\"foo\"");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
             Assert.AreEqual("foo", expression.Evaluate(null));
 
-            Assert.IsNull(ParseExpression(""));
+            Assert.IsNull(this.ParseExpression(string.Empty));
         }
 
         [TestMethod]
         public void ParseSimpleUnaryExpression()
         {
-            IExpression expression = ParseExpression("-2");
+            IExpression expression = this.ParseExpression("-2");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArithmeticUnaryExpression));
@@ -62,7 +60,7 @@
         [TestMethod]
         public void ParseFirstDefinedVariable()
         {
-            IExpression expression = ParseExpression("a");
+            IExpression expression = this.ParseExpression("a");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(VariableExpression));
@@ -74,7 +72,7 @@
         [TestMethod]
         public void ParseNullAsConstant()
         {
-            IExpression expression = ParseExpression("null");
+            IExpression expression = this.ParseExpression("null");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
@@ -86,7 +84,7 @@
         [TestMethod]
         public void ParseFalseAsConstant()
         {
-            IExpression expression = ParseExpression("false");
+            IExpression expression = this.ParseExpression("false");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
@@ -99,7 +97,7 @@
         [TestMethod]
         public void ParseTrueAsConstant()
         {
-            IExpression expression = ParseExpression("true");
+            IExpression expression = this.ParseExpression("true");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
@@ -112,7 +110,7 @@
         [TestMethod]
         public void ParseSecondDefinedVariable()
         {
-            IExpression expression = ParseExpression("b");
+            IExpression expression = this.ParseExpression("b");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(VariableExpression));
@@ -158,7 +156,7 @@
         [TestMethod]
         public void ParseSimpleBinaryExpression()
         {
-            IExpression expression = ParseExpression("a + 2");
+            IExpression expression = this.ParseExpression("a + 2");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArithmeticBinaryExpression));
@@ -175,7 +173,7 @@
         [TestMethod]
         public void ParseModExpression()
         {
-            IExpression expression = ParseExpression("a % 2");
+            IExpression expression = this.ParseExpression("a % 2");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArithmeticBinaryExpression));
@@ -192,7 +190,7 @@
         [TestMethod]
         public void ParseSimpleCompareExpression()
         {
-            IExpression expression = ParseExpression("b <= 1");
+            IExpression expression = this.ParseExpression("b <= 1");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(CompareExpression));
@@ -209,7 +207,7 @@
         [TestMethod]
         public void ParseSimpleBinaryExpressionWithParenthesis()
         {
-            IExpression expression = ParseExpression("((a) + (2))");
+            IExpression expression = this.ParseExpression("((a) + (2))");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArithmeticBinaryExpression));
@@ -228,7 +226,7 @@
         [TestMethod]
         public void ParseTwoBinaryExpression()
         {
-            IExpression expression = ParseExpression("a + 2 - 3");
+            IExpression expression = this.ParseExpression("a + 2 - 3");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArithmeticBinaryExpression));
@@ -245,7 +243,7 @@
         [TestMethod]
         public void ParseTwoBinaryExpressionDifferentLevels()
         {
-            IExpression expression = ParseExpression("a + 2 * 3");
+            IExpression expression = this.ParseExpression("a + 2 * 3");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArithmeticBinaryExpression));
@@ -258,7 +256,7 @@
             Assert.IsNotNull(arithmeticExpression.RightExpression);
             Assert.IsInstanceOfType(arithmeticExpression.RightExpression, typeof(ArithmeticBinaryExpression));
 
-            ArithmeticBinaryExpression rigthExpression = (ArithmeticBinaryExpression) arithmeticExpression.RightExpression;
+            ArithmeticBinaryExpression rigthExpression = (ArithmeticBinaryExpression)arithmeticExpression.RightExpression;
 
             Assert.AreEqual(ArithmeticOperator.Multiply, rigthExpression.Operation);
             Assert.IsInstanceOfType(rigthExpression.LeftExpression, typeof(ConstantExpression));
@@ -366,7 +364,7 @@
             Assert.IsInstanceOfType(cmds[0], typeof(VarCommand));
             Assert.IsInstanceOfType(cmds[1], typeof(ForEachCommand));
 
-            ForEachCommand foreachcmd = (ForEachCommand) cmds[1];
+            ForEachCommand foreachcmd = (ForEachCommand)cmds[1];
 
             Assert.IsNotNull(foreachcmd.Expression);
             Assert.IsInstanceOfType(foreachcmd.Expression, typeof(VariableExpression));
@@ -461,7 +459,7 @@
         [TestMethod]
         public void ParseSimpleDotExpression()
         {
-            IExpression expression = ParseExpression("a.length");
+            IExpression expression = this.ParseExpression("a.length");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(DotExpression));            
@@ -470,7 +468,7 @@
         [TestMethod]
         public void ParseSimpleDotExpressionWithArguments()
         {
-            IExpression expression = ParseExpression("a.c(1,2)");
+            IExpression expression = this.ParseExpression("a.c(1,2)");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(DotExpression));
@@ -480,7 +478,7 @@
         [ExpectedException(typeof(UnexpectedTokenException))]
         public void RaiseIfUnexpectedTokenDot()
         {
-            ParseExpression(".");
+            this.ParseExpression(".");
         }
 
         [TestMethod]
@@ -494,7 +492,7 @@
         [TestMethod]
         public void ParsePreIncrementExpressionWithVariable()
         {
-            IExpression expression = ParseExpression("++b");
+            IExpression expression = this.ParseExpression("++b");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(IncrementExpression));
@@ -509,7 +507,7 @@
         [TestMethod]
         public void ParsePreDecrementExpressionWithDotName()
         {
-            IExpression expression = ParseExpression("--a.Age");
+            IExpression expression = this.ParseExpression("--a.Age");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(IncrementExpression));
@@ -524,7 +522,7 @@
         [TestMethod]
         public void ParsePostIncrementExpressionWithVariable()
         {
-            IExpression expression = ParseExpression("b++");
+            IExpression expression = this.ParseExpression("b++");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(IncrementExpression));
@@ -539,7 +537,7 @@
         [TestMethod]
         public void ParsePostDecrementExpressionWithDotName()
         {
-            IExpression expression = ParseExpression("a.Age--");
+            IExpression expression = this.ParseExpression("a.Age--");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(IncrementExpression));
@@ -559,7 +557,7 @@
             Assert.IsNotNull(command);
             Assert.IsInstanceOfType(command, typeof(SetArrayCommand));
 
-            SetArrayCommand setcmd = (SetArrayCommand) command;
+            SetArrayCommand setcmd = (SetArrayCommand)command;
 
             Assert.IsInstanceOfType(setcmd.LeftValue, typeof(VariableExpression));
             Assert.AreEqual(1, setcmd.Arguments.Count);
@@ -584,7 +582,7 @@
         [TestMethod]
         public void ParseNotExpression()
         {
-            IExpression expression = ParseExpression("!a");
+            IExpression expression = this.ParseExpression("!a");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(NotExpression));
@@ -597,7 +595,7 @@
         [TestMethod]
         public void ParseAndExpression()
         {
-            IExpression expression = ParseExpression("a===1 && b===1");
+            IExpression expression = this.ParseExpression("a===1 && b===1");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(AndExpression));
@@ -611,7 +609,7 @@
         [TestMethod]
         public void ParseOrExpression()
         {
-            IExpression expression = ParseExpression("a===1 || b===1");
+            IExpression expression = this.ParseExpression("a===1 || b===1");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(OrExpression));
@@ -625,7 +623,7 @@
         [TestMethod]
         public void ParseOrAndExpression()
         {
-            IExpression expression = ParseExpression("a===1 || b===1 && c===1");
+            IExpression expression = this.ParseExpression("a===1 || b===1 && c===1");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(OrExpression));
@@ -639,7 +637,7 @@
         [TestMethod]
         public void ParseAndOrExpression()
         {
-            IExpression expression = ParseExpression("a===1 && b===1 || c===1");
+            IExpression expression = this.ParseExpression("a===1 && b===1 || c===1");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(OrExpression));
@@ -653,7 +651,7 @@
         [TestMethod]
         public void ParseNewObject()
         {
-            IExpression expression = ParseExpression("new Object()");
+            IExpression expression = this.ParseExpression("new Object()");
 
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(NewExpression));
@@ -669,7 +667,7 @@
         [TestMethod]
         public void ParseEmptyFunction()
         {
-            IExpression expression = ParseExpression("function() {}");
+            IExpression expression = this.ParseExpression("function() {}");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(FunctionExpression));
 
@@ -683,7 +681,7 @@
         [TestMethod]
         public void ParseSimpleFunction()
         {
-            IExpression expression = ParseExpression("function(x) { return x+1;}");
+            IExpression expression = this.ParseExpression("function(x) { return x+1;}");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(FunctionExpression));
 
@@ -697,7 +695,7 @@
         [TestMethod]
         public void ParseSimpleNamedFunction()
         {
-            IExpression expression = ParseExpression("function add1(x) { return x+1;}");
+            IExpression expression = this.ParseExpression("function add1(x) { return x+1;}");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(FunctionExpression));
 
@@ -728,7 +726,7 @@
         [TestMethod]
         public void ParseInnerFunctions()
         {
-            IExpression expression = ParseExpression("function add1(x) { function bar() {} return x+1; function foo() {}}");
+            IExpression expression = this.ParseExpression("function add1(x) { function bar() {} return x+1; function foo() {}}");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(FunctionExpression));
 
@@ -742,7 +740,7 @@
         [TestMethod]
         public void ParseSimpleObject()
         {
-            IExpression expression = ParseExpression("{ name: \"Adam\", age: 800 }");
+            IExpression expression = this.ParseExpression("{ name: \"Adam\", age: 800 }");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ObjectExpression));
 
@@ -768,7 +766,7 @@
         [TestMethod]
         public void ParseEmptyArray()
         {
-            IExpression expression = ParseExpression("[]");
+            IExpression expression = this.ParseExpression("[]");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
 
@@ -781,7 +779,7 @@
         [TestMethod]
         public void ParseArrayWithThreeElements()
         {
-            IExpression expression = ParseExpression("[1, 2+3, 'foo']");
+            IExpression expression = this.ParseExpression("[1, 2+3, 'foo']");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
 
@@ -805,23 +803,12 @@
         [TestMethod]
         public void DotExpression()
         {
-            IExpression expression = ParseExpression("a.b.c");
+            IExpression expression = this.ParseExpression("a.b.c");
             Assert.IsNotNull(expression);
             Assert.IsInstanceOfType(expression, typeof(DotExpression));
 
-            var dotexp = (DotExpression) expression;
+            var dotexp = (DotExpression)expression;
             Assert.AreEqual("c", dotexp.Name);
-        }
-
-        private IExpression ParseExpression(string text)
-        {
-            Parser parser = CreateParser(text);
-
-            IExpression expression = parser.ParseExpression();
-
-            Assert.IsNull(parser.ParseExpression());
-
-            return expression;
         }
 
         private static ICommand ParseCommand(string text)
@@ -844,6 +831,17 @@
         private static Parser CreateParser(string text)
         {
             return new Parser(text);
+        }
+
+        private IExpression ParseExpression(string text)
+        {
+            Parser parser = CreateParser(text);
+
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNull(parser.ParseExpression());
+
+            return expression;
         }
     }
 }
