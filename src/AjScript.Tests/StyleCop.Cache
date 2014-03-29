@@ -198,9 +198,6 @@
     <milliseconds>676</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1463015819">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ContextTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:07:51</timestamp>
@@ -210,4 +207,7 @@
     <milliseconds>354</milliseconds>
     <violations />
   </sourcecode>
+  <project key="1463015819">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

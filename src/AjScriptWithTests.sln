@@ -2,12 +2,21 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51F1D138-9236-40FE-B065-A6D8F31DE387}"
+	ProjectSection(SolutionItems) = preProject
+		AjScript.vsmdi = AjScript.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjScript", "AjScript\AjScript.csproj", "{4F0974B0-1331-4860-9462-B72A5A96FB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjScript.Tests", "AjScript.Tests\AjScript.Tests.csproj", "{C40B5606-239F-44D9-B253-BA95BCBE3A00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjScript.Console", "AjScript.Console\AjScript.Console.csproj", "{1BC77A29-8095-43A7-974A-0AB8ED48C17D}"
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AjScript.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -17,6 +26,10 @@ Global
 		{4F0974B0-1331-4860-9462-B72A5A96FB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F0974B0-1331-4860-9462-B72A5A96FB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F0974B0-1331-4860-9462-B72A5A96FB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40B5606-239F-44D9-B253-BA95BCBE3A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40B5606-239F-44D9-B253-BA95BCBE3A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40B5606-239F-44D9-B253-BA95BCBE3A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40B5606-239F-44D9-B253-BA95BCBE3A00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BC77A29-8095-43A7-974A-0AB8ED48C17D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BC77A29-8095-43A7-974A-0AB8ED48C17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BC77A29-8095-43A7-974A-0AB8ED48C17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
