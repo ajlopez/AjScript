@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using AjScript.Interpreter;
     using AjScript.Commands;
+    using AjScript.Interpreter;
     using AjScript.Primitives;
 
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             IContext context = new TopContext();
             Parser parser = new Parser(System.Console.In);
