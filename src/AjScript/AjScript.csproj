@@ -82,7 +82,6 @@
     <Compile Include="Interpreter\InvalidInputException.cs" />
     <Compile Include="Interpreter\Lexer.cs" />
     <Compile Include="Interpreter\LexerException.cs" />
-    <Compile Include="Interpreter\NameExpectedException.cs" />
     <Compile Include="Interpreter\Parser.cs" />
     <Compile Include="Interpreter\ParserException.cs" />
     <Compile Include="Interpreter\Token.cs" />
