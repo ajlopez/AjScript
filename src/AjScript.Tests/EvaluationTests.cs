@@ -302,12 +302,24 @@
             Assert.AreEqual(800, this.EvaluateExpression("Person.prototype.age"));
         }
 
-        // TODO Array are IList, it should be a Javascript dyn obj
         [TestMethod]
         public void AddElementToArray()
         {
             this.EvaluateCommands("var arr = []; arr.push(1); arr.push(2);");
             Assert.AreEqual(2, this.EvaluateExpression("arr.length"));
+            Assert.AreEqual(1, this.EvaluateExpression("arr[0]"));
+            Assert.AreEqual(2, this.EvaluateExpression("arr[1]"));
+        }
+
+        [TestMethod]
+        public void UnshiftAddElementIntoArray()
+        {
+            this.EvaluateCommands("var arr = [1, 2, 3]; arr.unshift(4);");
+            Assert.AreEqual(4, this.EvaluateExpression("arr.length"));
+            Assert.AreEqual(4, this.EvaluateExpression("arr[0]"));
+            Assert.AreEqual(1, this.EvaluateExpression("arr[1]"));
+            Assert.AreEqual(2, this.EvaluateExpression("arr[2]"));
+            Assert.AreEqual(3, this.EvaluateExpression("arr[3]"));
         }
 
         private void EvaluateCommands(string text)
