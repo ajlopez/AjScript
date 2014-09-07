@@ -78,15 +78,12 @@
     <Compile Include="Commands\SetCommand.cs" />
     <Compile Include="Commands\WhileCommand.cs" />
     <Compile Include="Interpreter\EndOfInputException.cs" />
-    <Compile Include="Interpreter\ExpectedTokenException.cs" />
-    <Compile Include="Interpreter\InvalidInputException.cs" />
     <Compile Include="Interpreter\Lexer.cs" />
     <Compile Include="Interpreter\LexerException.cs" />
     <Compile Include="Interpreter\Parser.cs" />
     <Compile Include="Interpreter\ParserException.cs" />
     <Compile Include="Interpreter\Token.cs" />
     <Compile Include="Interpreter\TokenType.cs" />
-    <Compile Include="Interpreter\UnexpectedEndOfInputException.cs" />
     <Compile Include="Interpreter\UnexpectedTokenException.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Expressions\AndExpression.cs" />

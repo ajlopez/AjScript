@@ -104,22 +104,6 @@
                 this.lexer.Dispose();
         }
 
-        private static bool IsName(Token token, string value)
-        {
-            return IsToken(token, value, TokenType.Name);
-        }
-
-        private static bool IsToken(Token token, string value, TokenType type)
-        {
-            if (token == null)
-                return false;
-
-            if (token.TokenType != type)
-                return false;
-
-            return token.Value.Equals(value);
-        }
-
         private static bool IsNoOperationCommand(ICommand command)
         {
             if (command == null)
@@ -190,25 +174,6 @@
                 this.lexer.PushToken(tokenSemiColon);
 
             return new ExpressionCommand(expression);
-        }
-
-        private ICollection<IExpression> ParseArrayValues()
-        {
-            this.Parse(TokenType.Separator, "{");
-
-            List<IExpression> expressions = new List<IExpression>();
-
-            while (!this.TryParse(TokenType.Separator, "}"))
-            {
-                if (expressions.Count > 0)
-                    this.Parse(TokenType.Separator, ",");
-
-                expressions.Add(this.ParseExpression());
-            }
-
-            this.Parse(TokenType.Separator, "}");
-
-            return expressions;
         }
 
         private IExpression ParseBinaryLogicalExpressionLevelOne()
@@ -763,57 +728,6 @@
             return new CompositeCommand(new List<ICommand>() { new VarCommand(name), new SetVariableCommand(name, expression) });
         }
 
-        private void ParseMemberVariable(IList<string> memberNames, IList<IExpression> memberExpressions)
-        {
-            string name = this.ParseName();
-            IExpression expression = null;
-
-            if (this.TryParse(TokenType.Operator, "="))
-            {
-                this.lexer.NextToken();
-
-                expression = this.ParseExpression();
-            }
-
-            this.Parse(TokenType.Separator, ";");
-
-            memberNames.Add(name);
-            memberExpressions.Add(expression);
-        }
-
-        private void ParseMemberMethod(IList<string> memberNames, IList<IExpression> memberExpressions, bool isdefault)
-        {
-            string name = this.ParseName();
-            bool hasvariableparameters = false;
-            string[] parameterNames = this.ParseParameters(ref hasvariableparameters);
-            ICommand body = this.ParseCommand();
-
-            memberNames.Add(name);
-
-            throw new NotImplementedException();
-
-            // memberExpressions.Add(new FunctionExpression(parameterNames, body, isdefault, hasvariableparameters));
-        }
-
-        private string[] ParseParameters(ref bool hasvariableparameters)
-        {
-            List<string> names = new List<string>();
-
-            this.Parse(TokenType.Separator, "(");
-
-            while (!this.TryParse(TokenType.Separator, ")"))
-            {
-                if (names.Count > 0)
-                    this.Parse(TokenType.Separator, ",");
-
-                names.Add(this.ParseName());
-            }
-
-            this.lexer.NextToken();
-
-            return names.ToArray();
-        }
-
         private bool TryPeekName()
         {
             Token token = this.lexer.PeekToken();
@@ -822,22 +736,6 @@
                 return false;
 
             return token.TokenType == TokenType.Name;
-        }
-
-        private object ParseValue()
-        {
-            Token token = this.lexer.NextToken();
-
-            if (token == null)
-                throw new UnexpectedEndOfInputException();
-
-            if (token.TokenType == TokenType.String)
-                return token.Value;
-
-            if (token.TokenType == TokenType.Integer)
-                return int.Parse(token.Value);
-
-            throw new UnexpectedTokenException(token);
         }
 
         private bool TryParse(TokenType type, params string[] values)
@@ -860,16 +758,10 @@
             Token token = this.lexer.NextToken();
 
             if (token == null)
-                throw new UnexpectedEndOfInputException();
-
-            if (type == TokenType.Name)
-                if (IsName(token, value))
-                    return;
-                else
-                    throw new UnexpectedTokenException(token);
+                throw new ParserException(string.Format("Expected '{0}'", value));
 
             if (token.TokenType != type || token.Value != value)
-                throw new UnexpectedTokenException(token);
+                throw new ParserException(string.Format("Expected '{0}'", value));
         }
 
         private string ParseName()
@@ -877,12 +769,12 @@
             Token token = this.lexer.NextToken();
 
             if (token == null)
-                throw new ParserException(string.Format("Unexpected end of input"));
+                throw new ParserException("Expected a name");
 
             if (token.TokenType == TokenType.Name)
                 return token.Value;
 
-            throw new UnexpectedTokenException(token);
+            throw new ParserException("Expected a name");
         }
 
         private IExpression ParseQualifiedName()
