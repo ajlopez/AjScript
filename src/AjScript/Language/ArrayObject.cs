@@ -10,6 +10,7 @@
     {
         private static ICallable pushFunction = new PushFunction();
         private static ICallable unshiftFunction = new UnshiftFunction();
+        private static ICallable shiftFunction = new ShiftFunction();
 
         private IList<object> elements;
 
@@ -20,6 +21,7 @@
             // TODO set this values in the Function IDynamicObject prototype
             this.SetValue("push", pushFunction);
             this.SetValue("unshift", unshiftFunction);
+            this.SetValue("shift", shiftFunction);
         }
 
         public IList<object> Elements { get { return this.elements; } }
@@ -81,6 +83,27 @@
                 ArrayObject array = (ArrayObject)@this;
                 array.Elements.Insert(0, newelement);
                 return newelement;
+            }
+        }
+
+        private class ShiftFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 0; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                ArrayObject array = (ArrayObject)@this;
+                var result = array.Elements[0];
+                array.Elements.RemoveAt(0);
+                return result;
             }
         }
     }
