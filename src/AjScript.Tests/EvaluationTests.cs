@@ -333,6 +333,16 @@
             Assert.AreEqual(3, this.EvaluateExpression("arr[1]"));
         }
 
+        [TestMethod]
+        public void PopRemoveElementFromArray()
+        {
+            this.EvaluateCommands("var arr = [1, 2, 3];");
+            Assert.AreEqual(3, this.EvaluateExpression("arr.pop()"));
+            Assert.AreEqual(2, this.EvaluateExpression("arr.length"));
+            Assert.AreEqual(1, this.EvaluateExpression("arr[0]"));
+            Assert.AreEqual(2, this.EvaluateExpression("arr[1]"));
+        }
+
         private void EvaluateCommands(string text)
         {
             Parser parser = new Parser(text);

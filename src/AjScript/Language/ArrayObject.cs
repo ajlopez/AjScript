@@ -9,6 +9,7 @@
     public class ArrayObject : DynamicObject, IEnumerable
     {
         private static ICallable pushFunction = new PushFunction();
+        private static ICallable popFunction = new PopFunction();
         private static ICallable unshiftFunction = new UnshiftFunction();
         private static ICallable shiftFunction = new ShiftFunction();
 
@@ -20,6 +21,7 @@
 
             // TODO set this values in the Function IDynamicObject prototype
             this.SetValue("push", pushFunction);
+            this.SetValue("pop", popFunction);
             this.SetValue("unshift", unshiftFunction);
             this.SetValue("shift", shiftFunction);
         }
@@ -62,6 +64,27 @@
                 ArrayObject array = (ArrayObject)@this;
                 array.Elements.Add(newelement);
                 return array.Elements.Count;
+            }
+        }
+
+        private class PopFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 0; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                ArrayObject array = (ArrayObject)@this;
+                var result = array.Elements[array.Elements.Count - 1];
+                array.Elements.RemoveAt(array.Elements.Count - 1);
+                return result;
             }
         }
 
