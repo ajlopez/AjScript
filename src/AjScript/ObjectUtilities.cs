@@ -19,6 +19,13 @@
                 return;
             }
 
+            if (obj is IContext)
+            {
+                ((IContext)obj).SetValue(name, value);
+
+                return;
+            }
+
             Type type = obj.GetType();
 
             type.InvokeMember(name, System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.SetField | System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, obj, new object[] { value });

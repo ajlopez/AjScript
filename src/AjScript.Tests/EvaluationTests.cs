@@ -19,7 +19,7 @@
         [TestInitialize]
         public void Setup()
         {
-            this.context = new TopContext();
+            this.context = new Context();
             this.context.SetValue("Object", new ObjectFunction(this.context));
         }
 

@@ -12,7 +12,7 @@
     {
         public static void Main(string[] args)
         {
-            IContext context = new TopContext();
+            IContext context = new Context();
             Parser parser = new Parser(System.Console.In);
 
             context.DefineVariable("write");

@@ -38,7 +38,7 @@
         [TestMethod]
         public void GetTopContext()
         {
-            TopContext top = new TopContext();
+            Context top = new Context();
             Context context = new Context(top);
 
             Assert.AreEqual(top, context.RootContext);
@@ -77,6 +77,30 @@
 
             context.SetValue("x", 123);
             Assert.AreEqual(123, context.GetValue("x"));
+        }
+
+        [TestMethod]
+        public void GetNames()
+        {
+            Context context = new Context();
+            context.DefineVariable("a");
+            context.DefineVariable("b");
+            context.DefineVariable("c");
+
+            var names = context.GetNames();
+
+            Assert.IsNotNull(names);
+            Assert.AreEqual(3, names.Count);
+            Assert.IsTrue(names.Contains("a"));
+            Assert.IsTrue(names.Contains("b"));
+            Assert.IsTrue(names.Contains("c"));
+        }
+
+        [TestMethod]
+        public void GetRootContextAsItSelf()
+        {
+            Context context = new Context();
+            Assert.AreEqual(context, context.RootContext);
         }
     }
 }
