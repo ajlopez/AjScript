@@ -63,6 +63,7 @@
     <Compile Include="ExpressionUtilitiesTests.cs" />
     <Compile Include="Language\DynamicObjectTests.cs" />
     <Compile Include="Language\FunctionTests.cs" />
+    <Compile Include="MachineTests.cs" />
     <Compile Include="PredicatesTests.cs" />
     <Compile Include="Primitives\ObjectFunctionTests.cs" />
     <Compile Include="Primitives\WriteFunctionTests.cs" />

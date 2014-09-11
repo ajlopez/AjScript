@@ -115,6 +115,7 @@
     <Compile Include="Language\IReference.cs" />
     <Compile Include="Language\ReturnValue.cs" />
     <Compile Include="Language\Undefined.cs" />
+    <Compile Include="Machine.cs" />
     <Compile Include="ObjectUtilities.cs" />
     <Compile Include="Predicates.cs" />
     <Compile Include="Primitives\WriteLineFunction.cs" />
