@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using AjScript.Expressions;
     using AjScript.Primitives;
 
     public class Machine
@@ -18,5 +19,10 @@
         }
 
         public IContext Context { get { return this.context; } }
+
+        public object Evaluate(IExpression expression)
+        {
+            return expression.Evaluate(this.context);
+        }
     }
 }

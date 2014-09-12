@@ -14,13 +14,12 @@
     [TestClass]
     public class EvaluationTests
     {
-        private IContext context;
+        private Machine machine;
 
         [TestInitialize]
         public void Setup()
         {
-            this.context = new Context();
-            this.context.SetValue("Object", new ObjectFunction(this.context));
+            this.machine = new Machine();
         }
 
         [TestMethod]
@@ -57,51 +56,51 @@
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");
-            Assert.AreEqual(Undefined.Instance, this.context.GetValue("x"));
+            Assert.AreEqual(Undefined.Instance, this.machine.Context.GetValue("x"));
         }
 
         [TestMethod]
         public void DefineVar()
         {
             this.EvaluateCommands("var x=1;");
-            Assert.AreEqual(1, this.context.GetValue("x"));
+            Assert.AreEqual(1, this.machine.Context.GetValue("x"));
         }
 
         [TestMethod]
         public void DefineVarWithInitialValue()
         {
             this.EvaluateCommands("var x=1+2;");
-            Assert.AreEqual(3, this.context.GetValue("x"));
+            Assert.AreEqual(3, this.machine.Context.GetValue("x"));
         }
 
         [TestMethod]
         public void DefineVarWithInitialExpressionValue()
         {
             this.EvaluateCommands("var x=1+2;");
-            Assert.AreEqual(3, this.context.GetValue("x"));
+            Assert.AreEqual(3, this.machine.Context.GetValue("x"));
         }
 
         [TestMethod]
         public void SetUndefinedVar()
         {
             this.EvaluateCommands("x = 1+2;");
-            Assert.AreEqual(3, this.context.GetValue("x"));
+            Assert.AreEqual(3, this.machine.Context.GetValue("x"));
         }
 
         [TestMethod]
         public void PreIncrementVar()
         {
             this.EvaluateCommands("var x = 0; y = ++x;");
-            Assert.AreEqual(1, this.context.GetValue("x"));
-            Assert.AreEqual(1, this.context.GetValue("y"));
+            Assert.AreEqual(1, this.machine.Context.GetValue("x"));
+            Assert.AreEqual(1, this.machine.Context.GetValue("y"));
         }
 
         [TestMethod]
         public void PostIncrementVar()
         {
             this.EvaluateCommands("var x = 0; y = x++;");
-            Assert.AreEqual(1, this.context.GetValue("x"));
-            Assert.AreEqual(0, this.context.GetValue("y"));
+            Assert.AreEqual(1, this.machine.Context.GetValue("x"));
+            Assert.AreEqual(0, this.machine.Context.GetValue("y"));
         }
 
         [TestMethod]
@@ -117,32 +116,32 @@
         public void PreDecrementVar()
         {
             this.EvaluateCommands("var x = 0; y = --x;");
-            Assert.AreEqual(-1, this.context.GetValue("x"));
-            Assert.AreEqual(-1, this.context.GetValue("y"));
+            Assert.AreEqual(-1, this.machine.Context.GetValue("x"));
+            Assert.AreEqual(-1, this.machine.Context.GetValue("y"));
         }
 
         [TestMethod]
         public void PostDecrementVar()
         {
             this.EvaluateCommands("var x = 0; y = x--;");
-            Assert.AreEqual(-1, this.context.GetValue("x"));
-            Assert.AreEqual(0, this.context.GetValue("y"));
+            Assert.AreEqual(-1, this.machine.Context.GetValue("x"));
+            Assert.AreEqual(0, this.machine.Context.GetValue("y"));
         }
 
         [TestMethod]
         public void SimpleFor()
         {
             this.EvaluateCommands("var y = 1; for (var x=1; x<4; x++) y = y*x;");
-            Assert.AreEqual(4, this.context.GetValue("x"));
-            Assert.AreEqual(6, this.context.GetValue("y"));
+            Assert.AreEqual(4, this.machine.Context.GetValue("x"));
+            Assert.AreEqual(6, this.machine.Context.GetValue("y"));
         }
 
         [TestMethod]
         public void SimpleForWithBlock()
         {
             this.EvaluateCommands("var y = 1; for (var x=1; x<4; x++) { y = y*x; y = y*2; }");
-            Assert.AreEqual(4, this.context.GetValue("x"));
-            Assert.AreEqual(48, this.context.GetValue("y"));
+            Assert.AreEqual(4, this.machine.Context.GetValue("x"));
+            Assert.AreEqual(48, this.machine.Context.GetValue("y"));
         }
 
         [TestMethod]
@@ -155,14 +154,14 @@
         public void DefineAndEvaluateAddFunction()
         {
             this.EvaluateCommands("var add1 = function (x) { return x+1;}; result = add1(2);");
-            Assert.AreEqual(3, this.context.GetValue("result"));
+            Assert.AreEqual(3, this.machine.Context.GetValue("result"));
         }
 
         [TestMethod]
         public void DefineAndEvaluateFunctionWithClosure()
         {
             this.EvaluateCommands("var addx = function (x) { return function(y) { return x+y;}; }; result = addx(2)(3);");
-            Assert.AreEqual(5, this.context.GetValue("result"));
+            Assert.AreEqual(5, this.machine.Context.GetValue("result"));
         }
 
         [TestMethod]
@@ -177,21 +176,21 @@
         public void NewObjectUsingPrototype()
         {
             this.EvaluateCommands("var x = new Object(); Object.prototype.y = 10; result = x.y;");
-            Assert.AreEqual(10, this.context.GetValue("result"));
+            Assert.AreEqual(10, this.machine.Context.GetValue("result"));
         }
 
         [TestMethod]
         public void NewEmptyObjectUsingPrototype()
         {
             this.EvaluateCommands("var x = {}; Object.prototype.y = 10; result = x.y;");
-            Assert.AreEqual(10, this.context.GetValue("result"));
+            Assert.AreEqual(10, this.machine.Context.GetValue("result"));
         }
 
         [TestMethod]
         public void SetValueUsingArrayNotation()
         {
             this.EvaluateCommands("var x = new Object(); x['y'] = 10; result = x.y;");
-            Assert.AreEqual(10, this.context.GetValue("result"));
+            Assert.AreEqual(10, this.machine.Context.GetValue("result"));
         }
 
         [TestMethod]
@@ -216,8 +215,8 @@
         {
             this.EvaluateCommands("function Person() { this.name = 'Adam'; this.age = 800; }");
             this.EvaluateExpression("Person()");
-            Assert.AreEqual("Adam", this.context.GetValue("name"));
-            Assert.AreEqual(800, this.context.GetValue("age"));
+            Assert.AreEqual("Adam", this.machine.Context.GetValue("name"));
+            Assert.AreEqual(800, this.machine.Context.GetValue("age"));
         }
 
         [TestMethod]
@@ -348,7 +347,7 @@
             Parser parser = new Parser(text);
 
             for (ICommand cmd = parser.ParseCommand(); cmd != null; cmd = parser.ParseCommand())
-                cmd.Execute(this.context);
+                cmd.Execute(this.machine.Context);
         }
 
         private object EvaluateExpression(string text)
@@ -356,7 +355,7 @@
             Parser parser = new Parser(text);
             IExpression expression = parser.ParseExpression();
             Assert.IsNull(parser.ParseExpression());
-            return expression.Evaluate(this.context);
+            return this.machine.Evaluate(expression);
         }
     }
 }
