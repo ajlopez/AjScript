@@ -19,5 +19,16 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ObjectFunction));
         }
+
+        [TestMethod]
+        public void ArrayFunction()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.Context.GetValue("Array");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ArrayFunction));
+        }
     }
 }

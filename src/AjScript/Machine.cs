@@ -14,6 +14,7 @@
         {
             this.context = new Context();
             this.context.SetValue("Object", new ObjectFunction(this.context));
+            this.context.SetValue("Array", new ArrayFunction(this.context));
         }
 
         public IContext Context { get { return this.context; } }
