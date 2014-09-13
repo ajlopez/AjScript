@@ -8,18 +8,89 @@
 
     public class ArrayFunction : Function
     {
+        private static ICallable pushFunction = new PushFunction();
+        private static ICallable popFunction = new PopFunction();
+        private static ICallable unshiftFunction = new UnshiftFunction();
+        private static ICallable shiftFunction = new ShiftFunction();
+
         public ArrayFunction(IContext context)
             : base(null, null, context)
         {
             var prototype = new DynamicObject();
 
             this.SetValue("prototype", prototype);
-            prototype.SetValue("shift", new ShiftFunction());
+            prototype.SetValue("push", pushFunction);
+            prototype.SetValue("pop", popFunction);
+            prototype.SetValue("unshift", unshiftFunction);
+            prototype.SetValue("shift", shiftFunction);
         }
 
         public override object NewInstance(object[] parameters)
         {
             return new ArrayObject(this, new List<object>());
+        }
+
+        private class PushFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 1; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                object newelement = arguments[0];
+                ArrayObject array = (ArrayObject)@this;
+                array.Elements.Add(newelement);
+                return array.Elements.Count;
+            }
+        }
+
+        private class PopFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 0; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                ArrayObject array = (ArrayObject)@this;
+                var result = array.Elements[array.Elements.Count - 1];
+                array.Elements.RemoveAt(array.Elements.Count - 1);
+                return result;
+            }
+        }
+
+        private class UnshiftFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 1; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                object newelement = arguments[0];
+                ArrayObject array = (ArrayObject)@this;
+                array.Elements.Insert(0, newelement);
+                return newelement;
+            }
         }
 
         private class ShiftFunction : ICallable
