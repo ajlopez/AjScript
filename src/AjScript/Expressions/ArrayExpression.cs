@@ -24,7 +24,7 @@
             foreach (IExpression expression in this.expressions)
                 values.Add(expression.Evaluate(context));
 
-            return new ArrayObject(values);
+            return new ArrayObject((IFunction)context.RootContext.GetValue("Array"), values);
         }
     }
 }

@@ -15,7 +15,8 @@
 
         private IList<object> elements;
 
-        public ArrayObject(IList<object> elements)
+        public ArrayObject(IFunction function, IList<object> elements)
+            : base(function)
         {
             this.elements = elements;
 
@@ -23,7 +24,7 @@
             this.SetValue("push", pushFunction);
             this.SetValue("pop", popFunction);
             this.SetValue("unshift", unshiftFunction);
-            this.SetValue("shift", shiftFunction);
+            //this.SetValue("shift", shiftFunction);
         }
 
         public IList<object> Elements { get { return this.elements; } }
