@@ -94,6 +94,9 @@
 
         public static void SetIndexedValue(object obj, object[] indexes, object value)
         {
+            if (obj is ArrayObject)
+                obj = ((ArrayObject)obj).Elements;
+
             if (obj is System.Array)
             {
                 SetIndexedValue((System.Array)obj, indexes, value);
