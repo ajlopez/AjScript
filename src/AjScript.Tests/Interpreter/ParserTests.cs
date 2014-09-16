@@ -475,6 +475,15 @@
         }
 
         [TestMethod]
+        public void ParseSimpleDotExpressionOnInteger()
+        {
+            IExpression expression = this.ParseExpression("42.c(1,2)");
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(DotExpression));
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(UnexpectedTokenException))]
         public void RaiseIfUnexpectedTokenDot()
         {

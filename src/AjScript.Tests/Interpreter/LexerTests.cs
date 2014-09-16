@@ -29,6 +29,32 @@
         }
 
         [TestMethod]
+        public void ParseIntegerWithDotAndName()
+        {
+            Lexer lexer = new Lexer("42.foo");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Integer, token.TokenType);
+            Assert.AreEqual("42", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(".", token.Value);
+            Assert.AreEqual(TokenType.Operator, token.TokenType);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Name, token.TokenType);
+            Assert.AreEqual("foo", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void ParseReal()
         {
             ParseToken("123.34", TokenType.Real, "123.34");

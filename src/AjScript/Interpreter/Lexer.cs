@@ -18,8 +18,7 @@
 
         private TextReader reader;
         private Stack<Token> tokens;
-        private char lastChar;
-        private bool hasChar;
+        private Stack<char> chars = new Stack<char>();
         private bool isConsole;
         private bool isFirstChar = true;
 
@@ -335,7 +334,18 @@
             {
             }
 
-            Token token = new Token();
+            Token token;
+
+            if (real.EndsWith("."))
+            {
+                this.PushChar('.');
+                token = new Token();
+                token.Value = integerPart;
+                token.TokenType = TokenType.Integer;
+                return token;
+            }
+
+            token = new Token();
             token.Value = real;
             token.TokenType = TokenType.Real;
 
@@ -438,17 +448,13 @@
 
         private void PushChar(char ch)
         {
-            this.lastChar = ch;
-            this.hasChar = true;
+            this.chars.Push(ch);
         }
 
         private char NextChar()
         {
-            if (this.hasChar)
-            {
-                this.hasChar = false;
-                return this.lastChar;
-            }
+            if (this.chars.Count > 0)
+                return this.chars.Pop();
 
             int ch;
 

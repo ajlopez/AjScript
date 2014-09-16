@@ -145,6 +145,12 @@
         }
 
         [TestMethod]
+        public void IntegerToString()
+        {
+            Assert.AreEqual("42", this.EvaluateExpression("42.toString()"));
+        }
+
+        [TestMethod]
         public void AddFunction()
         {
             Assert.AreEqual(3, this.EvaluateExpression("function (x) { return x+1;} (2)"));
