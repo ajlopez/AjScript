@@ -783,7 +783,7 @@
             string name = this.ParseName();
             IExpression expression = new VariableExpression(name);
 
-            while (this.TryParse(TokenType.Operator, "."))
+            while (this.TryParse(TokenType.Delimiter, "."))
             {
                 this.lexer.NextToken();
                 expression = new DotExpression(expression, this.ParseName());
