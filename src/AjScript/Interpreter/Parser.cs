@@ -13,7 +13,7 @@
 
     public class Parser : IDisposable
     {
-        private static readonly Token tokenSemiColon = new Token() { TokenType = TokenType.Separator, Value = ";" };
+        private static readonly Token tokenSemiColon = new Token() { TokenType = TokenType.Delimiter, Value = ";" };
         private static readonly string[] reserved = new string[] { "this", "null", "true", "false", "undefined" };
         private Lexer lexer;
         private IList<ICommand> hoistedCommands = null;
@@ -78,7 +78,7 @@
                     return this.ParseVarCommand();
             }
 
-            if (token.TokenType == TokenType.Separator && token.Value == "{")
+            if (token.TokenType == TokenType.Delimiter && token.Value == "{")
                 return this.ParseCompositeCommand();
 
             this.lexer.PushToken(token);
@@ -88,7 +88,7 @@
             if (command == null)
                 throw new UnexpectedTokenException(token);
 
-            this.Parse(TokenType.Separator, ";");
+            this.Parse(TokenType.Delimiter, ";");
 
             return command;
         }
@@ -345,22 +345,22 @@
 
             IExpression expression = this.ParseSimpleTermExpression();
 
-            while (this.TryParse(TokenType.Operator, ".") || this.TryParse(TokenType.Separator, "[", "("))
+            while (this.TryParse(TokenType.Delimiter, ".", "[", "("))
             {
-                if (this.TryParse(TokenType.Operator, "."))
+                if (this.TryParse(TokenType.Delimiter, "."))
                 {
                     this.lexer.NextToken();
                     string name = this.ParseName();
                     IList<IExpression> arguments = null;
 
-                    if (this.TryParse(TokenType.Separator, "("))
+                    if (this.TryParse(TokenType.Delimiter, "("))
                         arguments = this.ParseArgumentList();
 
                     expression = new DotExpression(expression, name, arguments);
                     continue;
                 }
 
-                if (this.TryParse(TokenType.Separator, "("))
+                if (this.TryParse(TokenType.Delimiter, "("))
                 {
                     IList<IExpression> arguments = this.ParseArgumentList();
                     expression = new InvokeExpression(expression, arguments);
@@ -398,7 +398,7 @@
             try
             {
                 IList<string> arguments = this.ParseArgumentNames();
-                this.Parse(TokenType.Separator, "{");
+                this.Parse(TokenType.Delimiter, "{");
                 CompositeCommand command = this.ParseCompositeCommand();
                 
                 // TODO Review, should be 0
@@ -417,17 +417,18 @@
         {
             List<IExpression> expressions = new List<IExpression>();
 
-            this.Parse(TokenType.Separator, "(");
+            this.Parse(TokenType.Delimiter, "(");
 
-            while (!this.TryParse(TokenType.Separator, ")"))
+            while (!this.TryParse(TokenType.Delimiter, ")"))
             {
                 if (expressions.Count > 0)
-                    this.Parse(TokenType.Separator, ",");
+                    this.Parse(TokenType.Delimiter, ",");
 
                 expressions.Add(this.ParseExpression());
             }
 
-            this.Parse(TokenType.Separator, ")");
+            System.Diagnostics.Trace.WriteLine("ArgumentList");
+            this.Parse(TokenType.Delimiter, ")");
 
             return expressions;
         }
@@ -436,15 +437,15 @@
         {
             List<IExpression> expressions = new List<IExpression>();
 
-            while (!this.TryParse(TokenType.Separator, "]"))
+            while (!this.TryParse(TokenType.Delimiter, "]"))
             {
                 if (expressions.Count > 0)
-                    this.Parse(TokenType.Separator, ",");
+                    this.Parse(TokenType.Delimiter, ",");
 
                 expressions.Add(this.ParseExpression());
             }
 
-            this.Parse(TokenType.Separator, "]");
+            this.Parse(TokenType.Delimiter, "]");
 
             return new ArrayExpression(expressions);
         }
@@ -453,20 +454,20 @@
         {
             List<string> names = new List<string>();
 
-            this.Parse(TokenType.Separator, "(");
+            this.Parse(TokenType.Delimiter, "(");
 
             while (this.TryPeekName())
             {
                 string name = this.ParseName();
                 names.Add(name);
 
-                if (this.TryParse(TokenType.Separator, ")"))
+                if (this.TryParse(TokenType.Delimiter, ")"))
                     break;
 
-                this.Parse(TokenType.Separator, ",");
+                this.Parse(TokenType.Delimiter, ",");
             }
 
-            this.Parse(TokenType.Separator, ")");
+            this.Parse(TokenType.Delimiter, ")");
 
             return names;
         }
@@ -475,17 +476,17 @@
         {
             List<IExpression> expressions = new List<IExpression>();
 
-            this.Parse(TokenType.Separator, "[");
+            this.Parse(TokenType.Delimiter, "[");
 
-            while (!this.TryParse(TokenType.Separator, "]"))
+            while (!this.TryParse(TokenType.Delimiter, "]"))
             {
                 if (expressions.Count > 0)
-                    this.Parse(TokenType.Separator, ",");
+                    this.Parse(TokenType.Delimiter, ",");
 
                 expressions.Add(this.ParseExpression());
             }
 
-            this.Parse(TokenType.Separator, "]");
+            this.Parse(TokenType.Delimiter, "]");
 
             return expressions;
         }
@@ -502,11 +503,11 @@
 
             switch (token.TokenType)
             {
-                case TokenType.Separator:
+                case TokenType.Delimiter:
                     if (token.Value == "(")
                     {
                         IExpression expression = this.ParseExpression();
-                        this.Parse(TokenType.Separator, ")");
+                        this.Parse(TokenType.Delimiter, ")");
                         return expression;
                     }
 
@@ -541,7 +542,7 @@
 
                     expr = new VariableExpression(token.Value);
 
-                    if (this.TryParse(TokenType.Separator, "("))
+                    if (this.TryParse(TokenType.Delimiter, "("))
                     {
                         IList<IExpression> arguments = this.ParseArgumentList();
                         expr = new InvokeExpression(expr, arguments);
@@ -558,19 +559,19 @@
             IList<string> names = new List<string>();
             IList<IExpression> expressions = new List<IExpression>();
 
-            while (!this.TryParse(TokenType.Separator, "}"))
+            while (!this.TryParse(TokenType.Delimiter, "}"))
             {
                 if (names.Count > 0)
-                    this.Parse(TokenType.Separator, ",");
+                    this.Parse(TokenType.Delimiter, ",");
 
                 string name = this.ParseName();
-                this.Parse(TokenType.Separator, ":");
+                this.Parse(TokenType.Delimiter, ":");
                 IExpression expression = this.ParseExpression();
                 names.Add(name);
                 expressions.Add(expression);
             }
 
-            this.Parse(TokenType.Separator, "}");
+            this.Parse(TokenType.Delimiter, "}");
 
             return new ObjectExpression(names, expressions);
         }
@@ -579,7 +580,7 @@
         {
             IList<ICommand> commands = new List<ICommand>();
 
-            while (!this.TryParse(TokenType.Separator, "}"))
+            while (!this.TryParse(TokenType.Delimiter, "}"))
                 this.AddCommand(commands, this.ParseCommand());
 
             this.lexer.NextToken();
@@ -597,7 +598,7 @@
 
         private ICommand ParseReturnCommand()
         {
-            if (this.TryParse(TokenType.Separator, ";"))
+            if (this.TryParse(TokenType.Delimiter, ";"))
             {
                 this.lexer.NextToken();
                 return new ReturnCommand();
@@ -605,16 +606,16 @@
 
             IExpression expression = this.ParseExpression();
 
-            this.Parse(TokenType.Separator, ";");
+            this.Parse(TokenType.Delimiter, ";");
 
             return new ReturnCommand(expression);
         }
 
         private ICommand ParseIfCommand()
         {
-            this.Parse(TokenType.Separator, "(");
+            this.Parse(TokenType.Delimiter, "(");
             IExpression condition = this.ParseExpression();
-            this.Parse(TokenType.Separator, ")");
+            this.Parse(TokenType.Delimiter, ")");
             ICommand thencmd = this.ParseCommand();
 
             if (!this.TryParse(TokenType.Name, "else"))
@@ -629,9 +630,9 @@
 
         private ICommand ParseWhileCommand()
         {
-            this.Parse(TokenType.Separator, "(");
+            this.Parse(TokenType.Delimiter, "(");
             IExpression condition = this.ParseExpression();
-            this.Parse(TokenType.Separator, ")");
+            this.Parse(TokenType.Delimiter, ")");
             ICommand command = this.ParseCommand();
 
             return new WhileCommand(condition, command);
@@ -650,7 +651,7 @@
 
             this.Parse(TokenType.Name, "in");
             IExpression values = this.ParseExpression();
-            this.Parse(TokenType.Separator, ")");
+            this.Parse(TokenType.Delimiter, ")");
             ICommand command = this.ParseCommand();
 
             ICommand forcmd = new ForEachCommand(name, values, command);
@@ -666,7 +667,7 @@
 
         private ICommand ParseForCommand()
         {
-            this.Parse(TokenType.Separator, "(");
+            this.Parse(TokenType.Delimiter, "(");
 
             Token token = this.lexer.NextToken();
 
@@ -690,9 +691,9 @@
 
             // this.Parse(TokenType.Separator, ";");
             IExpression condition = this.ParseExpression();
-            this.Parse(TokenType.Separator, ";");
+            this.Parse(TokenType.Delimiter, ";");
             ICommand endcmd = this.ParseSimpleCommand();
-            this.Parse(TokenType.Separator, ")");
+            this.Parse(TokenType.Delimiter, ")");
             ICommand command = this.ParseCommand();
 
             return new ForCommand(initial, condition, endcmd, command);
@@ -712,7 +713,7 @@
                 expression = this.ParseExpression();
             }
 
-            this.Parse(TokenType.Separator, ";");
+            this.Parse(TokenType.Delimiter, ";");
 
             if (this.hoistedCommands != null)
             {

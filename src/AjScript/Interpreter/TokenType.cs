@@ -13,7 +13,7 @@
         Boolean,
         String,
         Operator,
-        Separator,
+        Delimiter,
         Object
     }
 }

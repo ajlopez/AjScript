@@ -43,7 +43,7 @@
 
             Assert.IsNotNull(token);
             Assert.AreEqual(".", token.Value);
-            Assert.AreEqual(TokenType.Operator, token.TokenType);
+            Assert.AreEqual(TokenType.Delimiter, token.TokenType);
 
             token = lexer.NextToken();
 
@@ -112,7 +112,7 @@
         [TestMethod]
         public void ParseSeparators()
         {
-            ParseTokens("( ) [ ] ; , :", TokenType.Separator);
+            ParseTokens("( ) [ ] ; , :", TokenType.Delimiter);
         }
 
         [TestMethod]

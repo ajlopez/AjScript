@@ -11,8 +11,8 @@
     {
         private const char StringChar = '"';
         private const char QuotedStringChar = '\'';
-        private const string Operators = "!~+-*/%&|^<>=.\\@";
-        private const string Separators = "()[]{},:;";
+        private const string Operators = "!~+-*/%&|^<>=\\@";
+        private const string Delimiters = "()[]{},:;.";
 
         private static string[] otherOperators = new string[] { "++", "--", "<=", ">=", "==", "!=", "&&", "||", "*=", "/=", "%=", "+=", "-=", "===", "!==" };
 
@@ -89,7 +89,7 @@
                 return this.NextQuotedString();
             }
 
-            if (Separators.Contains(ch))
+            if (Delimiters.Contains(ch))
             {
                 return this.NextSeparator(ch);
             }
@@ -181,7 +181,7 @@
         {
             return new Token()
             {
-                TokenType = TokenType.Separator,
+                TokenType = TokenType.Delimiter,
                 Value = ch.ToString()
             };
         }
