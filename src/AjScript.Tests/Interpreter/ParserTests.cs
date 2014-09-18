@@ -484,10 +484,18 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UnexpectedTokenException))]
-        public void RaiseIfUnexpectedTokenDot()
+        public void UnexpectedTokenDot()
         {
-            this.ParseExpression(".");
+            try
+            {
+                this.ParseExpression(".");
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Unexpected '.'", ex.Message);
+            }
         }
 
         [TestMethod]

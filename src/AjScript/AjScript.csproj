@@ -86,7 +86,6 @@
     <Compile Include="Interpreter\ParserException.cs" />
     <Compile Include="Interpreter\Token.cs" />
     <Compile Include="Interpreter\TokenType.cs" />
-    <Compile Include="Interpreter\UnexpectedTokenException.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Expressions\AndExpression.cs" />
     <Compile Include="Expressions\ArithmeticBinaryExpression.cs" />

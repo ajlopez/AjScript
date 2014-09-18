@@ -86,7 +86,7 @@
             ICommand command = this.ParseSimpleCommand();
 
             if (command == null)
-                throw new UnexpectedTokenException(token);
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
 
             this.Parse(TokenType.Delimiter, ";");
 
@@ -551,7 +551,7 @@
                     return expr;
             }
 
-            throw new UnexpectedTokenException(token);
+            throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
         }
 
         private IExpression ParseObjectExpression()
