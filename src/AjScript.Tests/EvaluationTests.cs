@@ -358,6 +358,20 @@
             Assert.AreEqual(2, this.EvaluateExpression("arr[1]"));
         }
 
+        [TestMethod]
+        public void JoinArrayUsingDefaultComma()
+        {
+            this.EvaluateCommands("var arr = [1, 2, 3];");
+            Assert.AreEqual("1,2,3", this.EvaluateExpression("arr.join()"));
+        }
+
+        [TestMethod]
+        public void JoinArrayUsingDefaultSeparator()
+        {
+            this.EvaluateCommands("var arr = [1, 2, 3];");
+            Assert.AreEqual("1 2 3", this.EvaluateExpression("arr.join(' ')"));
+        }
+
         private void EvaluateCommands(string text)
         {
             Parser parser = new Parser(text);

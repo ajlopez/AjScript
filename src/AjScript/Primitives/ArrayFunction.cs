@@ -12,6 +12,7 @@
         private static ICallable popFunction = new PopFunction();
         private static ICallable unshiftFunction = new UnshiftFunction();
         private static ICallable shiftFunction = new ShiftFunction();
+        private static ICallable joinFunction = new JoinFunction();
 
         public ArrayFunction(IContext context)
             : base(null, null, context)
@@ -23,6 +24,7 @@
             prototype.SetValue("pop", popFunction);
             prototype.SetValue("unshift", unshiftFunction);
             prototype.SetValue("shift", shiftFunction);
+            prototype.SetValue("join", joinFunction);
         }
 
         public override object NewInstance(object[] parameters)
@@ -110,6 +112,41 @@
                 ArrayObject array = (ArrayObject)@this;
                 var result = array.Elements[0];
                 array.Elements.RemoveAt(0);
+                return result;
+            }
+        }
+
+        private class JoinFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 1; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                ArrayObject array = (ArrayObject)@this;
+                string result = string.Empty;
+                string join;
+
+                if (arguments != null && arguments.Length > 0)
+                    join = arguments[0].ToString();
+                else
+                    join = ",";
+
+                foreach (var element in array.Elements)
+                {
+                    if (result.Length > 0)
+                        result += join;
+
+                    result += element.ToString();
+                }
+
                 return result;
             }
         }
