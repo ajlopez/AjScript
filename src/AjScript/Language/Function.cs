@@ -69,7 +69,7 @@
             newctx.DefineVariable("arguments");
             newctx.SetValue("arguments", arguments);
 
-            for (int k = 0; arguments != null && k < arguments.Length && k < this.Arity; k++)
+            for (int k = 0; arguments != null && k < arguments.Length && k < this.parameterNames.Length; k++)
             {
                 newctx.DefineVariable(this.parameterNames[k]);
                 newctx.SetValue(this.parameterNames[k], arguments[k]);

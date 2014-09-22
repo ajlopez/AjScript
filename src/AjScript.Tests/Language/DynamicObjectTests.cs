@@ -58,8 +58,6 @@
             ICommand body = new ReturnCommand(new VariableExpression("Name"));
             Function function = new Function(null, body);
 
-            Assert.AreEqual(0, function.Arity);
-
             this.dynobj.SetValue("GetName", function);
 
             object result = this.dynobj.GetValue("GetName");
@@ -74,8 +72,6 @@
         {
             ICommand body = new ReturnCommand(new DotExpression(new VariableExpression("this"), "Name"));
             Function function = new Function(null, body);
-
-            Assert.AreEqual(0, function.Arity);
 
             this.dynobj.SetValue("Name", "Adam");
             this.dynobj.SetValue("GetName", function);
@@ -92,8 +88,6 @@
         {
             ICommand body = new ReturnCommand(new VariableExpression("Name"));
             Function function = new Function(null, body);
-
-            Assert.AreEqual(0, function.Arity);
 
             this.dynobj.SetValue("Name", "Adam");
 

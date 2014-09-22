@@ -20,12 +20,5 @@
             writer.Close();
             Assert.AreEqual("Hello!", writer.ToString());
         }
-
-        [TestMethod]
-        public void GetArity()
-        {
-            var wfunc = new WriteFunction();
-            Assert.AreEqual(1, wfunc.Arity);
-        }
     }
 }
