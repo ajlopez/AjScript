@@ -44,5 +44,31 @@
         {
             return !IsFalse(obj);
         }
+
+        public static bool IsNumber(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is int)
+                return true;
+
+            if (obj is string)
+                return false;
+
+            if (obj is long)
+                return true;
+
+            if (obj is short)
+                return true;
+
+            if (obj is double)
+                return true;
+
+            if (obj is float)
+                return true;
+
+            return false;
+        }
     }
 }

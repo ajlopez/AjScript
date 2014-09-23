@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Commands\CommandsTests.cs" />
     <Compile Include="Compiler\BaseVisitorProcessorTests.cs" />
+    <Compile Include="Expressions\TypeofExpressionTests.cs" />
     <Compile Include="Interpreter\LexerTests.cs" />
     <Compile Include="Interpreter\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />

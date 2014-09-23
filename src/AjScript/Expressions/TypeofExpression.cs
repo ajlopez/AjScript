@@ -19,7 +19,21 @@
 
         public object Evaluate(IContext context)
         {
-            throw new NotImplementedException();
+            var value = this.expression.Evaluate(context);
+
+            if (value == null)
+                return "null";
+
+            if (value is Undefined)
+                return "undefined";
+
+            if (value is String)
+                return "string";
+
+            if (Predicates.IsNumber(value))
+                return "number";
+
+            return "object";
         }
     }
 }

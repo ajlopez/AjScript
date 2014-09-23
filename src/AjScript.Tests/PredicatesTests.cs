@@ -65,5 +65,19 @@
             Assert.IsTrue(Predicates.IsTrue((float)1.2));
             Assert.IsTrue(Predicates.IsTrue(new ConstantExpression(1)));
         }
+
+        [TestMethod]
+        public void IsNumber()
+        {
+            Assert.IsTrue(Predicates.IsNumber(0));
+            Assert.IsTrue(Predicates.IsNumber(Math.PI));
+            Assert.IsTrue(Predicates.IsNumber((short) 1));
+            Assert.IsTrue(Predicates.IsNumber((long)1));
+            Assert.IsTrue(Predicates.IsNumber((float)1.2));
+
+            Assert.IsFalse(Predicates.IsNumber(null));
+            Assert.IsFalse(Predicates.IsNumber("foo"));
+            Assert.IsFalse(Predicates.IsNumber(new Random()));
+        }
     }
 }
