@@ -501,6 +501,9 @@
             if (token.TokenType == TokenType.Name && token.Value == "function")
                 return this.ParseFunctionExpression();
 
+            if (token.TokenType == TokenType.Name && token.Value == "typeof")
+                return new TypeofExpression(this.ParseExpression());
+
             switch (token.TokenType)
             {
                 case TokenType.Delimiter:

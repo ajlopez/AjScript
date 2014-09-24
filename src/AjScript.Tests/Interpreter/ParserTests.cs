@@ -484,6 +484,15 @@
         }
 
         [TestMethod]
+        public void ParseSimpleTypeofExpression()
+        {
+            IExpression expression = this.ParseExpression("typeof foo");
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(TypeofExpression));
+        }
+
+        [TestMethod]
         public void UnexpectedTokenDot()
         {
             try
