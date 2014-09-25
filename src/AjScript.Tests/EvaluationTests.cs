@@ -29,6 +29,12 @@
         }
 
         [TestMethod]
+        public void AddRealsSimpleExpression()
+        {
+            Assert.AreEqual(1.2 + 3.4, this.EvaluateExpression("1.2+3.4"));
+        }
+
+        [TestMethod]
         public void ArithmeticSimpleExpressionWithPrecedence()
         {
             Assert.AreEqual(7, this.EvaluateExpression("1+2*3"));
@@ -38,6 +44,13 @@
         public void ArithmeticSimpleExpressionWithParenthesis()
         {
             Assert.AreEqual(9, this.EvaluateExpression("(1+2)*3"));
+        }
+
+        [TestMethod]
+        public void DivideIntegers()
+        {
+            Assert.AreEqual(3, this.EvaluateExpression("9/3"));
+            Assert.AreEqual(1.0/2.0, this.EvaluateExpression("1/2"));
         }
 
         [TestMethod]
@@ -295,6 +308,14 @@
             this.EvaluateCommands("function Person() { this.name = 'Adam'; }");
             this.EvaluateCommands("Person.prototype.age = 800; var adam = new Person();");
             Assert.AreEqual(800, this.EvaluateExpression("adam.age"));
+        }
+
+        [TestMethod]
+        public void NewObjectWithArgument()
+        {
+            this.EvaluateCommands("function Person(name) { this.name = name; }");
+            this.EvaluateCommands("var adam = new Person('Adam');");
+            Assert.AreEqual("Adam", this.EvaluateExpression("adam.name"));
         }
 
         [TestMethod]

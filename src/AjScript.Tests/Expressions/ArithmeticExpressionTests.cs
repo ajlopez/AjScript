@@ -55,6 +55,7 @@
         [TestMethod]
         public void EvaluateDivideOperation()
         {
+            Assert.AreEqual(5, EvaluateArithmeticBinaryOperator(ArithmeticOperator.Divide, 10, 2));
             Assert.AreEqual(1.5, EvaluateArithmeticBinaryOperator(ArithmeticOperator.Divide, 3, 2));
             Assert.AreEqual(1.7, EvaluateArithmeticBinaryOperator(ArithmeticOperator.Divide, 3.4, 2));
         }

@@ -66,7 +66,18 @@
                     rightValue = 0;
             }
 
-            return this.function(leftValue, rightValue);
+            var result = this.function(leftValue, rightValue);
+
+            if (this.operation != ArithmeticOperator.Divide || !(result is double))
+                return result;
+
+            var r = (double)result;
+            var floor = Math.Floor(r);
+
+            if (floor == r)
+                return (int)floor;
+
+            return result;
         }
 
         private static object AddOrConcatenateObjects(object left, object right)
