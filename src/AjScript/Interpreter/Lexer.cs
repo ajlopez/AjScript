@@ -376,12 +376,6 @@
             token.Value = name;
             token.TokenType = TokenType.Name;
 
-            if (name == "true" || name == "false")
-                token.TokenType = TokenType.Boolean;
-
-            if (name == "null" || name == "undefined")
-                token.TokenType = TokenType.Object;
-
             return token;
         }
 

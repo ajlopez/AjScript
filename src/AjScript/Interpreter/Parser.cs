@@ -521,9 +521,6 @@
                         return this.ParseArrayExpression();
 
                     break;
-                case TokenType.Boolean:
-                    bool booleanValue = Convert.ToBoolean(token.Value);
-                    return new ConstantExpression(booleanValue);
                 case TokenType.Integer:
                     int intValue = Int32.Parse(token.Value, System.Globalization.CultureInfo.InvariantCulture);
                     return new ConstantExpression(intValue);
@@ -532,15 +529,16 @@
                     return new ConstantExpression(realValue);
                 case TokenType.String:
                     return new ConstantExpression(token.Value);
-                case TokenType.Object:
+                case TokenType.Name:
                     if (token.Value == "null")
                         return new ConstantExpression(null);
-
                     if (token.Value == "undefined")
                         return new ConstantExpression(Undefined.Instance);
+                    if (token.Value == "true")
+                        return new ConstantExpression(true);
+                    if (token.Value == "false")
+                        return new ConstantExpression(false);
 
-                    break;
-                case TokenType.Name:
                     IExpression expr = null;
 
                     expr = new VariableExpression(token.Value);

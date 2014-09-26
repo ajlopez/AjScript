@@ -10,10 +10,8 @@
         Name,
         Integer,
         Real,
-        Boolean,
         String,
         Operator,
-        Delimiter,
-        Object
+        Delimiter
     }
 }
