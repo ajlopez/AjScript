@@ -13,6 +13,7 @@
         private static ICallable unshiftFunction = new UnshiftFunction();
         private static ICallable shiftFunction = new ShiftFunction();
         private static ICallable joinFunction = new JoinFunction();
+        private static ICallable sliceFunction = new SliceFunction();
 
         public ArrayFunction(IContext context)
             : base(null, null, context)
@@ -25,6 +26,7 @@
             prototype.SetValue("unshift", unshiftFunction);
             prototype.SetValue("shift", shiftFunction);
             prototype.SetValue("join", joinFunction);
+            prototype.SetValue("slice", sliceFunction);
         }
 
         public override object NewInstance(object[] parameters)
@@ -148,6 +150,25 @@
                 }
 
                 return result;
+            }
+        }
+
+        private class SliceFunction : ICallable
+        {
+            public int Arity
+            {
+                get { return 0; }
+            }
+
+            public IContext Context
+            {
+                get { return null; }
+            }
+
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                ArrayObject array = (ArrayObject)@this;
+                return new ArrayObject(array.Function, array.Elements);
             }
         }
     }

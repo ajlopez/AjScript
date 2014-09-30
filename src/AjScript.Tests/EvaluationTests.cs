@@ -348,6 +348,16 @@
         }
 
         [TestMethod]
+        public void SliceCompleteArray()
+        {
+            this.EvaluateCommands("var arr = [1, 2, 3]; var arr2 = arr.slice();");
+            Assert.AreEqual(3, this.EvaluateExpression("arr2.length"));
+            Assert.AreEqual(1, this.EvaluateExpression("arr2[0]"));
+            Assert.AreEqual(2, this.EvaluateExpression("arr2[1]"));
+            Assert.AreEqual(3, this.EvaluateExpression("arr2[2]"));
+        }
+
+        [TestMethod]
         public void UnshiftAddElementIntoArray()
         {
             this.EvaluateCommands("var arr = [1, 2, 3];");
