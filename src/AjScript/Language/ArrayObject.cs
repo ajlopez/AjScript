@@ -10,10 +10,10 @@
     {
         private IList<object> elements;
 
-        public ArrayObject(IFunction function, IList<object> elements)
+        public ArrayObject(IFunction function, IEnumerable<object> elements)
             : base(function)
         {
-            this.elements = elements;
+            this.elements = new List<object>(elements);
         }
 
         public IList<object> Elements { get { return this.elements; } }

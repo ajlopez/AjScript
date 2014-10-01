@@ -168,6 +168,13 @@
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 ArrayObject array = (ArrayObject)@this;
+
+                if (arguments != null && arguments.Length == 1)
+                {
+                    int from = (int)arguments[0];
+                    return new ArrayObject(array.Function, array.Elements.Skip(from));
+                }
+
                 return new ArrayObject(array.Function, array.Elements);
             }
         }
