@@ -175,6 +175,13 @@
                     return new ArrayObject(array.Function, array.Elements.Skip(from));
                 }
 
+                if (arguments != null && arguments.Length == 2)
+                {
+                    int from = (int)arguments[0];
+                    int to = (int)arguments[1];
+                    return new ArrayObject(array.Function, array.Elements.Skip(from).Take(to - from));
+                }
+
                 return new ArrayObject(array.Function, array.Elements);
             }
         }
