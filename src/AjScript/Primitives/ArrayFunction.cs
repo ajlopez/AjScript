@@ -36,11 +36,6 @@
 
         private class PushFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 1; }
-            }
-
             public IContext Context
             {
                 get { return null; }
@@ -57,11 +52,6 @@
 
         private class PopFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 0; }
-            }
-
             public IContext Context
             {
                 get { return null; }
@@ -78,11 +68,6 @@
 
         private class UnshiftFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 1; }
-            }
-
             public IContext Context
             {
                 get { return null; }
@@ -99,11 +84,6 @@
 
         private class ShiftFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 0; }
-            }
-
             public IContext Context
             {
                 get { return null; }
@@ -120,11 +100,6 @@
 
         private class JoinFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 1; }
-            }
-
             public IContext Context
             {
                 get { return null; }
