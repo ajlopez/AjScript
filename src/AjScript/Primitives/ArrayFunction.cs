@@ -147,6 +147,10 @@
                 if (arguments != null && arguments.Length == 1)
                 {
                     int from = (int)arguments[0];
+
+                    if (from < 0)
+                        return new ArrayObject(array.Function, array.Elements.Skip(array.Elements.Count + from));
+
                     return new ArrayObject(array.Function, array.Elements.Skip(from));
                 }
 
