@@ -7,8 +7,6 @@
 
     public interface ICallable
     {
-        IContext Context { get; }
-
         object Invoke(IContext context, object @this, object[] arguments);
     }
 }

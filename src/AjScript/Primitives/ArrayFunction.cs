@@ -36,11 +36,6 @@
 
         private class PushFunction : ICallable
         {
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 object newelement = arguments[0];
@@ -52,11 +47,6 @@
 
         private class PopFunction : ICallable
         {
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 ArrayObject array = (ArrayObject)@this;
@@ -68,11 +58,6 @@
 
         private class UnshiftFunction : ICallable
         {
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 object newelement = arguments[0];
@@ -84,11 +69,6 @@
 
         private class ShiftFunction : ICallable
         {
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 ArrayObject array = (ArrayObject)@this;
@@ -100,11 +80,6 @@
 
         private class JoinFunction : ICallable
         {
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 ArrayObject array = (ArrayObject)@this;
@@ -130,16 +105,6 @@
 
         private class SliceFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 0; }
-            }
-
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 ArrayObject array = (ArrayObject)@this;

@@ -56,8 +56,6 @@
 
         public ICommand Body { get { return this.body; } }
 
-        public IContext Context { get { return this.context; } }
-
         public object Invoke(IContext context, object @this, object[] arguments)
         {
             // TODO review: any case for use context parameter?
@@ -97,16 +95,6 @@
 
         private class CallFunction : ICallable
         {
-            public int Arity
-            {
-                get { return 2; }
-            }
-
-            public IContext Context
-            {
-                get { return null; }
-            }
-
             public object Invoke(IContext context, object @this, object[] arguments)
             {
                 object newthis = arguments[0];
@@ -130,11 +118,6 @@
             public int Arity
             {
                 get { return -1; }
-            }
-
-            public IContext Context
-            {
-                get { return null; }
             }
 
             public object Invoke(IContext context, object @this, object[] arguments)

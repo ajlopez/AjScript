@@ -21,16 +21,6 @@
             this.writer = writer;
         }
 
-        public int Arity
-        {
-            get { return 1; }
-        }
-
-        public IContext Context
-        {
-            get { throw new NotImplementedException(); }
-        }
-
         public object Invoke(IContext context, object @this, object[] arguments)
         {
             if (arguments != null)
