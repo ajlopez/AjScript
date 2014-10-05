@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Text;
 
-    public class ArrayObject : DynamicObject, IEnumerable
+    public class ArrayObject : DynamicObject
     {
         private IList<object> elements;
 
@@ -29,11 +29,6 @@
                 return this.elements.Count;
 
             return base.GetValue(name);
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return this.elements.GetEnumerator();
         }
     }
 }
