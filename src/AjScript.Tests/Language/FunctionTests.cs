@@ -40,6 +40,18 @@
         }
 
         [TestMethod]
+        public void FunctionLength()
+        {
+            ICommand body = new ReturnCommand(new VariableExpression("x"));
+            Function function = new Function(new string[] { "x" }, body);
+
+            object result = function.GetValue("length");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
         public void FunctionHasApplyMethod()
         {
             ICommand body = new ReturnCommand(new VariableExpression("x"));

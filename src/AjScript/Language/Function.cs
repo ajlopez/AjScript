@@ -93,6 +93,14 @@
             return this.Invoke(this.context, obj, parameters);
         }
 
+        public override object GetValue(string name)
+        {
+            if (name == "length")
+                return this.parameterNames.Length;
+
+            return base.GetValue(name);
+        }
+
         private class CallFunction : ICallable
         {
             public object Invoke(IContext context, object @this, object[] arguments)
