@@ -384,6 +384,15 @@
         }
 
         [TestMethod]
+        public void SliceWithNegativeSecondArgument()
+        {
+            this.EvaluateCommands("var arr = [1, 2, 3, 4]; var arr2 = arr.slice(1, -1);");
+            Assert.AreEqual(2, this.EvaluateExpression("arr2.length"));
+            Assert.AreEqual(2, this.EvaluateExpression("arr2[0]"));
+            Assert.AreEqual(3, this.EvaluateExpression("arr2[1]"));
+        }
+
+        [TestMethod]
         public void UnshiftAddElementIntoArray()
         {
             this.EvaluateCommands("var arr = [1, 2, 3];");

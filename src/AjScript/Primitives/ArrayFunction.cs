@@ -158,6 +158,10 @@
                 {
                     int from = (int)arguments[0];
                     int to = (int)arguments[1];
+
+                    if (to < 0)
+                        to = array.Elements.Count + to;
+
                     return new ArrayObject(array.Function, array.Elements.Skip(from).Take(to - from));
                 }
 
