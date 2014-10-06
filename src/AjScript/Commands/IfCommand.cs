@@ -13,12 +13,7 @@
         private ICommand thenCommand;
         private ICommand elseCommand;
 
-        public IfCommand(IExpression condition, ICommand thenCommand)
-            : this(condition, thenCommand, null)
-        {
-        }
-
-        public IfCommand(IExpression condition, ICommand thenCommand, ICommand elseCommand)
+        public IfCommand(IExpression condition, ICommand thenCommand, ICommand elseCommand = null)
         {
             this.condition = condition;
             this.thenCommand = thenCommand;
