@@ -164,6 +164,12 @@
         }
 
         [TestMethod]
+        public void StringToString()
+        {
+            Assert.AreEqual("foo", this.EvaluateExpression("'foo'.toString()"));
+        }
+
+        [TestMethod]
         public void AddFunction()
         {
             Assert.AreEqual(3, this.EvaluateExpression("function (x) { return x+1;} (2)"));
