@@ -170,6 +170,12 @@
         }
 
         [TestMethod]
+        public void EmptyToString()
+        {
+            Assert.AreEqual("[object Object]", this.EvaluateExpression("{}.toString()"));
+        }
+
+        [TestMethod]
         public void AddFunction()
         {
             Assert.AreEqual(3, this.EvaluateExpression("function (x) { return x+1;} (2)"));
