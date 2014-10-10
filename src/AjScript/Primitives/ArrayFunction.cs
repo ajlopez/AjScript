@@ -8,6 +8,7 @@
 
     public class ArrayFunction : Function
     {
+        private static ICallable isArrayFunction = new IsArrayFunction();
         private static ICallable pushFunction = new PushFunction();
         private static ICallable popFunction = new PopFunction();
         private static ICallable unshiftFunction = new UnshiftFunction();
@@ -20,6 +21,7 @@
         {
             var prototype = new DynamicObject();
 
+            this.SetValue("isArray", isArrayFunction);
             this.SetValue("prototype", prototype);
             prototype.SetValue("push", pushFunction);
             prototype.SetValue("pop", popFunction);
@@ -131,6 +133,19 @@
                 }
 
                 return new ArrayObject(array.Function, array.Elements);
+            }
+        }
+
+        private class IsArrayFunction : ICallable
+        {
+            public object Invoke(IContext context, object @this, object[] arguments)
+            {
+                var arg = arguments[0];
+
+                if (arg is DynamicObject && ((DynamicObject)arg).Function == @this)
+                    return true;
+
+                return false;
             }
         }
     }

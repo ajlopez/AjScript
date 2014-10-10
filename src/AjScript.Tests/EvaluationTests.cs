@@ -137,6 +137,19 @@
         }
 
         [TestMethod]
+        public void IsArray()
+        {
+            Assert.AreEqual(true, this.EvaluateExpression("Array.isArray([])"));
+            Assert.AreEqual(true, this.EvaluateExpression("Array.isArray([1, 2, 3])"));
+
+            Assert.AreEqual(false, this.EvaluateExpression("Array.isArray({})"));
+            Assert.AreEqual(false, this.EvaluateExpression("Array.isArray(42)"));
+            Assert.AreEqual(false, this.EvaluateExpression("Array.isArray('foo')"));
+            Assert.AreEqual(false, this.EvaluateExpression("Array.isArray(null)"));
+            Assert.AreEqual(false, this.EvaluateExpression("Array.isArray(undefined)"));
+        }
+
+        [TestMethod]
         public void PreDecrementVar()
         {
             this.EvaluateCommands("var x = 0; y = --x;");
