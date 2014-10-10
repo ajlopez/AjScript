@@ -126,6 +126,17 @@
         }
 
         [TestMethod]
+        public void Typeof()
+        {
+            Assert.AreEqual("object", this.EvaluateExpression("typeof {}"));
+            Assert.AreEqual("object", this.EvaluateExpression("typeof []"));
+            Assert.AreEqual("number", this.EvaluateExpression("typeof 42"));
+            Assert.AreEqual("number", this.EvaluateExpression("typeof 3.14159"));
+            Assert.AreEqual("null", this.EvaluateExpression("typeof null"));
+            Assert.AreEqual("undefined", this.EvaluateExpression("typeof undefined"));
+        }
+
+        [TestMethod]
         public void PreDecrementVar()
         {
             this.EvaluateCommands("var x = 0; y = --x;");
