@@ -502,7 +502,7 @@
                 return this.ParseFunctionExpression();
 
             if (token.TokenType == TokenType.Name && token.Value == "typeof")
-                return new TypeofExpression(this.ParseExpression());
+                return new TypeOfExpression(this.ParseExpression());
 
             switch (token.TokenType)
             {

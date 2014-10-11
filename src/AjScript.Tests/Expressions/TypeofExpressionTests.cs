@@ -6,12 +6,12 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class TypeofExpressionTests
+    public class TypeOfExpressionTests
     {
         [TestMethod]
         public void EvaluateNull()
         {
-            TypeofExpression expr = new TypeofExpression(new ConstantExpression(null));
+            TypeOfExpression expr = new TypeOfExpression(new ConstantExpression(null));
             var result = expr.Evaluate(null);
 
             Assert.IsNotNull(result);
@@ -21,7 +21,7 @@
         [TestMethod]
         public void EvaluateString()
         {
-            TypeofExpression expr = new TypeofExpression(new ConstantExpression("foo"));
+            TypeOfExpression expr = new TypeOfExpression(new ConstantExpression("foo"));
             var result = expr.Evaluate(null);
 
             Assert.IsNotNull(result);
@@ -31,7 +31,7 @@
         [TestMethod]
         public void EvaluateInteger()
         {
-            TypeofExpression expr = new TypeofExpression(new ConstantExpression(42));
+            TypeOfExpression expr = new TypeOfExpression(new ConstantExpression(42));
             var result = expr.Evaluate(null);
 
             Assert.IsNotNull(result);
@@ -41,7 +41,7 @@
         [TestMethod]
         public void EvaluateReal()
         {
-            TypeofExpression expr = new TypeofExpression(new ConstantExpression(Math.PI));
+            TypeOfExpression expr = new TypeOfExpression(new ConstantExpression(Math.PI));
             var result = expr.Evaluate(null);
 
             Assert.IsNotNull(result);
@@ -51,7 +51,7 @@
         [TestMethod]
         public void EvaluateUndefined()
         {
-            TypeofExpression expr = new TypeofExpression(new VariableExpression("foo"));
+            TypeOfExpression expr = new TypeOfExpression(new VariableExpression("foo"));
             var result = expr.Evaluate(new Context());
 
             Assert.IsNotNull(result);
@@ -61,7 +61,7 @@
         [TestMethod]
         public void EvaluateArray()
         {
-            TypeofExpression expr = new TypeofExpression(new VariableExpression("foo"));
+            TypeOfExpression expr = new TypeOfExpression(new VariableExpression("foo"));
             Context ctx = new Context();
             ctx.SetValue("foo", (new ArrayFunction(ctx)).NewInstance(new object[] { }));
             var result = expr.Evaluate(ctx);

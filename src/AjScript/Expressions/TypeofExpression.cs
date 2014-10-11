@@ -6,11 +6,11 @@
     using System.Text;
     using AjScript.Language;
 
-    public class TypeofExpression : IExpression
+    public class TypeOfExpression : IExpression
     {
         private IExpression expression;
 
-        public TypeofExpression(IExpression expression)
+        public TypeOfExpression(IExpression expression)
         {
             this.expression = expression;
         }
