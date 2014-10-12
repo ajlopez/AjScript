@@ -21,5 +21,21 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(true, result);
         }
+
+        [TestMethod]
+        public void EvaluateEmptyArray()
+        {
+            Context context = new Context();
+            var objfn = new ObjectFunction(context);
+            var arrfn = new ArrayFunction(context);
+            context.SetValue("Object", objfn);
+            context.SetValue("Array", arrfn);
+
+            InstanceOfExpression expr = new InstanceOfExpression(new ConstantExpression(objfn.NewInstance(null)), new VariableExpression("Object"));
+            var result = expr.Evaluate(context);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(true, result);
+        }
     }
 }

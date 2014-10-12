@@ -461,6 +461,17 @@
         }
 
         [TestMethod]
+        public void InstanceOf()
+        {
+            Assert.AreEqual(false, this.EvaluateExpression("1 instanceof Object"));
+            Assert.AreEqual(true, this.EvaluateExpression("[] instanceof Array"));
+            Assert.AreEqual(true, this.EvaluateExpression("[] instanceof Object"));
+            Assert.AreEqual(true, this.EvaluateExpression("{} instanceof Object"));
+            Assert.AreEqual(false, this.EvaluateExpression("1 instanceof Number"));
+            Assert.AreEqual(false, this.EvaluateExpression("'foo' instanceof String"));
+        }
+
+        [TestMethod]
         public void JoinArrayUsingDefaultComma()
         {
             this.EvaluateCommands("var arr = [1, 2, 3];");

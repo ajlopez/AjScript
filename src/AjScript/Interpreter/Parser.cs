@@ -95,7 +95,18 @@
 
         public IExpression ParseExpression()
         {
-            return this.ParseBinaryLogicalExpressionLevelOne();
+            var expr = this.ParseBinaryLogicalExpressionLevelOne();
+
+            if (expr == null)
+                return null;
+
+            if (this.TryParse(TokenType.Name, "instanceof"))
+            {
+                this.lexer.NextToken();
+                return new InstanceOfExpression(expr, this.ParseExpression());
+            }
+
+            return expr;
         }
 
         public void Dispose()
@@ -185,7 +196,7 @@
 
             while (this.TryParse(TokenType.Operator, "||"))
             {
-                Token oper = this.lexer.NextToken();
+                this.lexer.NextToken();
                 IExpression right = this.ParseBinaryLogicalExpressionLevelTwo();
 
                 expression = new OrExpression(expression, right);
@@ -203,7 +214,7 @@
 
             while (this.TryParse(TokenType.Operator, "&&"))
             {
-                Token oper = this.lexer.NextToken();
+                this.lexer.NextToken();
                 IExpression right = this.ParseBinaryExpressionZerothLevel();
 
                 expression = new AndExpression(expression, right);

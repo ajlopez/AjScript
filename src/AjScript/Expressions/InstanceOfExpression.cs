@@ -17,6 +17,9 @@
         {
             var proto = ((DynamicObject)rightValue).GetValue("prototype");
 
+            if (!(leftValue is DynamicObject))
+                return false;
+
             return ((DynamicObject)leftValue).Function.GetValue("prototype") == proto;
         }
     }
