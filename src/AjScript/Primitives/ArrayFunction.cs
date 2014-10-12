@@ -21,6 +21,18 @@
         {
             var prototype = new DynamicObject();
 
+            if (context != null)
+            {
+                var obj = context.GetValue("Object");
+
+                if (obj != null && obj is DynamicObject)
+                {
+                    var superproto = ((DynamicObject)obj).GetValue("prototype");
+                    if (superproto != null && superproto is DynamicObject)
+                        prototype.SetValue("prototype", superproto);
+                }
+            }
+
             this.SetValue("isArray", isArrayFunction);
             this.SetValue("prototype", prototype);
             prototype.SetValue("push", pushFunction);
