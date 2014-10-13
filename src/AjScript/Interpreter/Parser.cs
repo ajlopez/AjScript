@@ -235,22 +235,23 @@
                 Token oper = this.lexer.NextToken();
                 IExpression right = this.ParseBinaryExpressionFirstLevel();
 
-                ComparisonOperator op = ComparisonOperator.Unknown;
+                ComparisonOperator op;
 
                 if (oper.Value == "<")
                     op = ComparisonOperator.Less;
-                if (oper.Value == ">")
+                else if (oper.Value == ">")
                     op = ComparisonOperator.Greater;
-                if (oper.Value == "<=")
+                else if (oper.Value == "<=")
                     op = ComparisonOperator.LessEqual;
-                if (oper.Value == ">=")
+                else if (oper.Value == ">=")
                     op = ComparisonOperator.GreaterEqual;
-                if (oper.Value == "===")
+                else if (oper.Value == "===")
                     op = ComparisonOperator.Equal;
-                if (oper.Value == "!==")
+                else if (oper.Value == "!==")
                     op = ComparisonOperator.NotEqual;
-
-                if (op == ComparisonOperator.Unknown)
+                else if (oper.Value == "==")
+                    op = ComparisonOperator.SemiEqual;
+                else
                     throw new ParserException(string.Format("Unknown operator '{0}'", oper.Value));
 
                 expression = new CompareExpression(op, expression, right);

@@ -472,6 +472,17 @@
         }
 
         [TestMethod]
+        public void EqualNullUndefined()
+        {
+            Assert.AreEqual(true, this.EvaluateExpression("null == undefined"));
+            Assert.AreEqual(true, this.EvaluateExpression("undefined == null"));
+            Assert.AreEqual(false, this.EvaluateExpression("undefined == false"));
+            Assert.AreEqual(false, this.EvaluateExpression("null == false"));
+            Assert.AreEqual(false, this.EvaluateExpression("false == undefined"));
+            Assert.AreEqual(false, this.EvaluateExpression("false == null"));
+        }
+
+        [TestMethod]
         public void JoinArrayUsingDefaultComma()
         {
             this.EvaluateCommands("var arr = [1, 2, 3];");

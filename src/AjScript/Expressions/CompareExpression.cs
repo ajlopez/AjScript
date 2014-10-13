@@ -21,6 +21,9 @@
 
             switch (operation)
             {
+                case ComparisonOperator.SemiEqual:
+                    this.function = SemiEqual;
+                    break;
                 case ComparisonOperator.Equal:
                     this.function = Operators.CompareObjectEqual;
                     break;
@@ -49,6 +52,17 @@
         public override object Apply(object leftValue, object rightValue)
         {
             return this.function(leftValue, rightValue, false);
+        }
+
+        private static object SemiEqual(object left, object right, bool txtcompare)
+        {
+            if (left == null && right is Undefined)
+                return true;
+
+            if (left is Undefined && right == null)
+                return true;
+
+            return left == right;
         }
     }
 }

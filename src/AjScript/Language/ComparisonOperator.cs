@@ -7,12 +7,12 @@
 
     public enum ComparisonOperator
     {
-        Unknown,
         Equal,
         NotEqual,
         Less,
         LessEqual,
         Greater,
-        GreaterEqual
+        GreaterEqual,
+        SemiEqual
     }
 }
