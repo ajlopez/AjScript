@@ -472,7 +472,7 @@
         }
 
         [TestMethod]
-        public void EqualNullUndefined()
+        public void NonStrictEqualNullUndefined()
         {
             Assert.AreEqual(true, this.EvaluateExpression("null == undefined"));
             Assert.AreEqual(true, this.EvaluateExpression("undefined == null"));
@@ -480,6 +480,17 @@
             Assert.AreEqual(false, this.EvaluateExpression("null == false"));
             Assert.AreEqual(false, this.EvaluateExpression("false == undefined"));
             Assert.AreEqual(false, this.EvaluateExpression("false == null"));
+        }
+
+        [TestMethod]
+        public void NonStrictNotEqualNullUndefined()
+        {
+            Assert.AreEqual(false, this.EvaluateExpression("null != undefined"));
+            Assert.AreEqual(false, this.EvaluateExpression("undefined != null"));
+            Assert.AreEqual(true, this.EvaluateExpression("undefined != false"));
+            Assert.AreEqual(true, this.EvaluateExpression("null != false"));
+            Assert.AreEqual(true, this.EvaluateExpression("false != undefined"));
+            Assert.AreEqual(true, this.EvaluateExpression("false != null"));
         }
 
         [TestMethod]

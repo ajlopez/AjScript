@@ -13,6 +13,7 @@
         LessEqual,
         Greater,
         GreaterEqual,
-        SemiEqual
+        NonStrictEqual,
+        NonStrictNotEqual
     }
 }

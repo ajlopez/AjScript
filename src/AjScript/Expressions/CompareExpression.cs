@@ -21,8 +21,11 @@
 
             switch (operation)
             {
-                case ComparisonOperator.SemiEqual:
-                    this.function = SemiEqual;
+                case ComparisonOperator.NonStrictEqual:
+                    this.function = NonStrictEqual;
+                    break;
+                case ComparisonOperator.NonStrictNotEqual:
+                    this.function = NonStrictNotEqual;
                     break;
                 case ComparisonOperator.Equal:
                     this.function = Operators.CompareObjectEqual;
@@ -54,7 +57,7 @@
             return this.function(leftValue, rightValue, false);
         }
 
-        private static object SemiEqual(object left, object right, bool txtcompare)
+        private static object NonStrictEqual(object left, object right, bool txtcompare)
         {
             if (left == null && right is Undefined)
                 return true;
@@ -63,6 +66,17 @@
                 return true;
 
             return left == right;
+        }
+
+        private static object NonStrictNotEqual(object left, object right, bool txtcompare)
+        {
+            if (left == null && right is Undefined)
+                return false;
+
+            if (left is Undefined && right == null)
+                return false;
+
+            return left != right;
         }
     }
 }

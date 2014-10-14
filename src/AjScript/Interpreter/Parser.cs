@@ -250,7 +250,9 @@
                 else if (oper.Value == "!==")
                     op = ComparisonOperator.NotEqual;
                 else if (oper.Value == "==")
-                    op = ComparisonOperator.SemiEqual;
+                    op = ComparisonOperator.NonStrictEqual;
+                else if (oper.Value == "!=")
+                    op = ComparisonOperator.NonStrictNotEqual;
                 else
                     throw new ParserException(string.Format("Unknown operator '{0}'", oper.Value));
 
