@@ -55,6 +55,26 @@
         }
 
         [TestMethod]
+        public void ParseNegativeInteger()
+        {
+            Lexer lexer = new Lexer("-42");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Operator, token.TokenType);
+            Assert.AreEqual("-", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("42", token.Value);
+            Assert.AreEqual(TokenType.Integer, token.TokenType);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void ParseReal()
         {
             ParseToken("123.34", TokenType.Real, "123.34");

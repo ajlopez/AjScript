@@ -23,6 +23,30 @@
         }
 
         [TestMethod]
+        public void GetInteger()
+        {
+            Assert.AreEqual(3, this.EvaluateExpression("3"));
+        }
+
+        [TestMethod]
+        public void GetNegativeInteger()
+        {
+            Assert.AreEqual(-3, this.EvaluateExpression("-3"));
+        }
+
+        [TestMethod]
+        public void GetReal()
+        {
+            Assert.AreEqual(3.14, this.EvaluateExpression("3.14"));
+        }
+
+        [TestMethod]
+        public void GetNegativeReal()
+        {
+            Assert.AreEqual(-3.14, this.EvaluateExpression("-3.14"));
+        }
+
+        [TestMethod]
         public void AddSimpleExpression()
         {
             Assert.AreEqual(3, this.EvaluateExpression("1+2"));
