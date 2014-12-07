@@ -27,13 +27,9 @@
 
         public object Evaluate(IContext context)
         {
-            object obj = null;
             ICallable callable;
 
-            if (this.expression is IndexedExpression)
-                callable = (ICallable)((IndexedExpression)this.expression).Evaluate(context, ref obj);
-            else
-                callable = (ICallable)this.expression.Evaluate(context);
+            callable = (ICallable)this.expression.Evaluate(context);
 
             List<object> parameters = new List<object>();
 
@@ -42,12 +38,6 @@
                 object parameter = expression.Evaluate(context);
 
                 parameters.Add(parameter);
-            }
-
-            if (obj != null && obj is DynamicObject)
-            {
-                DynamicObject dobj = (DynamicObject)obj;
-                return dobj.Invoke(callable, parameters.ToArray());
             }
 
             return callable.Invoke(context, context.RootContext, parameters.ToArray());

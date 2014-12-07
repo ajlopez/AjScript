@@ -22,14 +22,7 @@
 
         public object Evaluate(IContext context)
         {
-            object obj = null;
-
-            return this.Evaluate(context, ref obj);
-        }
-
-        public object Evaluate(IContext context, ref object obj)
-        {
-            obj = this.Expression.Evaluate(context);
+            object obj = this.Expression.Evaluate(context);
 
             object[] parameters = null;
 
