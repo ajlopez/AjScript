@@ -84,6 +84,20 @@
         }
 
         [TestMethod]
+        public void ConcatenateNull()
+        {
+            Assert.AreEqual("foonull", this.EvaluateExpression("'foo' + null"));
+            Assert.AreEqual("nullfoo", this.EvaluateExpression("null + 'foo'"));
+        }
+
+        [TestMethod]
+        public void AddNull()
+        {
+            Assert.AreEqual(10, this.EvaluateExpression("10 + null"));
+            Assert.AreEqual(10, this.EvaluateExpression("null + 10"));
+        }
+
+        [TestMethod]
         public void GetUndefined()
         {
             Assert.AreSame(Undefined.Instance, this.EvaluateExpression("undefined"));

@@ -86,10 +86,10 @@
                 return Operators.AddObject(left, right);
 
             if (left == null)
-                left = string.Empty;
+                left = "null";
 
             if (right == null)
-                right = string.Empty;
+                right = "null";
 
             return Operators.ConcatenateObject(left.ToString(), right.ToString());
         }
