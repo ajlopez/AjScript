@@ -81,7 +81,6 @@
     <Compile Include="Commands\SetArrayCommand.cs" />
     <Compile Include="Commands\SetCommand.cs" />
     <Compile Include="Commands\WhileCommand.cs" />
-    <Compile Include="Interpreter\EndOfInputException.cs" />
     <Compile Include="Interpreter\Lexer.cs" />
     <Compile Include="Interpreter\LexerException.cs" />
     <Compile Include="Interpreter\Parser.cs" />

@@ -58,16 +58,14 @@
             if (this.tokens != null && this.tokens.Count > 0)
                 return this.tokens.Pop();
 
-            char ch;
+            char? nch;
 
-            try
-            {
-                ch = this.NextCharSkipBlanks();
-            }
-            catch (EndOfInputException)
-            {
+            nch = this.NextCharSkipBlanks();
+
+            if (!nch.HasValue)
                 return null;
-            }
+
+            char ch = nch.Value;
 
             if (char.IsDigit(ch))
             {
@@ -126,19 +124,21 @@
 
         private Token NextOperator(char ch)
         {
-            char ch2;
+            char? nch2 = this.NextChar();
 
-            try
+            if (nch2.HasValue)
             {
-                ch2 = this.NextChar();
+                char ch2 = nch2.Value;
 
                 string op = ch.ToString() + ch2.ToString();
 
                 if (otherOperators.Contains(op))
                 {
-                    try
+                    char? nch3 = this.NextChar();
+
+                    if (nch3.HasValue)
                     {
-                        char ch3 = this.NextChar();
+                        char ch3 = nch3.Value;
 
                         string op2 = op + ch3.ToString();
 
@@ -151,9 +151,6 @@
 
                         this.PushChar(ch3);
                     }
-                    catch (EndOfInputException)
-                    {
-                    }
 
                     return new Token()
                     {
@@ -165,9 +162,6 @@
                 {
                     this.PushChar(ch2);
                 }
-            }
-            catch (EndOfInputException)
-            {
             }
 
             return new Token()
@@ -189,13 +183,15 @@
         private Token NextString()
         {
             StringBuilder sb = new StringBuilder();
-            char ch;
+            char? nch;
             char lastChar = (char)0;
 
-            ch = this.NextChar();
+            nch = this.NextChar();
 
-            while (ch != StringChar || lastChar == '\\')
+            while (nch.HasValue && nch.Value != StringChar || lastChar == '\\')
             {
+                char ch = nch.Value;
+
                 if (lastChar == '\\')
                 {
                     switch (ch)
@@ -248,7 +244,7 @@
                     lastChar = ch;
                 }
 
-                ch = this.NextChar();
+                nch = this.NextChar();
             }
 
             Token token = new Token();
@@ -261,17 +257,17 @@
         private Token NextQuotedString()
         {
             StringBuilder sb = new StringBuilder();
-            char ch;
+            char? nch;
             char lastChar = (char)0;
 
-            ch = this.NextChar();
+            nch = this.NextChar();
 
-            while (ch != QuotedStringChar)
+            while (nch.HasValue && nch.Value != QuotedStringChar)
             {
-                sb.Append(ch);
-                lastChar = ch;
+                sb.Append(nch);
+                lastChar = nch.Value;
 
-                ch = this.NextChar();
+                nch = this.NextChar();
             }
 
             Token token = new Token();
@@ -281,30 +277,25 @@
             return token;
         }
 
-        private Token NextInteger(char ch)
+        private Token NextInteger(char? nch)
         {
-            string integer = ch.ToString();
+            string integer = nch.ToString();
 
-            try
+            nch = this.NextChar();
+
+            while (nch.HasValue && char.IsDigit(nch.Value))
             {
-                ch = this.NextChar();
-
-                while (char.IsDigit(ch))
-                {
-                    integer += ch;
-                    ch = this.NextChar();
-                }
-
-                if (ch == '.')
-                {
-                    return this.NextReal(integer);
-                }
-
-                this.PushChar(ch);
+                integer += nch;
+                nch = this.NextChar();
             }
-            catch (EndOfInputException)
+
+            if (nch == '.')
             {
+                return this.NextReal(integer);
             }
+
+            if (nch.HasValue)
+                this.PushChar(nch.Value);
 
             Token token = new Token();
             token.Value = integer;
@@ -316,23 +307,18 @@
         private Token NextReal(string integerPart)
         {
             string real = integerPart + ".";
-            char ch;
+            char? nch;
 
-            try
+            nch = this.NextChar();
+
+            while (nch.HasValue && char.IsDigit(nch.Value))
             {
-                ch = this.NextChar();
-
-                while (char.IsDigit(ch))
-                {
-                    real += ch;
-                    ch = this.NextChar();
-                }
-
-                this.PushChar(ch);
+                real += nch;
+                nch = this.NextChar();
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            if (nch.HasValue)
+                this.PushChar(nch.Value);
 
             Token token;
 
@@ -352,25 +338,20 @@
             return token;
         }
 
-        private Token NextName(char ch)
+        private Token NextName(char? nch)
         {
-            string name = ch.ToString();
+            string name = nch.ToString();
 
-            try
+            nch = this.NextChar();
+
+            while (nch.HasValue && (char.IsLetterOrDigit(nch.Value) || nch.Value == '_'))
             {
-                ch = this.NextChar();
-
-                while (char.IsLetterOrDigit(ch) || ch == '_')
-                {
-                    name += ch;
-                    ch = this.NextChar();
-                }
-
-                this.PushChar(ch);
+                name += nch.Value;
+                nch = this.NextChar();
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            if (nch.HasValue)
+                this.PushChar(nch.Value);
 
             Token token = new Token();
             token.Value = name;
@@ -379,64 +360,70 @@
             return token;
         }
 
-        private char NextCharSkipBlanks()
+        private char? NextCharSkipBlanks()
         {
-            char ch;
+            char? nch;
 
-            ch = this.NextChar();
+            nch = this.NextChar();
 
-            while (char.IsWhiteSpace(ch) || ch == '/')
+            while (nch.HasValue && (char.IsWhiteSpace(nch.Value) || nch.Value == '/'))
             {
-                if (ch == '/')
+                if (nch == '/')
                 {
-                    char ch2 = this.NextChar();
+                    char? nch2 = this.NextChar();
 
-                    if (ch2 == '/')
-                        this.SkipToEndOfLine();
-                    else if (ch2 == '*')
-                        this.SkipToEndOfComment();
-                    else
+                    if (nch2.HasValue)
                     {
-                        this.PushChar(ch2);
-                        return ch;
+                        char ch2 = nch2.Value;
+
+                        if (ch2 == '/')
+                            this.SkipToEndOfLine();
+                        else if (ch2 == '*')
+                            this.SkipToEndOfComment();
+                        else
+                        {
+                            this.PushChar(ch2);
+                            return nch.Value;
+                        }
                     }
                 }
 
-                ch = this.NextChar();
+                nch = this.NextChar();
             }
 
-            return ch;
+            return nch;
         }
 
         private void SkipToEndOfLine()
         {
-            char ch;
+            char? nch;
 
-            ch = this.NextChar();
+            nch = this.NextChar();
 
-            while (ch != '\r' && ch != '\n')
-                ch = this.NextChar();
+            while (nch.HasValue && nch != '\r' && nch != '\n')
+                nch = this.NextChar();
 
-            this.PushChar(ch);
+            if (nch.HasValue)
+                this.PushChar(nch.Value);
         }
 
         private void SkipToEndOfComment()
         {
-            char ch;
+            char? nch;
 
-            ch = this.NextChar();
+            nch = this.NextChar();
 
-            while (true)
+            while (nch.HasValue)
             {
-                while (ch != '*')
-                    ch = this.NextChar();
+                while (nch.Value != '*')
+                    nch = this.NextChar();
 
-                char ch2 = this.NextChar();
+                char? nch2 = this.NextChar();
 
-                if (ch2 == '/')
+                if (nch2.HasValue && nch2 == '/')
                     return;
 
-                ch = ch2;
+                nch = nch2;
             }
         }
 
@@ -445,7 +432,7 @@
             this.chars.Push(ch);
         }
 
-        private char NextChar()
+        private char? NextChar()
         {
             if (this.chars.Count > 0)
                 return this.chars.Pop();
@@ -463,11 +450,9 @@
             ch = this.reader.Read();
 
             if (ch < 0)
-            {
-                throw new EndOfInputException();
-            }
+                return null;
 
-            return Convert.ToChar(ch);
+            return (char)ch;
         }
     }
 }
