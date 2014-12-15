@@ -27,7 +27,7 @@
             if (value is Undefined)
                 return "undefined";
 
-            if (value is String)
+            if (value is string)
                 return "string";
 
             if (Predicates.IsNumber(value))

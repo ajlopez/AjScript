@@ -71,7 +71,7 @@
         {
             Assert.IsTrue(Predicates.IsNumber(0));
             Assert.IsTrue(Predicates.IsNumber(Math.PI));
-            Assert.IsTrue(Predicates.IsNumber((short) 1));
+            Assert.IsTrue(Predicates.IsNumber((short)1));
             Assert.IsTrue(Predicates.IsNumber((long)1));
             Assert.IsTrue(Predicates.IsNumber((float)1.2));
 

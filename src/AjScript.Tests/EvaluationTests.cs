@@ -74,7 +74,7 @@
         public void DivideIntegers()
         {
             Assert.AreEqual(3, this.EvaluateExpression("9/3"));
-            Assert.AreEqual(1.0/2.0, this.EvaluateExpression("1/2"));
+            Assert.AreEqual(1.0 / 2.0, this.EvaluateExpression("1/2"));
         }
 
         [TestMethod]
