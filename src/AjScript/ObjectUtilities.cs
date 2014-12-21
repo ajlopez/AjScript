@@ -10,6 +10,8 @@
 
     public class ObjectUtilities
     {
+        private static StringObject strobj = new StringObject();
+
         public static void SetValue(object obj, string name, object value)
         {
             if (obj is IObject)
@@ -51,8 +53,8 @@
                 return ((IObject)obj).Invoke(name, parameters);
             }
 
-            if (obj is string && name == "toUpperCase")
-                return ((string)obj).ToUpper();
+            if (obj is string && strobj.GetValue(name) is ICallable)
+                return ((ICallable)strobj.GetValue(name)).Invoke(null, obj, parameters);
 
             return GetNativeValue(obj, name, parameters);
         }

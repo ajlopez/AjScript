@@ -108,6 +108,8 @@
     <Compile Include="IContext.cs" />
     <Compile Include="Language\ArithmeticOperator.cs" />
     <Compile Include="Language\ComparisonOperator.cs" />
+    <Compile Include="Language\LambdaCallable.cs" />
+    <Compile Include="Language\StringObject.cs" />
     <Compile Include="Language\DynamicObject.cs" />
     <Compile Include="Language\Function.cs" />
     <Compile Include="Language\ICallable.cs" />
