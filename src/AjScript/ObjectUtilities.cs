@@ -51,6 +51,9 @@
                 return ((IObject)obj).Invoke(name, parameters);
             }
 
+            if (obj is string && name == "toUpperCase")
+                return ((string)obj).ToUpper();
+
             return GetNativeValue(obj, name, parameters);
         }
 

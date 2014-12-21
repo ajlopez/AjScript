@@ -104,6 +104,12 @@
         }
 
         [TestMethod]
+        public void EvaluateStringToUpperCase()
+        {
+            Assert.AreEqual("FOO", this.EvaluateExpression("'foo'.toUpperCase()"));
+        }
+
+        [TestMethod]
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");
