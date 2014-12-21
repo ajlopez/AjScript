@@ -82,7 +82,6 @@
     <Compile Include="Commands\SetCommand.cs" />
     <Compile Include="Commands\WhileCommand.cs" />
     <Compile Include="Interpreter\Lexer.cs" />
-    <Compile Include="Interpreter\LexerException.cs" />
     <Compile Include="Interpreter\Parser.cs" />
     <Compile Include="Interpreter\ParserException.cs" />
     <Compile Include="Interpreter\Token.cs" />
