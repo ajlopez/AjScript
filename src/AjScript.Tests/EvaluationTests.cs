@@ -116,6 +116,15 @@
         }
 
         [TestMethod]
+        public void EvaluateStringSubstring()
+        {
+            Assert.AreEqual("oo", this.EvaluateExpression("'foobar'.substring(1, 3)"));
+            Assert.AreEqual("obar", this.EvaluateExpression("'foobar'.substring(2)"));
+            Assert.AreEqual("foobar", this.EvaluateExpression("'foobar'.substring()"));
+            Assert.AreEqual("foobar", this.EvaluateExpression("'foobar'.substring(-10, 100)"));
+        }
+
+        [TestMethod]
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");
