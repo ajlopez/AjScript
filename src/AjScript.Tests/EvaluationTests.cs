@@ -110,6 +110,12 @@
         }
 
         [TestMethod]
+        public void EvaluateStringToLowerCase()
+        {
+            Assert.AreEqual("foo", this.EvaluateExpression("'Foo'.toLowerCase()"));
+        }
+
+        [TestMethod]
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");

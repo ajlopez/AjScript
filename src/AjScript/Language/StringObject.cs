@@ -15,11 +15,17 @@
         public StringObject()
         {
             this.SetValue("toUpperCase", new LambdaCallable(ToUpperCase));
+            this.SetValue("toLowerCase", new LambdaCallable(ToLowerCase));
         }
 
         private static object ToUpperCase(IContext context, object @this, object[] arguments)
         {
             return ((string)@this).ToUpper();
+        }
+
+        private static object ToLowerCase(IContext context, object @this, object[] arguments)
+        {
+            return ((string)@this).ToLower();
         }
     }
 }
