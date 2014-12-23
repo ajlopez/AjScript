@@ -125,6 +125,14 @@
         }
 
         [TestMethod]
+        public void EvaluateStringLength()
+        {
+            Assert.AreEqual(6, this.EvaluateExpression("'foobar'.length"));
+            Assert.AreEqual(0, this.EvaluateExpression("''.length"));
+            Assert.AreEqual(3, this.EvaluateExpression("'foo'.length"));
+        }
+
+        [TestMethod]
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");
