@@ -17,6 +17,7 @@
             this.SetValue("toUpperCase", new LambdaCallable(ToUpperCase));
             this.SetValue("toLowerCase", new LambdaCallable(ToLowerCase));
             this.SetValue("substring", new LambdaCallable(Substring));
+            this.SetValue("charAt", new LambdaCallable(CharAt));
         }
 
         private static object ToUpperCase(IContext context, object @this, object[] arguments)
@@ -27,6 +28,18 @@
         private static object ToLowerCase(IContext context, object @this, object[] arguments)
         {
             return ((string)@this).ToLower();
+        }
+
+        private static object CharAt(IContext context, object @this, object[] arguments)
+        {
+            string str = (string)@this;
+
+            int index = Convert.ToInt32(arguments[0]);
+
+            if (index < 0 || index >= str.Length)
+                return string.Empty;
+
+            return str.Substring(index, 1);
         }
 
         private static object Substring(IContext context, object @this, object[] arguments)

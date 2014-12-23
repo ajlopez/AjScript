@@ -133,6 +133,15 @@
         }
 
         [TestMethod]
+        public void EvaluateStringCharAt()
+        {
+            Assert.AreEqual("f", this.EvaluateExpression("'foobar'.charAt(0)"));
+            Assert.AreEqual("b", this.EvaluateExpression("'foobar'.charAt(3)"));
+            Assert.AreEqual(string.Empty, this.EvaluateExpression("'foobar'.charAt(-2)"));
+            Assert.AreEqual(string.Empty, this.EvaluateExpression("'foobar'.charAt(100)"));
+        }
+
+        [TestMethod]
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");
