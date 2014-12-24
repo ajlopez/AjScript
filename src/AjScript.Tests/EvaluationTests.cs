@@ -142,6 +142,16 @@
         }
 
         [TestMethod]
+        public void EvaluateStringConcat()
+        {
+            Assert.AreEqual("foobar", this.EvaluateExpression("'foo'.concat('bar')"));
+            Assert.AreEqual("foo", this.EvaluateExpression("'foo'.concat()"));
+            Assert.AreEqual("foo42", this.EvaluateExpression("'foo'.concat(42)"));
+            Assert.AreEqual("hello, world", this.EvaluateExpression("'hello'.concat(', ', 'world')"));
+            Assert.AreEqual("foonull", this.EvaluateExpression("'foo'.concat(null)"));
+        }
+
+        [TestMethod]
         public void EvaluateVar()
         {
             this.EvaluateCommands("var x;");

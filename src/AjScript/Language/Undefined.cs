@@ -14,5 +14,10 @@
         }
 
         public static Undefined Instance { get { return instance; } }
+
+        public override string ToString()
+        {
+            return "undefined";
+        }
     }
 }

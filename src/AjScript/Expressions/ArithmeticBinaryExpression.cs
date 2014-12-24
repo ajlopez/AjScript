@@ -85,13 +85,7 @@
             if (ObjectUtilities.IsNumber(left) && ObjectUtilities.IsNumber(right))
                 return Operators.AddObject(left, right);
 
-            if (left == null)
-                left = "null";
-
-            if (right == null)
-                right = "null";
-
-            return Operators.ConcatenateObject(left.ToString(), right.ToString());
+            return Operators.ConcatenateObject(StringUtilities.AsString(left), StringUtilities.AsString(right));
         }
     }
 }

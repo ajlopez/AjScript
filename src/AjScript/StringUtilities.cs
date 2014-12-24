@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
+    using AjScript.Language;
 
     public class StringUtilities
     {
@@ -28,6 +29,14 @@
                 parts.Add(text);
 
             return parts;
+        }
+
+        public static string AsString(object obj)
+        {
+            if (obj == null)
+                return "null";
+
+            return obj.ToString();
         }
     }
 }

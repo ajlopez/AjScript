@@ -18,6 +18,7 @@
             this.SetValue("toLowerCase", new LambdaCallable(ToLowerCase));
             this.SetValue("substring", new LambdaCallable(Substring));
             this.SetValue("charAt", new LambdaCallable(CharAt));
+            this.SetValue("concat", new LambdaCallable(Concat));
         }
 
         private static object ToUpperCase(IContext context, object @this, object[] arguments)
@@ -74,6 +75,16 @@
                 to = str.Length;
 
             return str.Substring(from, to - from);
+        }
+
+        private static object Concat(IContext context, object @this, object[] arguments)
+        {
+            string result = (string)@this;
+
+            for (int k = 0; k < arguments.Length; k++)
+                result += StringUtilities.AsString(arguments[k]);
+
+            return result;
         }
     }
 }
