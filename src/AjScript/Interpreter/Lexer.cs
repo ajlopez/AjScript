@@ -188,7 +188,7 @@
 
             nch = this.NextChar();
 
-            while (nch.HasValue && nch.Value != StringChar || lastChar == '\\')
+            while ((nch.HasValue && nch.Value != StringChar) || lastChar == '\\')
             {
                 char ch = nch.Value;
 

@@ -117,9 +117,6 @@
     <milliseconds>92</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1463015819">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ContextTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:07:51</timestamp>
@@ -128,21 +125,6 @@
     <timestamp>09/13/2014 07:53:14</timestamp>
     <milliseconds>860</milliseconds>
     <violations />
-  </sourcecode>
-  <sourcecode name="EvaluationTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:07:51</timestamp>
-      <milliseconds>495</milliseconds>
-    </settings>
-    <timestamp>12/07/2014 17:12:52</timestamp>
-    <milliseconds>486</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.SpacingRules" rule="SymbolsMustBeSpacedCorrectly" ruleCheckId="SA1003">
-        <context>The spacing around the symbol '/' is invalid.</context>
-        <line>77</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
   </sourcecode>
   <sourcecode name="ArithmeticExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
@@ -225,21 +207,6 @@
     <milliseconds>889</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="PredicatesTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:07:51</timestamp>
-      <milliseconds>495</milliseconds>
-    </settings>
-    <timestamp>09/24/2014 06:26:33</timestamp>
-    <milliseconds>316</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.SpacingRules" rule="ClosingParenthesisMustBeSpacedCorrectly" ruleCheckId="SA1009">
-        <context>Invalid spacing around the closing parenthesis.</context>
-        <line>74</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
   <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:07:51</timestamp>
@@ -256,6 +223,27 @@
     </settings>
     <timestamp>09/23/2014 06:05:48</timestamp>
     <milliseconds>754</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1463015819">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="EvaluationTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:07:51</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:30:51</timestamp>
+    <milliseconds>22</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="PredicatesTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:07:51</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>12/15/2014 06:19:53</timestamp>
+    <milliseconds>303</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

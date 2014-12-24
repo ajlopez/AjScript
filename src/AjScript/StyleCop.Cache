@@ -462,24 +462,6 @@
     <milliseconds>644</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Undefined.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>03/06/2011 17:04:33</timestamp>
-    <milliseconds>352</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="StringUtilities.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>03/05/2011 19:18:32</timestamp>
-    <milliseconds>985</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="TopContext.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:04:24</timestamp>
@@ -507,9 +489,6 @@
     <milliseconds>842</milliseconds>
     <violations />
   </sourcecode>
-  <project key="2118587373">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="IfCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:04:24</timestamp>
@@ -526,15 +505,6 @@
     </settings>
     <timestamp>10/07/2014 07:46:44</timestamp>
     <milliseconds>208</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ArithmeticBinaryExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>12/07/2014 17:11:40</timestamp>
-    <milliseconds>90</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ArrayExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -581,30 +551,6 @@
     <timestamp>12/07/2014 17:24:25</timestamp>
     <milliseconds>883</milliseconds>
     <violations />
-  </sourcecode>
-  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>10/13/2014 07:09:44</timestamp>
-    <milliseconds>441</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="TypeOfExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>10/11/2014 14:34:02</timestamp>
-    <milliseconds>455</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="UseBuiltInTypeAlias" ruleCheckId="SA1121">
-        <context>Use the built-in type alias 'string' rather than String or System.String.</context>
-        <line>30</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
   </sourcecode>
   <sourcecode name="TokenType.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
@@ -669,15 +615,6 @@
     <milliseconds>498</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Machine.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>09/13/2014 07:53:14</timestamp>
-    <milliseconds>925</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="Predicates.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:04:24</timestamp>
@@ -685,15 +622,6 @@
     </settings>
     <timestamp>09/24/2014 06:26:33</timestamp>
     <milliseconds>319</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ObjectUtilities.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>09/16/2014 06:42:46</timestamp>
-    <milliseconds>846</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ObjectFunction.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -739,6 +667,96 @@
     </settings>
     <timestamp>09/20/2014 07:12:40</timestamp>
     <milliseconds>707</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="2118587373">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ArithmeticBinaryExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:35:53</timestamp>
+    <milliseconds>70</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TypeOfExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/15/2014 06:19:53</timestamp>
+    <milliseconds>316</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LambdaCallable.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/22/2014 12:58:53</timestamp>
+    <milliseconds>335</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/15/2014 06:35:05</timestamp>
+    <milliseconds>85</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="ConditionalExpressionsMustDeclarePrecedence" ruleCheckId="SA1408">
+        <context>Insert parenthesis within the conditional AND and OR expressions to declare the operator precedence.</context>
+        <line>191</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="StringObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:36:22</timestamp>
+    <milliseconds>753</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Undefined.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:34:49</timestamp>
+    <milliseconds>965</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Machine.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:32:30</timestamp>
+    <milliseconds>857</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ObjectUtilities.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/22/2014 12:58:53</timestamp>
+    <milliseconds>429</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="StringUtilities.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:34:59</timestamp>
+    <milliseconds>865</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

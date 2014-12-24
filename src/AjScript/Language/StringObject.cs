@@ -10,7 +10,6 @@
         private static string[] nativeMethods = new string[] { "SetValue", "GetValue", "ToString", "GetNames", "Invoke", "GetHashCode", "Equals" };
 
         private Dictionary<string, object> values = new Dictionary<string, object>();
-        private IFunction function;
 
         public StringObject()
         {
