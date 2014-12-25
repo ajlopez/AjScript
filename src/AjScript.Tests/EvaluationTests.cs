@@ -125,6 +125,15 @@
         }
 
         [TestMethod]
+        public void EvaluateStringIndexOf()
+        {
+            Assert.AreEqual(3, this.EvaluateExpression("'foobar'.indexOf('bar')"));
+            Assert.AreEqual(-1, this.EvaluateExpression("'foobar'.indexOf('boo')"));
+            Assert.AreEqual(1, this.EvaluateExpression("'foobar'.indexOf('o')"));
+            Assert.AreEqual(2, this.EvaluateExpression("'foobar'.indexOf('o', 2)"));
+        }
+
+        [TestMethod]
         public void EvaluateStringLength()
         {
             Assert.AreEqual(6, this.EvaluateExpression("'foobar'.length"));
