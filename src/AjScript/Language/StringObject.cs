@@ -18,6 +18,7 @@
             this.SetValue("substring", new LambdaCallable(Substring));
             this.SetValue("charAt", new LambdaCallable(CharAt));
             this.SetValue("concat", new LambdaCallable(Concat));
+            this.SetValue("slice", new LambdaCallable(Slice));
         }
 
         private static object ToUpperCase(IContext context, object @this, object[] arguments)
@@ -72,6 +73,40 @@
 
             if (to > str.Length)
                 to = str.Length;
+
+            return str.Substring(from, to - from);
+        }
+
+        private static object Slice(IContext context, object @this, object[] arguments)
+        {
+            string str = (string)@this;
+
+            int from = 0;
+            int to = str.Length;
+
+            if (arguments.Length > 0)
+                try
+                {
+                    from = Convert.ToInt32(arguments[0]);
+                }
+                catch
+                {
+                }
+
+            if (arguments.Length > 1)
+                try
+                {
+                    to = Convert.ToInt32(arguments[1]);
+                }
+                catch
+                {
+                }
+
+            if (from < 0)
+                from = str.Length + from;
+
+            if (to < 0)
+                to = str.Length + to;
 
             return str.Substring(from, to - from);
         }

@@ -144,6 +144,15 @@
         }
 
         [TestMethod]
+        public void EvaluateStringSlice()
+        {
+            Assert.AreEqual("oobar", this.EvaluateExpression("'foobar'.slice(1)"));
+            Assert.AreEqual("oob", this.EvaluateExpression("'foobar'.slice(1, 4)"));
+            Assert.AreEqual("bar", this.EvaluateExpression("'foobar'.slice(-3)"));
+            Assert.AreEqual("ooba", this.EvaluateExpression("'foobar'.slice(1, -1)"));
+        }
+
+        [TestMethod]
         public void EvaluateStringLength()
         {
             Assert.AreEqual(6, this.EvaluateExpression("'foobar'.length"));
