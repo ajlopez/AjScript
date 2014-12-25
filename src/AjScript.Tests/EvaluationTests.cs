@@ -134,6 +134,16 @@
         }
 
         [TestMethod]
+        public void EvaluateStringLastIndexOf()
+        {
+            Assert.AreEqual(3, this.EvaluateExpression("'foobar'.lastIndexOf('bar')"));
+            Assert.AreEqual(-1, this.EvaluateExpression("'foobar'.lastIndexOf('boo')"));
+            Assert.AreEqual(2, this.EvaluateExpression("'foobar'.lastIndexOf('o')"));
+            Assert.AreEqual(1, this.EvaluateExpression("'foobar'.lastIndexOf('o', 1)"));
+            Assert.AreEqual(-1, this.EvaluateExpression("'foobar'.lastIndexOf('o', 0)"));
+        }
+
+        [TestMethod]
         public void EvaluateStringLength()
         {
             Assert.AreEqual(6, this.EvaluateExpression("'foobar'.length"));
