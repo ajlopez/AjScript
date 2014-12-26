@@ -125,6 +125,20 @@
         }
 
         [TestMethod]
+        public void EvaluateStringSubstr()
+        {
+            Assert.AreEqual("oobar", this.EvaluateExpression("'foobar'.substr(1)"));
+            Assert.AreEqual("foobar", this.EvaluateExpression("'foobar'.substr(0)"));
+            Assert.AreEqual(string.Empty, this.EvaluateExpression("'foobar'.substr(10)"));
+            Assert.AreEqual("bar", this.EvaluateExpression("'foobar'.substr(-3)"));
+            Assert.AreEqual("ba", this.EvaluateExpression("'foobar'.substr(-3, 2)"));
+            Assert.AreEqual("foobar", this.EvaluateExpression("'foobar'.substr(-10)"));
+            Assert.AreEqual("oob", this.EvaluateExpression("'foobar'.substr(1, 3)"));
+            Assert.AreEqual(string.Empty, this.EvaluateExpression("'foobar'.substr(1, 0)"));
+            Assert.AreEqual(string.Empty, this.EvaluateExpression("'foobar'.substr(1, -2)"));
+        }
+
+        [TestMethod]
         public void EvaluateStringIndexOf()
         {
             Assert.AreEqual(3, this.EvaluateExpression("'foobar'.indexOf('bar')"));
