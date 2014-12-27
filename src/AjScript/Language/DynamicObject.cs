@@ -82,5 +82,15 @@
         {
             return method.Invoke(null, this, parameters);
         }
+
+        public void RemoveValue(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

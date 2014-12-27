@@ -13,6 +13,10 @@
 
         void SetValue(string name, object value);
 
+        void RemoveValue(string name);
+
+        bool HasName(string name);
+
         ICollection<string> GetNames();
 
         object Invoke(string name, object[] parameters);

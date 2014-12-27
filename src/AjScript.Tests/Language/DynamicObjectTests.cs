@@ -13,37 +13,32 @@
     [TestClass]
     public class DynamicObjectTests
     {
-        private DynamicObject dynobj;
-        private Function function;
-
-        [TestInitialize]
-        public void SetupDynamicObject()
-        {
-            this.function = new Function(null, null);
-            this.dynobj = new DynamicObject(this.function);
-        }
-
         [TestMethod]
         public void GetUndefinedForUndefinedValue()
         {
-            Assert.AreSame(Undefined.Instance, this.dynobj.GetValue("Foo"));
+            DynamicObject dynobj = new DynamicObject();
+            Assert.AreSame(Undefined.Instance, dynobj.GetValue("Foo"));
         }
 
         [TestMethod]
         public void SetAndGetValue()
         {
-            this.dynobj.SetValue("Foo", "Bar");
+            DynamicObject dynobj = new DynamicObject();
 
-            Assert.AreEqual("Bar", this.dynobj.GetValue("Foo"));
+            dynobj.SetValue("Foo", "Bar");
+
+            Assert.AreEqual("Bar", dynobj.GetValue("Foo"));
         }
 
         [TestMethod]
         public void GetNames()
         {
-            this.dynobj.SetValue("FirstName", "Adam");
-            this.dynobj.SetValue("LastName", "Genesis");
+            DynamicObject dynobj = new DynamicObject();
 
-            ICollection<string> names = this.dynobj.GetNames();
+            dynobj.SetValue("FirstName", "Adam");
+            dynobj.SetValue("LastName", "Genesis");
+
+            ICollection<string> names = dynobj.GetNames();
 
             Assert.IsNotNull(names);
             Assert.AreEqual(2, names.Count);
@@ -55,12 +50,14 @@
         [TestMethod]
         public void DefineMethod()
         {
+            DynamicObject dynobj = new DynamicObject();
+
             ICommand body = new ReturnCommand(new VariableExpression("Name"));
             Function function = new Function(null, body);
 
-            this.dynobj.SetValue("GetName", function);
+            dynobj.SetValue("GetName", function);
 
-            object result = this.dynobj.GetValue("GetName");
+            object result = dynobj.GetValue("GetName");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ICallable));
@@ -70,13 +67,15 @@
         [TestMethod]
         public void InvokeMethod()
         {
+            DynamicObject dynobj = new DynamicObject();
+
             ICommand body = new ReturnCommand(new DotExpression(new VariableExpression("this"), "Name"));
             Function function = new Function(null, body);
 
-            this.dynobj.SetValue("Name", "Adam");
-            this.dynobj.SetValue("GetName", function);
+            dynobj.SetValue("Name", "Adam");
+            dynobj.SetValue("GetName", function);
 
-            object result = this.dynobj.Invoke("GetName", new object[] { });
+            object result = dynobj.Invoke("GetName", new object[] { });
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(string));
@@ -86,12 +85,14 @@
         [TestMethod]
         public void InvokeNativeMethod()
         {
+            DynamicObject dynobj = new DynamicObject();
+
             ICommand body = new ReturnCommand(new VariableExpression("Name"));
             Function function = new Function(null, body);
 
-            this.dynobj.SetValue("Name", "Adam");
+            dynobj.SetValue("Name", "Adam");
 
-            object result = this.dynobj.Invoke("GetValue", new object[] { "Name" });
+            object result = dynobj.Invoke("GetValue", new object[] { "Name" });
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(string));
@@ -101,36 +102,43 @@
         [TestMethod]
         public void DetectNativeMethods()
         {
-            Assert.IsTrue(this.dynobj.IsNativeMethod("ToString"));
-            Assert.IsTrue(this.dynobj.IsNativeMethod("GetHashCode"));
-            Assert.IsTrue(this.dynobj.IsNativeMethod("Equals"));
+            DynamicObject dynobj = new DynamicObject();
 
-            Assert.IsTrue(this.dynobj.IsNativeMethod("GetValue"));
-            Assert.IsTrue(this.dynobj.IsNativeMethod("SetValue"));
-            Assert.IsTrue(this.dynobj.IsNativeMethod("GetNames"));
-            Assert.IsTrue(this.dynobj.IsNativeMethod("Invoke"));
+            Assert.IsTrue(dynobj.IsNativeMethod("ToString"));
+            Assert.IsTrue(dynobj.IsNativeMethod("GetHashCode"));
+            Assert.IsTrue(dynobj.IsNativeMethod("Equals"));
 
-            Assert.IsFalse(this.dynobj.IsNativeMethod("Foo"));
+            Assert.IsTrue(dynobj.IsNativeMethod("GetValue"));
+            Assert.IsTrue(dynobj.IsNativeMethod("SetValue"));
+            Assert.IsTrue(dynobj.IsNativeMethod("GetNames"));
+            Assert.IsTrue(dynobj.IsNativeMethod("Invoke"));
+
+            Assert.IsFalse(dynobj.IsNativeMethod("Foo"));
         }
 
         [TestMethod]
         public void UsePrototypeForGetValue()
         {
+            Function function = new Function(null, null);
+            DynamicObject dynobj = new DynamicObject(function);
+
             DynamicObject prototype = new DynamicObject();
-            this.function.SetValue("prototype", prototype);
+            function.SetValue("prototype", prototype);
             prototype.SetValue("x", 10);
 
-            Assert.AreEqual(10, this.dynobj.GetValue("x"));
+            Assert.AreEqual(10, dynobj.GetValue("x"));
         }
 
         [TestMethod]
         public void GetValueFromPrototypeAndSetValueInObject()
         {
+            Function function = new Function(null, null);
+            DynamicObject dynobj = new DynamicObject(function);
             DynamicObject prototype = new DynamicObject();
-            this.function.SetValue("prototype", prototype);
+            function.SetValue("prototype", prototype);
             prototype.SetValue("x", 10);
-            this.dynobj.SetValue("x", 20);
-            Assert.AreEqual(20, this.dynobj.GetValue("x"));
+            dynobj.SetValue("x", 20);
+            Assert.AreEqual(20, dynobj.GetValue("x"));
             Assert.AreEqual(10, prototype.GetValue("x"));
         }
     }
