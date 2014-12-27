@@ -85,7 +85,8 @@
 
         public void RemoveValue(string name)
         {
-            throw new NotImplementedException();
+            if (this.values.ContainsKey(name))
+                this.values.Remove(name);
         }
 
         public bool HasName(string name)

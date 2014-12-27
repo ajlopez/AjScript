@@ -57,6 +57,26 @@
         }
 
         [TestMethod]
+        public void RemoveValue()
+        {
+            DynamicObject dynobj = new DynamicObject();
+            dynobj.SetValue("name", "Adam");
+            Assert.IsTrue(dynobj.HasName("name"));
+            dynobj.RemoveValue("name");
+            Assert.IsFalse(dynobj.HasName("name"));
+            Assert.AreSame(Undefined.Instance, dynobj.GetValue("name"));
+        }
+
+        [TestMethod]
+        public void RemoveUndefinedValue()
+        {
+            DynamicObject dynobj = new DynamicObject();
+            dynobj.RemoveValue("name");
+            Assert.IsFalse(dynobj.HasName("name"));
+            Assert.AreSame(Undefined.Instance, dynobj.GetValue("name"));
+        }
+
+        [TestMethod]
         public void GetNames()
         {
             DynamicObject dynobj = new DynamicObject();
