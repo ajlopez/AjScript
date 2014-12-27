@@ -21,6 +21,32 @@
         }
 
         [TestMethod]
+        public void HasUndefinedName()
+        {
+            DynamicObject dynobj = new DynamicObject();
+            Assert.IsFalse(dynobj.HasName("name"));
+        }
+
+        [TestMethod]
+        public void HasName()
+        {
+            DynamicObject dynobj = new DynamicObject();
+            dynobj.SetValue("name", "Adam");
+            Assert.IsTrue(dynobj.HasName("name"));
+        }
+
+        [TestMethod]
+        public void HasNameInPrototype()
+        {
+            Function function = new Function(null, null);
+            DynamicObject dynobj = new DynamicObject(function);
+            DynamicObject prototype = new DynamicObject();
+            function.SetValue("prototype", prototype);
+            prototype.SetValue("name", "Adam");
+            Assert.IsTrue(dynobj.HasName("name"));
+        }
+
+        [TestMethod]
         public void SetAndGetValue()
         {
             DynamicObject dynobj = new DynamicObject();

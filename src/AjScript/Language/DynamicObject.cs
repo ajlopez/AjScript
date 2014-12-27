@@ -90,7 +90,18 @@
 
         public bool HasName(string name)
         {
-            throw new NotImplementedException();
+            if (this.values.ContainsKey(name))
+                return true;
+
+            if (this.function == null)
+                return false;
+
+            object prototype = this.function.GetValue("prototype");
+
+            if (prototype == null || prototype == Undefined.Instance)
+                return false;
+
+            return ((IObject)prototype).HasName(name);
         }
     }
 }
