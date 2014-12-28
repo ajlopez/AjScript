@@ -164,5 +164,23 @@
 
             Assert.AreEqual("bar", context.GetValue("a"));
         }
+
+        [TestMethod]
+        public void ExecuteDeleteCommand()
+        {
+            DynamicObject dynobj = new DynamicObject();
+            dynobj.SetValue("name", "Adam");
+            dynobj.SetValue("age", 800);
+
+            DeleteCommand cmd = new DeleteCommand(new DotExpression(new VariableExpression("adam"), "name"));
+
+            var context = new Context();
+            context.SetValue("adam", dynobj);
+
+            cmd.Execute(context);
+
+            Assert.IsTrue(dynobj.HasName("age"));
+            Assert.IsFalse(dynobj.HasName("name"));
+        }
     }
 }
