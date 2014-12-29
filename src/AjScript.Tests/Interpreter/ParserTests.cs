@@ -837,6 +837,20 @@
             Assert.AreEqual("c", dotexp.Name);
         }
 
+        [TestMethod]
+        public void ParseDeleteCommand()
+        {
+            ICommand command = ParseCommand("delete adam.name;");
+            Assert.IsNotNull(command);
+            Assert.IsInstanceOfType(command, typeof(DeleteCommand));
+
+            DeleteCommand deleteCommand = (DeleteCommand)command;
+
+            Assert.AreEqual("name", deleteCommand.Expression.Name);
+            Assert.IsInstanceOfType(deleteCommand.Expression.Expression, typeof(VariableExpression));
+            Assert.AreEqual("adam", ((VariableExpression)deleteCommand.Expression.Expression).Name);
+        }
+
         private static ICommand ParseCommand(string text)
         {
             Parser parser = CreateParser(text);

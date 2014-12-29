@@ -76,6 +76,9 @@
 
                 if (token.Value == "var")
                     return this.ParseVarCommand();
+
+                if (token.Value == "delete")
+                    return this.ParseDeleteCommand();
             }
 
             if (token.TokenType == TokenType.Delimiter && token.Value == "{")
@@ -624,6 +627,15 @@
             this.Parse(TokenType.Delimiter, ";");
 
             return new ReturnCommand(expression);
+        }
+
+        private ICommand ParseDeleteCommand()
+        {
+            IExpression expression = this.ParseExpression();
+
+            this.Parse(TokenType.Delimiter, ";");
+
+            return new DeleteCommand((DotExpression)expression);
         }
 
         private ICommand ParseIfCommand()
