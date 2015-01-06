@@ -435,15 +435,6 @@
     <milliseconds>920</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="IObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>03/25/2011 15:08:04</timestamp>
-    <milliseconds>906</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="IReference.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:04:24</timestamp>
@@ -570,15 +561,6 @@
     <milliseconds>513</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>10/16/2014 07:13:15</timestamp>
-    <milliseconds>356</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ComparisonOperator.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:04:24</timestamp>
@@ -586,15 +568,6 @@
     </settings>
     <timestamp>10/16/2014 07:13:15</timestamp>
     <milliseconds>358</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="DynamicObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>09/13/2014 11:17:34</timestamp>
-    <milliseconds>753</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="Function.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -669,9 +642,6 @@
     <milliseconds>707</milliseconds>
     <violations />
   </sourcecode>
-  <project key="2118587373">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ArithmeticBinaryExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/08/2014 20:04:24</timestamp>
@@ -697,30 +667,6 @@
     </settings>
     <timestamp>12/22/2014 12:58:53</timestamp>
     <milliseconds>335</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>12/15/2014 06:35:05</timestamp>
-    <milliseconds>85</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="ConditionalExpressionsMustDeclarePrecedence" ruleCheckId="SA1408">
-        <context>Insert parenthesis within the conditional AND and OR expressions to declare the operator precedence.</context>
-        <line>191</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
-  <sourcecode name="StringObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/08/2014 20:04:24</timestamp>
-      <milliseconds>465</milliseconds>
-    </settings>
-    <timestamp>12/24/2014 05:36:22</timestamp>
-    <milliseconds>753</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="Undefined.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -759,4 +705,61 @@
     <milliseconds>865</milliseconds>
     <violations />
   </sourcecode>
+  <sourcecode name="DeleteCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/28/2014 06:31:40</timestamp>
+    <milliseconds>582</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/24/2014 05:42:24</timestamp>
+    <milliseconds>658</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/29/2014 07:34:14</timestamp>
+    <milliseconds>490</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/27/2014 13:53:55</timestamp>
+    <milliseconds>497</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DynamicObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/27/2014 13:53:55</timestamp>
+    <milliseconds>495</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="StringObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/08/2014 20:04:24</timestamp>
+      <milliseconds>465</milliseconds>
+    </settings>
+    <timestamp>12/26/2014 07:33:40</timestamp>
+    <milliseconds>24</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="2118587373">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

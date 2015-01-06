@@ -635,6 +635,20 @@
             Assert.AreEqual("1 2 3", this.EvaluateExpression("arr.join(' ')"));
         }
 
+        [TestMethod]
+        public void DeleteProperty()
+        {
+            this.EvaluateCommands("adam = {}; adam.name = 'Adam'; adam.age = 800;");
+
+            var adam = (IObject)this.machine.Context.GetValue("adam");
+
+            Assert.AreEqual(800, adam.GetValue("age"));
+
+            this.EvaluateCommands("delete adam.age;");
+
+            Assert.AreSame(Undefined.Instance, adam.GetValue("age"));
+        }
+
         private void EvaluateCommands(string text)
         {
             Parser parser = new Parser(text);
