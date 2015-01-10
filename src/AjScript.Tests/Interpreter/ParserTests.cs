@@ -838,7 +838,7 @@
         }
 
         [TestMethod]
-        public void ParseDeleteCommand()
+        public void ParseDeletePropertyCommand()
         {
             ICommand command = ParseCommand("delete adam.name;");
             Assert.IsNotNull(command);
@@ -846,9 +846,29 @@
 
             DeleteCommand deleteCommand = (DeleteCommand)command;
 
-            Assert.AreEqual("name", deleteCommand.Expression.Name);
-            Assert.IsInstanceOfType(deleteCommand.Expression.Expression, typeof(VariableExpression));
-            Assert.AreEqual("adam", ((VariableExpression)deleteCommand.Expression.Expression).Name);
+            Assert.IsInstanceOfType(deleteCommand.Expression, typeof(DotExpression));
+
+            var dexpr = (DotExpression)deleteCommand.Expression;
+
+            Assert.AreEqual("name", dexpr.Name);
+            Assert.IsInstanceOfType(dexpr.Expression, typeof(VariableExpression));
+            Assert.AreEqual("adam", ((VariableExpression)dexpr.Expression).Name);
+        }
+
+        [TestMethod]
+        public void ParseDeleteVariableCommand()
+        {
+            ICommand command = ParseCommand("delete adam;");
+            Assert.IsNotNull(command);
+            Assert.IsInstanceOfType(command, typeof(DeleteCommand));
+
+            DeleteCommand deleteCommand = (DeleteCommand)command;
+
+            Assert.IsInstanceOfType(deleteCommand.Expression, typeof(VariableExpression));
+
+            var vexpr = (VariableExpression)deleteCommand.Expression;
+
+            Assert.AreEqual("adam", vexpr.Name);
         }
 
         private static ICommand ParseCommand(string text)

@@ -10,19 +10,26 @@
 
     public class DeleteCommand : ICommand
     {
-        private DotExpression expression;
+        private IExpression expression;
 
-        public DeleteCommand(DotExpression expression)
+        public DeleteCommand(IExpression expression)
         {
             this.expression = expression;
         }
 
-        public DotExpression Expression { get { return this.expression; } }
+        public IExpression Expression { get { return this.expression; } }
 
         public void Execute(IContext context)
         {
-            var target = (DynamicObject)this.expression.Expression.Evaluate(context);
-            target.RemoveValue(this.expression.Name);
+            if (this.expression is DotExpression)
+            {
+                DotExpression dexpr = (DotExpression)this.expression;
+                var target = (DynamicObject)dexpr.Expression.Evaluate(context);
+                target.RemoveValue(dexpr.Name);
+                return;
+            }
+
+            context.RemoveValue(((VariableExpression)this.expression).Name);
         }
     }
 }

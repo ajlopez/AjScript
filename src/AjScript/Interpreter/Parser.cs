@@ -635,7 +635,7 @@
 
             this.Parse(TokenType.Delimiter, ";");
 
-            return new DeleteCommand((DotExpression)expression);
+            return new DeleteCommand(expression);
         }
 
         private ICommand ParseIfCommand()
