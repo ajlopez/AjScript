@@ -139,5 +139,17 @@
             Context context = new Context();
             Assert.AreEqual(context, context.RootContext);
         }
+
+        [TestMethod]
+        public void SetNewGlobalVariable()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+
+            context.SetValue("x", 42);
+
+            Assert.AreEqual(42, parent.GetValue("x"));
+            Assert.AreEqual(42, context.GetValue("x"));
+        }
     }
 }
