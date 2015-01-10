@@ -63,5 +63,13 @@
         {
             this.values[name] = Undefined.Instance;
         }
+
+        public void RemoveValue(string name)
+        {
+            if (this.values.ContainsKey(name))
+                this.values.Remove(name);
+            else if (this.parent != null)
+                this.parent.RemoveValue(name);
+        }
     }
 }

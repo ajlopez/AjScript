@@ -17,6 +17,8 @@
         object GetValue(string name);
 
         void DefineVariable(string name);
+
+        void RemoveValue(string name);
     }
 }
 

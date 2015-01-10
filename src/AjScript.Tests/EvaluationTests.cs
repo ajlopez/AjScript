@@ -649,6 +649,21 @@
             Assert.AreSame(Undefined.Instance, adam.GetValue("age"));
         }
 
+        [TestMethod]
+        public void DeleteVariable()
+        {
+            this.EvaluateCommands("adam = {}; adam.name = 'Adam'; adam.age = 800;");
+
+            var adam = (IObject)this.machine.Context.GetValue("adam");
+
+            Assert.IsNotNull(adam);
+            Assert.AreNotSame(Undefined.Instance, adam);
+
+            this.EvaluateCommands("delete adam;");
+
+            Assert.AreSame(Undefined.Instance, this.machine.Context.GetValue("adam"));
+        }
+
         private void EvaluateCommands(string text)
         {
             Parser parser = new Parser(text);

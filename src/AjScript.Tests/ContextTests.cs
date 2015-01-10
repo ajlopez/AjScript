@@ -80,6 +80,43 @@
         }
 
         [TestMethod]
+        public void DefineSetAndGetAndRemoveVariable()
+        {
+            Context context = new Context();
+
+            context.DefineVariable("x");
+
+            context.SetValue("x", 123);
+            Assert.AreEqual(123, context.GetValue("x"));
+
+            context.RemoveValue("x");
+            Assert.AreSame(Undefined.Instance, context.GetValue("x"));
+        }
+
+        [TestMethod]
+        public void RemoveUndefinedVariable()
+        {
+            Context context = new Context();
+
+            context.RemoveValue("x");
+            Assert.AreSame(Undefined.Instance, context.GetValue("x"));
+        }
+
+        [TestMethod]
+        public void RemoveParentVariable()
+        {
+            Context parent = new Context();
+            parent.SetValue("x", 42);
+            Context context = new Context(parent);
+
+            Assert.AreEqual(42, context.GetValue("x"));
+
+            context.RemoveValue("x");
+
+            Assert.AreSame(Undefined.Instance, context.GetValue("x"));
+        }
+
+        [TestMethod]
         public void GetNames()
         {
             Context context = new Context();
