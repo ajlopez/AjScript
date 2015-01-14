@@ -68,6 +68,7 @@
     <Compile Include="MachineTests.cs" />
     <Compile Include="PredicatesTests.cs" />
     <Compile Include="Primitives\ArrayFunctionTests.cs" />
+    <Compile Include="Primitives\StringFunctionTests.cs" />
     <Compile Include="Primitives\ObjectFunctionTests.cs" />
     <Compile Include="Primitives\WriteFunctionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

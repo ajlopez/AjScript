@@ -124,6 +124,7 @@
     <Compile Include="ObjectUtilities.cs" />
     <Compile Include="Predicates.cs" />
     <Compile Include="Primitives\ArrayFunction.cs" />
+    <Compile Include="Primitives\StringFunction.cs" />
     <Compile Include="Primitives\WriteLineFunction.cs" />
     <Compile Include="Primitives\ObjectFunction.cs" />
     <Compile Include="Primitives\WriteFunction.cs" />
