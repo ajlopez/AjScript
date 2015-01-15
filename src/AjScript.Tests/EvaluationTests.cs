@@ -664,6 +664,14 @@
             Assert.AreSame(Undefined.Instance, this.machine.Context.GetValue("adam"));
         }
 
+        [TestMethod]
+        public void TypeofPrimitiveFunctions()
+        {
+            Assert.AreEqual("function", this.EvaluateExpression("typeof Object"));
+            Assert.AreEqual("function", this.EvaluateExpression("typeof Array"));
+            Assert.AreEqual("function", this.EvaluateExpression("typeof String"));
+        }
+
         private void EvaluateCommands(string text)
         {
             Parser parser = new Parser(text);

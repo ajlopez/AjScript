@@ -30,5 +30,16 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ArrayFunction));
         }
+
+        [TestMethod]
+        public void StringFunction()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.Context.GetValue("String");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(StringFunction));
+        }
     }
 }

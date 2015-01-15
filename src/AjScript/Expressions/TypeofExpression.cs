@@ -33,6 +33,9 @@
             if (Predicates.IsNumber(value))
                 return "number";
 
+            if (value is IFunction)
+                return "function";
+
             return "object";
         }
     }
