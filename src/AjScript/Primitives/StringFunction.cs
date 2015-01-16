@@ -18,7 +18,20 @@
 
         public override object NewInstance(object[] parameters)
         {
-            throw new NotImplementedException();
+            return new DynamicObject();
+        }
+
+        public override object Invoke(IContext context, object @this, object[] arguments)
+        {
+            if (arguments == null || arguments.Length == 0)
+                return string.Empty;
+
+            var arg = arguments[0];
+
+            if (arg == null)
+                return "null";
+
+            return arg.ToString();
         }
     }
 }

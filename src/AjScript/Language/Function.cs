@@ -56,7 +56,7 @@
 
         public ICommand Body { get { return this.body; } }
 
-        public object Invoke(IContext context, object @this, object[] arguments)
+        public virtual object Invoke(IContext context, object @this, object[] arguments)
         {
             // TODO review: any case for use context parameter?
             IContext newctx = new Context(this.context);
