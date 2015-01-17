@@ -38,6 +38,43 @@
         }
 
         [TestMethod]
+        public void CreateInstanceFromString()
+        {
+            StringFunction function = new StringFunction(null);
+
+            var result = function.NewInstance(new object[] { "foo" });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
+
+            var dynobj = (DynamicObject)result;
+
+            Assert.AreEqual(3, dynobj.GetNames().Count);
+            Assert.AreEqual("f", dynobj.GetValue("0"));
+            Assert.AreEqual("o", dynobj.GetValue("1"));
+            Assert.AreEqual("o", dynobj.GetValue("2"));
+        }
+
+        [TestMethod]
+        public void CreateInstanceFromNullString()
+        {
+            StringFunction function = new StringFunction(null);
+
+            var result = function.NewInstance(new object[] { null });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
+
+            var dynobj = (DynamicObject)result;
+
+            Assert.AreEqual(4, dynobj.GetNames().Count);
+            Assert.AreEqual("n", dynobj.GetValue("0"));
+            Assert.AreEqual("u", dynobj.GetValue("1"));
+            Assert.AreEqual("l", dynobj.GetValue("2"));
+            Assert.AreEqual("l", dynobj.GetValue("3"));
+        }
+
+        [TestMethod]
         public void InvokeWithoutArguments()
         {
             StringFunction function = new StringFunction(null);
