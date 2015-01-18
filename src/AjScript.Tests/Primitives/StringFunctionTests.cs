@@ -75,6 +75,24 @@
         }
 
         [TestMethod]
+        public void NewInstanceToString()
+        {
+            StringFunction function = new StringFunction(null);
+
+            var result = function.NewInstance(new object[] { "foo" });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
+
+            var dynobj = (DynamicObject)result;
+
+            result = dynobj.Invoke("toString", null);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo", result);
+        }
+
+        [TestMethod]
         public void InvokeWithoutArguments()
         {
             StringFunction function = new StringFunction(null);

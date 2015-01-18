@@ -14,11 +14,12 @@
             var prototype = new StringObject();
 
             this.SetValue("prototype", prototype);
+            prototype.SetValue("toString", new LambdaCallable(ToString));
         }
 
         public override object NewInstance(object[] parameters)
         {
-            var dynobj = new DynamicObject();
+            var dynobj = new DynamicObject(this);
 
             if (parameters == null || parameters.Length == 0)
                 return dynobj;
@@ -49,6 +50,21 @@
                 return "null";
 
             return arg.ToString();
+        }
+
+        private static object ToString(IContext context, object @this, object[] arguments)
+        {
+            var dynobj = (DynamicObject)@this;
+
+            var result = string.Empty;
+            int k = 0;
+
+            for (var value = dynobj.GetValue(k.ToString()); value != null && value != Undefined.Instance; k++, value = dynobj.GetValue(k.ToString()))
+                result += dynobj.GetValue(k.ToString()).ToString();
+
+            return result;
+            
+            return ((string)@this).ToUpper();
         }
     }
 }
