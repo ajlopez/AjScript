@@ -606,6 +606,18 @@
         }
 
         [TestMethod]
+        public void NewStringTypeOf()
+        {
+            Assert.AreEqual("object", this.EvaluateExpression("typeof (new String('foo'))"));
+        }
+
+        [TestMethod]
+        public void NewStringIndexedAccess()
+        {
+            Assert.AreEqual(3, this.EvaluateExpression("(new String('foo')).length"));
+        }
+
+        [TestMethod]
         public void NonStrictEqualNullUndefined()
         {
             Assert.AreEqual(true, this.EvaluateExpression("null == undefined"));

@@ -36,6 +36,8 @@
             for (int k = 0; k < str.Length; k++)
                 dynobj.SetValue(k.ToString(), str[k].ToString());
 
+            dynobj.SetValue("length", str.Length, false);
+
             return dynobj;
         }
 

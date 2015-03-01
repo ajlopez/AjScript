@@ -11,7 +11,7 @@
 
         object GetValue(string name);
 
-        void SetValue(string name, object value);
+        void SetValue(string name, object value, bool enumerable = true);
 
         void RemoveValue(string name);
 

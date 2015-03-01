@@ -10,6 +10,7 @@
         private static string[] nativeMethods = new string[] { "SetValue", "GetValue", "ToString", "GetNames", "Invoke", "GetHashCode", "Equals" };
 
         private Dictionary<string, object> values = new Dictionary<string, object>();
+        private Dictionary<string, object> noenumvalues = new Dictionary<string, object>();
         private IFunction function;
 
         public DynamicObject()
@@ -23,15 +24,21 @@
 
         public IFunction Function { get { return this.function; } internal set { this.function = value; } }
 
-        public virtual void SetValue(string name, object value)
+        public virtual void SetValue(string name, object value, bool enumerable = true)
         {
-            this.values[name] = value;
+            if (enumerable)
+                this.values[name] = value;
+            else
+                this.noenumvalues[name] = value;
         }
 
         public virtual object GetValue(string name)
         {
             if (this.values.ContainsKey(name))
                 return this.values[name];
+
+            if (this.noenumvalues.ContainsKey(name))
+                return this.noenumvalues[name];
 
             if (this.function == null)
                 return Undefined.Instance;
