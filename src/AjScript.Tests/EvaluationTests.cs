@@ -600,6 +600,12 @@
         }
 
         [TestMethod]
+        public void NewStringInstanceOf()
+        {
+            Assert.AreEqual(true, this.EvaluateExpression("new String('foo') instanceof String"));
+        }
+
+        [TestMethod]
         public void NonStrictEqualNullUndefined()
         {
             Assert.AreEqual(true, this.EvaluateExpression("null == undefined"));
