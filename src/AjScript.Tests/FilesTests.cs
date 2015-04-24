@@ -81,6 +81,15 @@
             Assert.AreEqual(3, this.EvaluateFile("FunctionPrototypeMethod.js"));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"Files\For.js")]
+        public void For()
+        {
+            this.EvaluateFile("For.js");
+            Assert.AreEqual(5, this.context.GetValue("k"));
+            Assert.AreEqual(10, this.context.GetValue("a"));
+        }
+
         private object EvaluateFile(string filename)
         {
             Parser parser = new Parser(new StreamReader(filename));
